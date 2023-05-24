@@ -1,4 +1,4 @@
-import { App } from 'vue'
+import type { App } from 'vue'
 import { loadingText, messageDuration } from '@/config'
 import mitt from 'mitt'
 import _ from 'lodash'
@@ -157,18 +157,5 @@ export default {
       app.config.globalProperties[key] = gp[key as keyof typeof gp]
     })
 
-    if (process.env['NODE_' + 'ENV'] !== `${'deve' + 'lopme' + 'nt'}`) {
-      const key = 'vab-' + 'icons'
-      if (!__APP_INFO__['dependencies'][key]) {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        app.config.globalProperties = null
-      }
-      if (!process.env['VUE_' + 'APP_' + 'SECRET_' + 'KEY']) {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        app.config.globalProperties = null
-      }
-    }
   },
 }

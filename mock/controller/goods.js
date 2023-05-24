@@ -6,18 +6,18 @@ const List = [
     price: '敬请期待',
     label: ['极简', 'vite'],
     company: 'vdp',
-    url: 'https://vue-admin-bea' + 'utiful.com/shop-vite',
+    url: 'https://vue-admin-beautiful.com/shop-vite',
     description: '全新一代前端框架',
   },
   {
     uuid: '@uuid',
     icon: 'dashboard-2-line',
-    title: 'Dash' + 'board Pro',
-    price: 'Admin Pro + Admin Plus 1299版' + '本赠品',
+    title: 'Dashboard Pro',
+    price: 'Admin Pro + Admin Plus 1299版本赠品',
     label: ['敬请期待', '人工智能', '科技风'],
     company: 'vdp',
-    url: 'https://vue-admin-bea' + 'utiful.com/dashboard-pro',
-    description: 'Admin Pro + Adm' + 'in Plus 1299版本赠品',
+    url: 'https://vue-admin-beautiful.com/dashboard-pro',
+    description: 'Admin Pro + Admin Plus 1299版本赠品',
   },
   {
     uuid: '@uuid',
@@ -49,7 +49,7 @@ const List = [
     label: ['vue', 'element-ui', 'MIT协议'],
     company: 'vab',
     url: 'https://github.com/chuzhixin/vue-admin-better',
-    description: '绝佳的开源、' + '企业级、' + '中后台前端框架',
+    description: '绝佳的开源、企业级、中后台前端框架',
   },
   {
     uuid: '@uuid',
@@ -59,11 +59,11 @@ const List = [
       'ixin/image' +
       '/logo/vdb.svg',
     title: 'vue-datav-beautiful-pro',
-    price: 'Admin Pro + Adm' + 'in Plus 1299版本赠品',
+    price: 'Admin Pro + Admin Plus 1299版本赠品',
     label: ['数据大屏'],
     company: 'vdb',
-    url: 'https://github.com/vue-' + 'datav-beautiful',
-    description: '立志做' + '国内最好' + '的数据大屏应用',
+    url: 'https://github.com/vue-datav-beautiful',
+    description: '立志做国内最好的数据大屏应用',
   },
   {
     uuid: '@uuid',
@@ -74,7 +74,7 @@ const List = [
     company: '言信网络',
     url: 'http://uviewui.com',
     description:
-      '跨 7 端移动端框架，全面的组件和便' + '捷的工具会让您信手拈来，如鱼得水',
+      '跨 7 端移动端框架，全面的组件和便捷的工具会让您信手拈来，如鱼得水',
   },
   {
     uuid: '@uuid',
@@ -94,7 +94,7 @@ const List = [
     label: ['element-ui', '表单设计器'],
     company: 'form-generator',
     url: 'https://mrhj.gitee.io/form-generator',
-    description: 'Element UI表单设' + '计及代码生成器',
+    description: 'Element UI表单设计及代码生成器',
   },
   {
     uuid: '@uuid',
@@ -103,18 +103,18 @@ const List = [
     price: '免费',
     label: ['spring-boot', 'vue-admin-better'],
     company: 'OPSLI',
-    url: 'https://www.op' + 'sli.com',
-    description: 'vue-admin-better开源' + '版结合spring boot的最佳实践',
+    url: 'https://www.opsli.com',
+    description: 'vue-admin-better开源版结合spring boot的最佳实践',
   },
   {
     uuid: '@uuid',
     title: 'WangEditor',
-    image: 'https://www.wangedi' + 'tor.com/image/logo.png',
+    image: 'https://www.wangeditor.com/image/logo.png',
     price: '免费',
     label: ['富文本编辑器'],
     company: 'WangEditor',
     url: 'https://www.wangeditor.com/v5/',
-    description: '绝佳' + '的富文本' + '编辑器组件，感谢巨人',
+    description: '绝佳的富文本编辑器组件，感谢巨人',
   },
 ]
 

@@ -43,5 +43,6 @@ public/video
 *.zip
 *.7z
 *.rar
-/library/styles/variables/vab-red-variables.module.scss
 /.history
+/types/auto-imports.d.ts
+/types/components.d.ts

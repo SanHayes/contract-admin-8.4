@@ -24,9 +24,15 @@ const {
   createChainWebpack,
 } = require('./library/build/index.ts')
 
+const { short } = require('git-rev-sync')
+
+// 适配spug获取commit id的方式
+const SPUG_GIT_COMMIT_ID = process.env.SPUG_GIT_COMMIT_ID
+
 const info = {
   ...pkg,
   lastBuildTime: dayjs().format('YYYY-MM-DD HH:mm:ss'),
+  commit: `${SPUG_GIT_COMMIT_ID ?? short()}`,
 }
 
 process.env.VUE_APP_TITLE = title
@@ -113,16 +119,6 @@ module.exports = defineConfig({
     }
   },
   chainWebpack(config) {
-    //为了防止忘记配置而造成项目无法打包，请保留以下提示
-    if (process.env.NODE_ENV === 'production') {
-      if (
-        process['env'].VUE_GITHUB_USER_NAME == 'test' &&
-        process['env'].VUE_APP_SECRET_KEY == 'preview'
-      )
-        console.log(
-          '检测到您的用户名和key未配置，key在购买时通过邮件邀请函发放，请仔细阅读文档并进行配置'
-        )
-    }
     createChainWebpack(process.env.NODE_ENV, config)
   },
   runtimeCompiler: false,

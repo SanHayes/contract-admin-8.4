@@ -6,6 +6,7 @@ import en from './locales/en.json'
 import zh from './locales/zh.json'
 import enLocale from 'element-plus/lib/locale/lang/en'
 import zhLocale from 'element-plus/lib/locale/lang/zh-cn'
+import type { App } from 'vue'
 
 export { enLocale, zhLocale }
 
@@ -30,7 +31,7 @@ export const i18n = createI18n({
   messages,
 })
 
-export function setupI18n(app: any) {
+export function setupI18n(app: App<Element>) {
   app.use(i18n)
   return i18n
 }

@@ -66,7 +66,7 @@
       const remotePrint = () => {
         ElMessageBox.prompt('', '自定义打印', {
           inputType: 'textarea',
-          inputValue: `<h1>双赢系统</h1>
+          inputValue: `<h1>${process.env.VUE_APP_TITLE}</h1>
 <p>vue-admin-beautiful.com</p>`,
           inputErrorMessage: 'Invalid Email',
           confirmButtonText: '打印',

@@ -1,5 +1,5 @@
-const { createUnPlugin } = require('vue-' + 'unplugins')
-const { createWebpackBar } = require('./webpack' + 'Bar/index.ts')
+const { createUnPlugin } = require('./unplugin/index.ts')
+const { createWebpackBar } = require('./webpackBar/index.ts')
 const { createDefineOptions } = require('./defineOptions/index.ts')
 const { createDefinePlugin } = require('./definePlugin/index.ts')
 const { createProvidePlugin } = require('./providePlugin/index.ts')

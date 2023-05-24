@@ -36,14 +36,11 @@
       const list = [
         {
           title: 'vue-admin-better',
-          description: '一款' + '绝佳的' + '中后台前端开发管理框架',
+          description: '一款绝佳的中后台前端开发管理框架',
           colorFrom: 'var(--el-color-primary)',
           colorTo: 'var(--el-color-transition)',
           icon: 'vuejs-line',
-          url:
-            'https://github.com/chuzhixin/' +
-            'vue-admin-better/' +
-            'tree/master',
+          url: 'https://github.com/chuzhixin/vue-admin-better/tree/master',
         },
         {
           title: 'vue-admin-better-antdv(vue3.x)',
@@ -56,21 +53,16 @@
           colorFrom: 'var(--el-color-transition)',
           colorTo: 'var(--el-color-primary)',
           icon: 'dashboard-line',
-          url:
-            'https://github.com/chuzhixin/' +
-            'vue-admin-better/tree/vue3.0-antdv',
+          url: 'https://github.com/chuzhixin/vue-admin-better/tree/vue3.0-antdv',
         },
         {
-          title: 'vue-admin' + '-arco(vue3.x)',
+          title: 'vue-admin-arco(vue3.x)',
           description:
-            '一款' +
-            '基于vue3.x + vite + ts + arco-' +
-            'design-pro-vue' +
-            '修改的前端框架',
+            '一款基于vue3.x + vite + ts + arco-design-pro-vue修改的前端框架',
           colorFrom: 'var(--el-color-primary)',
           colorTo: 'var(--el-color-transition)',
           icon: 'dashboard-line',
-          url: 'https://github.com/' + 'chuzhixin' + '/vue-admin-arco',
+          url: 'https://github.com/chuzhixin/vue-admin-arco',
         },
       ]
 

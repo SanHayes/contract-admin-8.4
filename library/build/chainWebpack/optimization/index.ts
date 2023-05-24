@@ -1,9 +1,7 @@
-const rely = require('./rely')
 const { resolve } = require('path')
 
 module.exports = {
   createOptimization: (config) => {
-    process.env['VUE_AP' + 'P_RELY'] = rely
     config.performance.set('hints', false)
     config.optimization.splitChunks({
       automaticNameDelimiter: '-',

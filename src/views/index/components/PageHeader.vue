@@ -1,6 +1,5 @@
 <script setup>
   import { useUserStore } from '@/store/modules/user'
-  import { getList } from '@/api/description'
   import VabAvatarList from '@/plugins/VabAvatarList'
 
   const userStore = useUserStore()
@@ -15,11 +14,8 @@
       },
       {
         avatar:
-          'https://fastly.jsdelivr.net/gh/' +
-          'chuzh' +
-          'ixin/image' +
-          '/user/fwfmiao.gif',
-        username: 'FlowPea' + 'kFish',
+          'https://fastly.jsdelivr.net/gh/chuzhixin/image/user/fwfmiao.gif',
+        username: 'FlowPeakFish',
       },
       {
         avatar: 'https://i.gtimg.cn/club/item/face/img/3/15643_100.gif',
@@ -40,18 +36,11 @@
       ? `下午好 ${username.value}，你一定有些累了，喝杯咖啡提提神。`
       : `晚上好 ${username.value}，愿你天黑有灯，下雨有伞。`
   }
-  const fetchData = async () => {
-    const {
-      data: { description },
-    } = await getList()
-    state.description = description
-  }
+  const fetchData = async () => {}
 
   onMounted(() => {
     // 仅在开发坏境和演示地址调用首页更新提示AD，防止正式环境触发更新推广
     if (
-      document.domain.includes('vue-admin-beautiful') ||
-      document.domain.includes('chu1204505056') ||
       document.domain.includes('localhost') ||
       document.domain.includes('127.0.0.1')
     )

@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-  import { getList } from '@/api/description'
-
   const voice = ref<SpeechSynthesisVoice>(
     undefined as unknown as SpeechSynthesisVoice
   )
@@ -10,12 +8,7 @@
     voice,
   })
 
-  const fetchData = async () => {
-    const {
-      data: { description },
-    } = await getList()
-    text.value = description
-  }
+  const fetchData = async () => {}
 
   let synth: SpeechSynthesis
   const voices = ref<SpeechSynthesisVoice[]>([])

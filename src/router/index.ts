@@ -11,6 +11,7 @@ import {
 import Layout from '@vab/layouts/index.vue'
 import { setupPermissions } from './permissions'
 import { authentication, isHashRouterMode, publicPath } from '@/config'
+import type { App } from 'vue'
 
 export const constantRoutes: VabRouteRecord[] = [
   {
@@ -1050,7 +1051,7 @@ export function resetRouter(routes: VabRouteRecord[] = constantRoutes) {
   addRouter(routes)
 }
 
-export function setupRouter(app: any) {
+export function setupRouter(app: App<Element>) {
   if (authentication === 'intelligence') addRouter(asyncRoutes)
   setupPermissions(router)
   app.use(router)

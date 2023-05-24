@@ -1,4 +1,4 @@
-import { App } from 'vue'
+import type { App } from 'vue'
 import pinia from '@/store'
 import { useErrorLogStore } from '@/store/modules/errorLog'
 import { errorLog } from '@/config'

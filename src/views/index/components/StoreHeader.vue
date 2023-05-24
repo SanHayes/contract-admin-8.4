@@ -33,7 +33,7 @@
           colorFrom: '#1890ffb3',
           colorTo: '#1890ff',
           icon: 'mac-line',
-          url: 'https://vue-admin-beautiful.com/' + 'authorization',
+          url: 'https://vue-admin-beautiful.com/authorization',
         },
         {
           title: '分享讨论',
@@ -41,7 +41,7 @@
           colorFrom: '#1bea7ab3',
           colorTo: '#1bea7a',
           icon: 'chat-heart-line',
-          url: 'https://vue-admin-beautiful.com/' + 'authorization',
+          url: 'https://vue-admin-beautiful.com/authorization',
         },
       ]
 
