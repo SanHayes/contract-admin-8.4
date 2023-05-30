@@ -1,27 +1,11 @@
 <script setup>
   import { useUserStore } from '@/store/modules/user'
-  import VabAvatarList from '@/plugins/VabAvatarList'
 
   const userStore = useUserStore()
   const { avatar, username } = storeToRefs(userStore)
 
   const state = reactive({
     description: '',
-    avatarList: [
-      {
-        avatar: 'https://i.gtimg.cn/club/item/face/img/2/15922_100.gif',
-        username: 'good luck',
-      },
-      {
-        avatar:
-          'https://fastly.jsdelivr.net/gh/chuzhixin/image/user/fwfmiao.gif',
-        username: 'FlowPeakFish',
-      },
-      {
-        avatar: 'https://i.gtimg.cn/club/item/face/img/3/15643_100.gif',
-        username: '嘻嘻',
-      },
-    ],
   })
 
   const handleTips = () => {
@@ -43,8 +27,9 @@
     if (
       document.domain.includes('localhost') ||
       document.domain.includes('127.0.0.1')
-    )
+    ) {
       fetchData()
+    }
   })
 </script>
 
@@ -57,10 +42,6 @@
           {{ handleTips() }}
         </p>
         <p class="page-header-tip-description" v-html="state.description"></p>
-      </div>
-      <div class="page-header-avatar-list">
-        <vab-avatar-list :avatar-list="state.avatarList" />
-        <p>participants</p>
       </div>
     </vab-card>
   </el-col>
@@ -106,18 +87,6 @@
         min-height: 20px;
         font-size: $base-font-size-default;
         color: #808695;
-      }
-    }
-
-    &-avatar-list {
-      flex: 1;
-      min-width: 100px;
-      margin-left: 20px;
-      text-align: right;
-
-      p {
-        margin-right: 9px;
-        line-height: 0;
       }
     }
   }

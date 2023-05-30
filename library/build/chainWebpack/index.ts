@@ -13,12 +13,20 @@ module.exports = {
     createBanner(config)
     createSvgSprite(config)
     if (env === 'production') {
-      if (build7z) createBuild7z(config)
-      if (buildGzip) createGzip(config)
-      if (imageCompression) createImageCompression(config)
+      if (build7z) {
+        createBuild7z(config)
+      }
+      if (buildGzip) {
+        createGzip(config)
+      }
+      if (imageCompression) {
+        createImageCompression(config)
+      }
       createOptimization(config)
     }
-    if (env === 'development') config.devtool('cheap-module-source-map')
+    if (env === 'development') {
+      config.devtool('cheap-module-source-map')
+    }
     createSourceInjector(config)
   },
 }
