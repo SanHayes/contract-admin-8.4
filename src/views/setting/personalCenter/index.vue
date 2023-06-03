@@ -24,8 +24,6 @@
   export default defineComponent({
     name: 'PersonalCenter',
     setup() {
-      const $baseMessage = inject('$baseMessage')
-
       const userStore = useUserStore()
       const { avatar } = storeToRefs(userStore)
 
