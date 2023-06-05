@@ -14,30 +14,6 @@
   const randomTheme = () => {
     $pub('random-theme')
   }
-  const buy = () => {
-    window.open('https://vue-admin-beautiful.com/authorization')
-  }
-  const getCode = () => {
-    if (process.env.NODE_ENV === 'development') $pub('get-code')
-    else
-      ElMessageBox.prompt(
-        '请输入密码(密码在购买时获得，跳转后需登录购买时绑定的github账号)',
-        '温馨提示',
-        {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-        }
-      )
-        .then(({ value }) => {
-          if (value !== 'vabp') {
-            $baseMessage('密码不正确！', 'error', 'vab-hey-message-error')
-            return
-          }
-          $pub('get-code')
-        })
-        .catch(() => {})
-  }
-
   const removeLocalStorage = () => {
     localStorage.clear()
     location.reload()

@@ -3,6 +3,7 @@ import pinia from '@/store'
 import { useSettingsStore } from '@/store/modules/settings'
 
 export default {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   install(app: App<Element>) {
     const { title } = useSettingsStore(pinia)
     if (!!window.ActiveXObject || 'ActiveXObject' in window) {
