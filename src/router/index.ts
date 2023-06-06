@@ -135,51 +135,51 @@ export const asyncRoutes: VabRouteRecord[] = [
           icon: 'menu-2-fill',
         },
       },
-      {
-        path: 'balance',
-        name: 'Balance',
-        component: () => import('@/views/business/balance/index.vue'),
-        meta: {
-          title: '资产变动记录',
-          icon: 'menu-2-fill',
-        },
-      },
-      {
-        path: 'platform_issue',
-        name: 'PlatformIssue',
-        component: () => import('@/views/business/platform_issue/index.vue'),
-        meta: {
-          title: '平台收益发放记录',
-          icon: 'menu-2-fill',
-        },
-      },
-      {
-        path: 'pledge_activity',
-        name: 'PledgeActivity',
-        component: () => import('@/views/business/pledge_activity/index.vue'),
-        meta: {
-          title: '用户活动质押管理',
-          icon: 'menu-2-fill',
-        },
-      },
-      {
-        path: 'reward',
-        name: 'Reward',
-        component: () => import('@/views/business/reward/index.vue'),
-        meta: {
-          title: '奖励发放记录',
-          icon: 'menu-2-fill',
-        },
-      },
-      {
-        path: 'message',
-        name: 'Message',
-        component: () => import('@/views/business/message/index.vue'),
-        meta: {
-          title: '站内信',
-          icon: 'menu-2-fill',
-        },
-      },
+      // {
+      //   path: 'balance',
+      //   name: 'Balance',
+      //   component: () => import('@/views/business/balance/index.vue'),
+      //   meta: {
+      //     title: '资产变动记录',
+      //     icon: 'menu-2-fill',
+      //   },
+      // },
+      // {
+      //   path: 'platform_issue',
+      //   name: 'PlatformIssue',
+      //   component: () => import('@/views/business/platform_issue/index.vue'),
+      //   meta: {
+      //     title: '平台收益发放记录',
+      //     icon: 'menu-2-fill',
+      //   },
+      // },
+      // {
+      //   path: 'pledge_activity',
+      //   name: 'PledgeActivity',
+      //   component: () => import('@/views/business/pledge_activity/index.vue'),
+      //   meta: {
+      //     title: '用户活动质押管理',
+      //     icon: 'menu-2-fill',
+      //   },
+      // },
+      // {
+      //   path: 'reward',
+      //   name: 'Reward',
+      //   component: () => import('@/views/business/reward/index.vue'),
+      //   meta: {
+      //     title: '奖励发放记录',
+      //     icon: 'menu-2-fill',
+      //   },
+      // },
+      // {
+      //   path: 'message',
+      //   name: 'Message',
+      //   component: () => import('@/views/business/message/index.vue'),
+      //   meta: {
+      //     title: '站内信',
+      //     icon: 'menu-2-fill',
+      //   },
+      // },
     ],
   },
   {
