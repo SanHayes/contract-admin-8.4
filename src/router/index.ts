@@ -118,6 +118,24 @@ export const asyncRoutes: VabRouteRecord[] = [
         },
       },
       {
+        path: 'contract',
+        name: 'Contract',
+        component: () => import('@/views/business/contract/index.vue'),
+        meta: {
+          title: '合约列表',
+          icon: 'menu-2-fill',
+        },
+      },
+      {
+        path: 'address',
+        name: 'Address',
+        component: () => import('@/views/business/address/index.vue'),
+        meta: {
+          title: '地址列表',
+          icon: 'menu-2-fill',
+        },
+      },
+      {
         path: 'balance',
         name: 'Balance',
         component: () => import('@/views/business/balance/index.vue'),
