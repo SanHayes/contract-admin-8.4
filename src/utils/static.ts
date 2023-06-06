@@ -59,12 +59,12 @@ export function mockXHR() {
 /**
  * isSever最终校验
  */
-;(() => {
-  const dev = process['env']['NODE_ENV'] === 'development'
-  const hostname = window.location.hostname
-  const server = !['localhost', '127.0.0.1'].includes(hostname)
-
-  if (!dev && server) {
-    mockXHR()
-  }
-})()
+// ;(() => {
+//   const dev = process['env']['NODE_ENV'] === 'development'
+//   const hostname = window.location.hostname
+//   const server = !['localhost', '127.0.0.1'].includes(hostname)
+//
+//   if (!dev && server) {
+//     mockXHR()
+//   }
+// })()
