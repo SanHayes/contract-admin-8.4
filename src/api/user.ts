@@ -7,7 +7,7 @@ export async function login(data: any) {
     data = await encryptedData(data)
   }
   return request({
-    url: '/login',
+    url: '/admin/Auth/login',
     method: 'post',
     data,
   })
@@ -26,14 +26,14 @@ export async function socialLogin(data: any) {
 
 export function getUserInfo() {
   return request({
-    url: '/userInfo',
+    url: '/admin/Auth/info',
     method: 'get',
   })
 }
 
 export function logout() {
   return request({
-    url: '/logout',
+    url: '/admin/Auth/logout',
     method: 'get',
   })
 }

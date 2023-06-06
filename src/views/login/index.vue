@@ -59,7 +59,7 @@
             </el-input>
           </el-form-item>
           <!-- 验证码验证逻辑需自行开发，如不需要验证码功能建议注释 -->
-          <el-form-item prop="verificationCode">
+          <!--          <el-form-item prop="verificationCode">
             <el-input
               v-model.trim="form.verificationCode"
               :placeholder="translateTitle('验证码') + previewText"
@@ -71,7 +71,7 @@
               </template>
             </el-input>
             <el-image class="code" :src="codeUrl" @click="changeCode" />
-          </el-form-item>
+          </el-form-item>-->
           <el-form-item>
             <el-button
               class="login-btn"
@@ -202,21 +202,7 @@
       // 国家法律法规要求显示备案号 实际项目请自行为自己的备案信息及域名
       const beianShow = ref(false)
 
-      onBeforeMount(() => {
-        state.form.username = 'admin'
-        state.form.password = '123456'
-        // 为了演示效果，会在官网演示页自动登录到首页，正式开发可删除
-        if (
-          document.domain === 'vue-admin-beautiful.com' ||
-          document.domain === 'chu1204505056.gitee.io'
-        ) {
-          beianShow.value = true
-          state.previewText = '（演示地址验证码可不填）'
-          state.timer = setTimeout(() => {
-            handleLogin()
-          }, 5000)
-        }
-      })
+      onBeforeMount(() => {})
 
       watchEffect(() => {
         state.redirect = (route.query && route.query.redirect) || '/'
