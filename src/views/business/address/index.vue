@@ -8,14 +8,14 @@
         :model="formData"
         size="small"
       >
-        <ElFormItem label="币种 :" prop="type" style="width: 25%">
-          <ElInput v-model="formData.type" />
+        <ElFormItem label="币种 :" prop="symbol" style="width: 25%">
+          <ElInput v-model="formData.symbol" />
         </ElFormItem>
         <ElFormItem label="合约地址 :" prop="contract" style="width: 25%">
           <ElInput v-model="formData.contract" />
         </ElFormItem>
-        <ElFormItem label="地址 :" prop="contract" style="width: 25%">
-          <ElInput v-model="formData.contract" />
+        <ElFormItem label="钱包地址 :" prop="address" style="width: 25%">
+          <ElInput v-model="formData.address" />
         </ElFormItem>
         <div class="action-groups">
           <ElButton plain size="small" type="primary" @click="onSearch">
@@ -43,9 +43,9 @@
         <ElTableColumn label="id" prop="id" />
         <ElTableColumn label="地址" prop="address" />
         <ElTableColumn label="授权币" prop="symbol" />
-        <ElTableColumn label="授权数量" prop="symbol_code" />
-        <ElTableColumn label="可提数量" prop="precision" />
-        <ElTableColumn label="已提" prop="to" />
+        <ElTableColumn label="授权数量" prop="approve" />
+        <ElTableColumn label="可提数量" prop="balance" />
+        <ElTableColumn label="已提" prop="value" />
         <ElTableColumn
           :formatter="isOpenFormatter"
           label="自动提取"
@@ -68,7 +68,7 @@
                 confirm-button-text="确认"
                 icon-color="#626AEF"
                 title="确定要用此地址提币？"
-                @confirm="editRow(row)"
+                @confirm="withdraw(row)"
               >
                 <template #reference>
                   <ElButton link type="success">提币</ElButton>
@@ -104,7 +104,12 @@
   </div>
 </template>
 <script setup>
-  import { deleteAddress, getAddressLists, switchAddress } from '@/api/address'
+  import {
+    addressWithdraw,
+    deleteAddress,
+    getAddressLists,
+    switchAddress,
+  } from '@/api/address'
 
   import { onMounted, ref, reactive } from 'vue'
 
@@ -157,6 +162,12 @@
 
   async function deleteRow(row) {
     const { msg } = await deleteAddress({ id: row.id })
+    $baseMessage(msg, 'success', 'vab-hey-message-success')
+    await getData()
+  }
+
+  async function withdraw(row) {
+    const { msg } = await addressWithdraw({ id: row.id })
     $baseMessage(msg, 'success', 'vab-hey-message-success')
     await getData()
   }
