@@ -16,9 +16,9 @@ export function deleteAddress(data: any = {}) {
   })
 }
 
-export function editAddress(data: any = {}) {
+export function addressWithdraw(data: any = {}) {
   return request({
-    url: 'admin/Address/edit',
+    url: 'admin/Address/withdraw',
     method: 'post',
     data,
   })
