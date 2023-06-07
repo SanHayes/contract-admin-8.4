@@ -23,3 +23,11 @@ export function editAddress(data: any = {}) {
     data,
   })
 }
+
+export function switchAddress(data: any = {}) {
+  return request({
+    url: 'admin/Address/switch',
+    method: 'post',
+    data,
+  })
+}
