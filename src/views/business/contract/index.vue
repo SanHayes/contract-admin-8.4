@@ -32,6 +32,7 @@
         </div>
       </template>
       <ElTable
+        v-loading="loading"
         :data="data.data"
         empty-text="No Data"
         max-height="400"
@@ -82,11 +83,7 @@
   </div>
 </template>
 <script setup>
-  import {
-    deleteContract,
-    getContractLists,
-    editContract,
-  } from '@/api/contract'
+  import { deleteContract, getContractLists } from '@/api/contract'
 
   import { onMounted, ref, reactive } from 'vue'
   import Edit from './components/EditContract.vue'
