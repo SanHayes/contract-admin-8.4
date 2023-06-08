@@ -82,11 +82,11 @@
               {{ translateTitle('登录') }}
             </el-button>
           </el-form-item>
-          <el-form-item>
+          <!--          <el-form-item>
             <router-link to="/register">
               {{ translateTitle('注册') }}
             </router-link>
-          </el-form-item>
+          </el-form-item>-->
         </el-form>
       </el-col>
       <el-col :lg="1" :md="1" :sm="24" :xl="1" :xs="24">
