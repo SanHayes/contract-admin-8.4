@@ -62,7 +62,6 @@ module.exports = defineConfig({
       target: [`http://localhost:${devPort}`],
     },
     port: devPort,
-    setupMiddlewares: require('./mock'),
     // 注释掉的地方是前端配置代理访问后端的示例，如无特别需求，不建议使用！！！
     // baseURL必须为/xxx，而不是后端服务器，请先了解代理逻辑，再设置前端代理
     // ！！！一定要注意！！！
