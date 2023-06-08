@@ -29,6 +29,16 @@
         <div class="card-header">
           <ElSpace><span>合约列表</span></ElSpace>
           <ElSpace />
+          <ElSpace>
+            <ElButton
+              class="button"
+              plain
+              type="primary"
+              @click="editRow($event)"
+            >
+              新增
+            </ElButton>
+          </ElSpace>
         </div>
       </template>
       <ElTable
