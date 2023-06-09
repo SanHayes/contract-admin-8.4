@@ -8,8 +8,19 @@
         :model="formData"
         size="small"
       >
-        <ElFormItem label="币种 :" prop="type" style="width: 25%">
-          <ElInput v-model="formData.type" />
+        <ElFormItem label="币种 :" prop="symbol" style="width: 25%">
+          <ElInput v-model="formData.symbol" />
+        </ElFormItem>
+        <ElFormItem label="链 :" prop="type" style="width: 25%">
+          <ElSelect
+            v-model="formData.type"
+            v-bind="{ optionsList: '默认不选/erc/trc/bsc' }"
+          >
+            <ElOption label="默认不选" value="">默认不选</ElOption>
+            <ElOption label="erc" value="erc">erc</ElOption>
+            <ElOption label="trc" value="trc">trc</ElOption>
+            <ElOption label="bsc" value="bsc">bsc</ElOption>
+          </ElSelect>
         </ElFormItem>
         <ElFormItem label="合约地址 :" prop="contract" style="width: 25%">
           <ElInput v-model="formData.contract" />
