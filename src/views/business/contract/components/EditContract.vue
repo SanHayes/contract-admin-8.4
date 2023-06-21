@@ -14,13 +14,7 @@
   const emits = defineEmits(['fetch-data'])
 
   // 接收父组件传递过来的值
-  const props = defineProps(['coin', 'coinId'])
-  watch(
-    () => props.coinId,
-    () => {
-      state.form.coin_id = props.coinId
-    }
-  )
+  const props = defineProps(['coin'])
 
   const showEdit = (row) => {
     if (!row) {

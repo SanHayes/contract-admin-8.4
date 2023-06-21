@@ -20,19 +20,12 @@
             </ElOption>
           </ElSelect>
         </ElFormItem>
-        <ElFormItem label="链 :" prop="type" style="width: 25%">
-          <ElSelect
-            v-model="formData.type"
-            v-bind="{ optionsList: '默认不选/erc/trc/bsc' }"
-          >
-            <ElOption label="默认不选" value="">默认不选</ElOption>
-            <ElOption label="erc" value="erc">erc</ElOption>
-            <ElOption label="trc" value="trc">trc</ElOption>
-            <ElOption label="bsc" value="bsc">bsc</ElOption>
-          </ElSelect>
-        </ElFormItem>
-        <ElFormItem label="合约地址 :" prop="contract" style="width: 25%">
-          <ElInput v-model="formData.contract" />
+        <ElFormItem
+          label="合约地址 :"
+          prop="contract_address"
+          style="width: 25%"
+        >
+          <ElInput v-model="formData.contract_address" />
         </ElFormItem>
         <div class="action-groups">
           <ElButton plain size="small" type="primary" @click="onSearch">
@@ -70,11 +63,11 @@
         style="width: 100%"
       >
         <ElTableColumn label="id" prop="id" />
-        <ElTableColumn label="链" prop="type" />
-        <ElTableColumn label="合约" prop="contract" />
-        <ElTableColumn label="授权代币" prop="symbol" />
-        <ElTableColumn label="代币地址" prop="symbol_code" />
-        <ElTableColumn label="小数位数" prop="decimals" />
+        <ElTableColumn label="链" prop="coin.chain" />
+        <ElTableColumn label="合约" prop="contract_address" />
+        <ElTableColumn label="授权代币" prop="coin.symbol" />
+        <ElTableColumn label="代币地址" prop="coin.contract_address" />
+        <ElTableColumn label="小数位数" prop="coin.contract_decimals" />
         <ElTableColumn label="操作" prop="act" :width="160">
           <template #default="{ row }">
             <ElSpace>
@@ -108,7 +101,7 @@
         @size-change="getData"
       />
     </ElCard>
-    <Edit ref="editRef" :coin="coin" @fetch-data="getData" :coinId="formData.coin_id" />
+    <Edit ref="editRef" :coin="coin" @fetch-data="getData" />
   </div>
 </template>
 <script setup>
@@ -128,7 +121,7 @@
     lists: [],
   })
   const formData = ref({
-    coin_id: undefined
+    coin_id: undefined,
   })
   const page = reactive({
     current: 1,
