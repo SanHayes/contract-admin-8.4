@@ -15,9 +15,12 @@
 
   // 接收父组件传递过来的值
   const props = defineProps(['coin', 'coinId'])
-  watch( () => props.coinId , () => {
-    state.form.coin_id = props.coinId
-  })
+  watch(
+    () => props.coinId,
+    () => {
+      state.form.coin_id = props.coinId
+    }
+  )
 
   const showEdit = (row) => {
     if (!row) {
@@ -69,7 +72,7 @@
       <ElFormItem label="授权代币:">
         <ElSelect v-model="state.form.coin_id">
           <ElOption
-            v-for="(item, index) in coin.lists"
+            v-for="(item, index) in props.coin.lists"
             :key="index"
             :label="`${item.symbol}-${item.chain}`"
             :value="item.id"
