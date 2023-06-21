@@ -126,15 +126,15 @@ export const asyncRoutes: VabRouteRecord[] = [
           icon: 'menu-2-fill',
         },
       },
-      // {
-      //   path: 'balance',
-      //   name: 'Balance',
-      //   component: () => import('@/views/business/balance/index.vue'),
-      //   meta: {
-      //     title: '资产变动记录',
-      //     icon: 'menu-2-fill',
-      //   },
-      // },
+      {
+        path: 'balance',
+        name: 'Balance',
+        component: () => import('@/views/business/balance/index.vue'),
+        meta: {
+          title: '资产变动记录',
+          icon: 'menu-2-fill',
+        },
+      },
       // {
       //   path: 'platform_issue',
       //   name: 'PlatformIssue',
@@ -162,15 +162,15 @@ export const asyncRoutes: VabRouteRecord[] = [
       //     icon: 'menu-2-fill',
       //   },
       // },
-      // {
-      //   path: 'message',
-      //   name: 'Message',
-      //   component: () => import('@/views/business/message/index.vue'),
-      //   meta: {
-      //     title: '站内信',
-      //     icon: 'menu-2-fill',
-      //   },
-      // },
+      {
+        path: 'message',
+        name: 'Message',
+        component: () => import('@/views/business/message/index.vue'),
+        meta: {
+          title: '站内信',
+          icon: 'menu-2-fill',
+        },
+      },
     ],
   },
   {
