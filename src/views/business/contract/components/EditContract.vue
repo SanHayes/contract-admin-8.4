@@ -64,7 +64,7 @@
         <ElInput v-model="state.form.contract_address" placeholder="合约地址" />
       </ElFormItem>
       <ElFormItem label="授权代币:">
-        <ElSelect v-model="state.form.coin_id">
+        <ElSelect v-model="state.form.token_id">
           <ElOption
             v-for="(item, index) in props.coin.lists"
             :key="index"
