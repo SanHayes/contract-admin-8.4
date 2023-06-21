@@ -63,7 +63,6 @@
   </div>
 </template>
 <script setup>
-  import { mock } from 'mockjs'
   import { onMounted, ref, reactive } from 'vue'
   import { getAdminLoginList } from '@/api/log'
   const loading = ref(false)

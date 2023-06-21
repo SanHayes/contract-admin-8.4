@@ -21,7 +21,7 @@
           <ElInput v-model="formData.admin_id" />
         </ElFormItem>
         <ElFormItem label="用户ID :" prop="user_id" style="width: 25%">
-          <ElInputNumber v-model="formData.user_id" />
+          <ElInput v-model="formData.user_id" />
         </ElFormItem>
         <div class="action-groups">
           <ElButton plain size="small" type="primary" @click="onSearch">
@@ -47,7 +47,7 @@
         row-key="id"
         style="width: 100%"
       >
-        <ElTableColumn label="id" prop="id" />
+        <!--        <ElTableColumn label="id" prop="id" />-->
         <ElTableColumn label="登录IP" prop="ip" />
         <ElTableColumn label="请求域名" prop="domain" />
         <ElTableColumn label="所属盘口" prop="col1" />
@@ -72,8 +72,9 @@
   </div>
 </template>
 <script setup>
-  import { mock } from 'mockjs'
   import { onMounted, ref, reactive } from 'vue'
+  import { getLoginOperationList } from '@/api/log'
+  const loading = ref(false)
   const data = reactive({
     data: [],
     total: 100,
@@ -85,21 +86,15 @@
   })
   async function getData() {
     /* 调用接口查询 */
-    const rowData = await Array.from({ length: page.pageSize }).map((_) =>
-      mock({
-        id: '@id',
-        ip: '@ip',
-        domain: '@url',
-        col1: '@cword(1,10)',
-        url: '@cword(1,10)',
-        admin_id: '@cname',
-        content: '@cword()',
-        create_time: '@date',
-        user_id: '@cword(1,10)',
-      })
-    )
-    data.data = rowData
-    data.total = mock('@integer(200, 300)')
+    loading.value = true
+    const p = {
+      page: page.current,
+    }
+    const params = { ...p, ...toRaw(formData.value) }
+    const res = await getLoginOperationList(params)
+    loading.value = false
+    data.data = res.data.data
+    data.total = res.data.total
   }
   onMounted(() => {
     getData()
