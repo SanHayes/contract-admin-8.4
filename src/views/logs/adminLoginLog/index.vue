@@ -41,7 +41,7 @@
         row-key="id"
         style="width: 100%"
       >
-        <ElTableColumn label="id" prop="id" />
+        <!--        <ElTableColumn label="id" prop="id" />-->
         <ElTableColumn label="登录IP" prop="ip" />
         <ElTableColumn label="请求域名" prop="domain" />
         <ElTableColumn label="用户名" prop="admin_id" />
@@ -65,6 +65,8 @@
 <script setup>
   import { mock } from 'mockjs'
   import { onMounted, ref, reactive } from 'vue'
+  import { getAdminLoginList } from '@/api/log'
+  const loading = ref(false)
   const data = reactive({
     data: [],
     total: 100,
@@ -74,21 +76,20 @@
     current: 1,
     pageSize: 15,
   })
+
   async function getData() {
     /* 调用接口查询 */
-    const rowData = await Array.from({ length: page.pageSize }).map((_) =>
-      mock({
-        id: '@id',
-        ip: '@ip',
-        domain: '@url',
-        admin_id: '@cname',
-        content: '@cword()',
-        create_time: '@date',
-      })
-    )
-    data.data = rowData
-    data.total = mock('@integer(200, 300)')
+    loading.value = true
+    const p = {
+      page: page.current,
+    }
+    const params = { ...p, ...toRaw(formData.value) }
+    const res = await getAdminLoginList(params)
+    loading.value = false
+    data.data = res.data.data
+    data.total = res.data.total
   }
+
   onMounted(() => {
     getData()
   })
