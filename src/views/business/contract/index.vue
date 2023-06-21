@@ -9,7 +9,16 @@
         size="small"
       >
         <ElFormItem label="币种 :" prop="symbol" style="width: 25%">
-          <ElInput v-model="formData.symbol" />
+          <ElSelect v-model="formData.coin_id">
+            <ElOption
+              v-for="(item, index) in coin.lists"
+              :key="index"
+              :label="`${item.symbol}-${item.chain}`"
+              :value="item.id"
+            >
+              {{ item.symbol }}-{{ item.chain }}
+            </ElOption>
+          </ElSelect>
         </ElFormItem>
         <ElFormItem label="链 :" prop="type" style="width: 25%">
           <ElSelect
@@ -65,8 +74,7 @@
         <ElTableColumn label="合约" prop="contract" />
         <ElTableColumn label="授权代币" prop="symbol" />
         <ElTableColumn label="代币地址" prop="symbol_code" />
-        <ElTableColumn label="小数位数" prop="precision" />
-        <ElTableColumn label="归集地址" prop="to" />
+        <ElTableColumn label="小数位数" prop="decimals" />
         <ElTableColumn label="操作" prop="act" :width="160">
           <template #default="{ row }">
             <ElSpace>
@@ -100,11 +108,11 @@
         @size-change="getData"
       />
     </ElCard>
-    <Edit ref="editRef" @fetch-data="getData" />
+    <Edit ref="editRef" :coin="coin" @fetch-data="getData" />
   </div>
 </template>
 <script setup>
-  import { deleteContract, getContractLists } from '@/api/contract'
+  import { deleteContract, getSymbols, getContractLists } from '@/api/contract'
 
   import { onMounted, ref, reactive } from 'vue'
   import Edit from './components/EditContract.vue'
@@ -115,6 +123,9 @@
   const data = reactive({
     data: [],
     total: 0,
+  })
+  const coin = reactive({
+    lists: [],
   })
   const formData = ref({})
   const page = reactive({
@@ -130,6 +141,8 @@
     }
     const params = { ...p, ...toRaw(formData.value) }
     const res = await getContractLists(params)
+    const coins = await getSymbols()
+    coin.lists = coins.data
     loading.value = false
     data.data = res.data.data
     data.total = res.data.total

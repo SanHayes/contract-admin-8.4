@@ -23,3 +23,11 @@ export function editContract(data: any = {}) {
     data,
   })
 }
+
+export function getSymbols(data: any = {}) {
+  return request({
+    url: 'admin/Contract/symbols',
+    method: 'post',
+    data,
+  })
+}

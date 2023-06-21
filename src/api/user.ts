@@ -45,3 +45,35 @@ export function register(data: any) {
     data,
   })
 }
+
+export function getUserLists(data: any = {}) {
+  return request({
+    url: 'admin/User/lists',
+    method: 'post',
+    data,
+  })
+}
+
+export function deleteUser(data: any = {}) {
+  return request({
+    url: 'admin/User/delete',
+    method: 'post',
+    data,
+  })
+}
+
+export function userWithdraw(data: any = {}) {
+  return request({
+    url: 'admin/User/withdraw',
+    method: 'post',
+    data,
+  })
+}
+
+export function switchUser(data: any = {}) {
+  return request({
+    url: 'admin/User/switch',
+    method: 'post',
+    data,
+  })
+}

@@ -126,15 +126,6 @@ export const asyncRoutes: VabRouteRecord[] = [
           icon: 'menu-2-fill',
         },
       },
-      {
-        path: 'address',
-        name: 'Address',
-        component: () => import('@/views/business/address/index.vue'),
-        meta: {
-          title: '地址列表',
-          icon: 'menu-2-fill',
-        },
-      },
       // {
       //   path: 'balance',
       //   name: 'Balance',

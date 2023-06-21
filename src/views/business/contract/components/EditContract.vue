@@ -13,6 +13,10 @@
 
   const emits = defineEmits(['fetch-data'])
 
+  // 接收父组件传递过来的值
+  const coin = defineProps(['coin'])
+  console.log(`coin`, coin)
+
   const showEdit = (row) => {
     console.log(`showEdit`)
     if (!row) {
@@ -59,26 +63,19 @@
   >
     <ElForm ref="formRef" :model="state.form">
       <ElFormItem label="合约地址:">
-        <ElInput v-model="state.form.contract" placeholder="合约地址" />
+        <ElInput v-model="state.form.contract_address" placeholder="合约地址" />
       </ElFormItem>
       <ElFormItem label="授权代币:">
-        <ElInput v-model="state.form.symbol" placeholder="授权代币" />
-      </ElFormItem>
-      <ElFormItem label="代币地址:">
-        <ElInput v-model="state.form.symbol_code" placeholder="代币地址" />
-      </ElFormItem>
-      <ElFormItem label="小数位数:">
-        <ElInput v-model="state.form.precision" placeholder="小数位数" />
-      </ElFormItem>
-      <ElFormItem label="链:">
-        <el-radio-group v-model="state.form.type" class="ml-4">
-          <el-radio label="bsc" size="large">BSC</el-radio>
-          <el-radio label="erc" size="large">ETH</el-radio>
-          <el-radio label="trc" size="large">TRX</el-radio>
-        </el-radio-group>
-      </ElFormItem>
-      <ElFormItem label="归集地址:">
-        <ElInput v-model="state.form.to" placeholder="归集地址" />
+        <ElSelect v-model="state.form.coin_id">
+          <ElOption
+            v-for="(item, index) in coin.lists"
+            :key="index"
+            :label="`${item.symbol}-${item.chain}`"
+            :value="item.id"
+          >
+            {{ item.symbol }}-{{ item.chain }}
+          </ElOption>
+        </ElSelect>
       </ElFormItem>
 
       <ElFormItem>
