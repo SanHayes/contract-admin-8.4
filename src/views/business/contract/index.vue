@@ -108,7 +108,7 @@
         @size-change="getData"
       />
     </ElCard>
-    <Edit ref="editRef" :coin="coin" @fetch-data="getData" />
+    <Edit ref="editRef" :coin="coin" @fetch-data="getData" :coinId="formData.coin_id" />
   </div>
 </template>
 <script setup>
@@ -127,7 +127,9 @@
   const coin = reactive({
     lists: [],
   })
-  const formData = ref({})
+  const formData = ref({
+    coin_id: undefined
+  })
   const page = reactive({
     current: 1,
     pageSize: 15,
@@ -142,7 +144,7 @@
     const params = { ...p, ...toRaw(formData.value) }
     const res = await getContractLists(params)
     const coins = await getSymbols()
-    coin.lists = coins.data
+    coin.lists = coins.data || []
     loading.value = false
     data.data = res.data.data
     data.total = res.data.total

@@ -14,11 +14,12 @@
   const emits = defineEmits(['fetch-data'])
 
   // 接收父组件传递过来的值
-  const coin = defineProps(['coin'])
-  console.log(`coin`, coin)
+  const props = defineProps(['coin', 'coinId'])
+  watch( () => props.coinId , () => {
+    state.form.coin_id = props.coinId
+  })
 
   const showEdit = (row) => {
-    console.log(`showEdit`)
     if (!row) {
       state.name = '添加'
     } else {
