@@ -31,3 +31,11 @@ export function getSymbols(data: any = {}) {
     data,
   })
 }
+
+export function switchContract(data: any = {}) {
+  return request({
+    url: 'admin/Contract/switch',
+    method: 'post',
+    data,
+  })
+}

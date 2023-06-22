@@ -68,6 +68,16 @@
         <ElTableColumn label="授权代币" prop="coin.symbol" />
         <ElTableColumn label="代币地址" prop="coin.contract_address" />
         <ElTableColumn label="小数位数" prop="coin.contract_decimals" />
+        <ElTableColumn :formatter="statusFormatter" label="状态" prop="status">
+          <template #default="{ row }">
+            <ElSwitch
+              v-model="row.is_auto"
+              :active-value="1"
+              :inactive-value="0"
+              @change="onSwitchChange(row)"
+            />
+          </template>
+        </ElTableColumn>
         <ElTableColumn label="操作" prop="act" :width="160">
           <template #default="{ row }">
             <ElSpace>
@@ -105,7 +115,12 @@
   </div>
 </template>
 <script setup>
-  import { deleteContract, getSymbols, getContractLists } from '@/api/contract'
+  import {
+    deleteContract,
+    getSymbols,
+    getContractLists,
+    switchContract,
+  } from '@/api/contract'
 
   import { onMounted, ref, reactive } from 'vue'
   import Edit from './components/EditContract.vue'
@@ -171,6 +186,20 @@
       //todo
       editRef.value.showEdit()
     }
+  }
+  const statusFormatter = (row, column) => {
+    const v = row.status
+    switch (v) {
+      case 1:
+        return `是`
+      case 0:
+        return `否`
+    }
+  }
+  const onSwitchChange = async (row) => {
+    loading.value = true
+    await switchContract({ id: row.id, field: `status` })
+    loading.value = false
   }
 </script>
 <style>
