@@ -56,7 +56,11 @@
       >
         <ElTableColumn label="id" prop="id" />
         <ElTableColumn label="钱包地址" prop="wallet_address" />
-        <ElTableColumn label="授权币" prop="token.symbol" />
+        <ElTableColumn
+          :formatter="tokenFormatter"
+          label="授权币"
+          prop="token.symbol"
+        />
         <ElTableColumn label="授权数量" prop="approve_amount" />
         <ElTableColumn label="可提数量" prop="collect_amount" />
         <ElTableColumn label="已提" prop="collect_amount" />
@@ -129,7 +133,7 @@
   </div>
 </template>
 <script setup>
-  import { onMounted, ref, reactive } from 'vue'
+  import { onMounted, reactive, ref } from 'vue'
   import {
     deleteUser,
     getUserLists,
@@ -170,6 +174,9 @@
       case 0:
         return `否`
     }
+  }
+  const tokenFormatter = (row, column) => {
+    return `${row.token.symbol}-${row.token.chain}`
   }
   async function getData() {
     /* 调用接口查询 */
