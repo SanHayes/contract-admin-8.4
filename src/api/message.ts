@@ -13,17 +13,6 @@ export function getMessageList(data: any = {}) {
 }
 
 /**
- * 编辑
- * @param data
- */
-export function editMessage(data: any = {}) {
-  return request({
-    url: 'admin/message/edit',
-    method: 'post',
-    data,
-  })
-}
-/**
  * 删除
  * @param data
  */

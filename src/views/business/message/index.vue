@@ -8,6 +8,7 @@
         </div>
       </template>
       <ElTable
+        v-loading="loading"
         :data="data.data"
         empty-text="No Data"
         max-height="400"
@@ -47,16 +48,13 @@
         @size-change="getData"
       />
     </ElCard>
-    <Edit ref="editRef" @fetch-data="getData" />
   </div>
 </template>
 <script setup>
   import { onMounted, ref, reactive } from 'vue'
   import { deleteMessage, getMessageList } from '@/api/message'
-  import Edit from './components/Edit.vue'
   const $baseMessage = inject('$baseMessage')
   const loading = ref(false)
-  const editRef = ref()
   const data = reactive({
     data: [],
     total: 100,
