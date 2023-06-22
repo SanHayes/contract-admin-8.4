@@ -142,6 +142,7 @@ module.exports = defineConfig({
             return `@use "~@vab/styles/variables/variables.module.scss" as *;${content}`
           return content
         },
+        prependData: `@import "@/assets/styles/base.scss";`, // base scss file
       },
     },
   },

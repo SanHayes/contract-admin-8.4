@@ -1,0 +1,72 @@
+@import './base.scss';
+
+.flex_center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex_start {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.flex_end {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.mg_t_20 {
+    margin-top: 20px;
+}
+.mg_b_20 {
+    margin-bottom: 20px;
+}
+.mg_l_20 {
+    margin-left: 20px;
+}
+.mg_r_20 {
+    margin-right: 20px;
+}
+.mg_t_10 {
+    margin-top: 10px;
+}
+.mg_b_10 {
+    margin-bottom: 10px;
+}
+.mg_l_10 {
+    margin-left: 10px;
+}
+.mg_r_10 {
+    margin-right: 10px;
+}
+.pd_t_20 {
+    padding-top: 20px;
+}
+.pd_b_20 {
+    padding-bottom: 20px;
+}
+.pd_l_20 {
+    padding-left: 20px;
+}
+.pd_r_20 {
+    padding-right: 20px;
+}
+
+.whole_width {
+    width: 100%;
+}
+
+.danger_f {
+    color: $dangerColor;
+}
+
+.form_tip {
+    height: 32px;
+    color: $dangerColor;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
