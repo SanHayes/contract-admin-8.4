@@ -14,12 +14,6 @@
         <ElFormItem label="钱包地址 :" prop="wallet_address" style="width: 25%">
           <ElInput v-model="formData.wallet_address" />
         </ElFormItem>
-        <ElFormItem label="所属员工 :" prop="assets_type" style="width: 25%">
-          <ElInput v-model="formData.assets_type" />
-        </ElFormItem>
-        <ElFormItem label="用户ID :" prop="user_id" style="width: 25%">
-          <ElInput v-model="formData.user_id" />
-        </ElFormItem>
         <div class="action-groups">
           <ElButton plain size="small" type="primary" @click="onSearch">
             查询
