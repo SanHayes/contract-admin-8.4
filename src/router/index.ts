@@ -377,7 +377,7 @@ export const asyncRoutes: VabRouteRecord[] = [
         name: 'OperationLog',
         component: () => import('@/views/logs/operationLog/index.vue'),
         meta: {
-          title: '操作日志',
+          title: '管理员操作日志',
           icon: 'file-shield-2-line',
         },
       },
