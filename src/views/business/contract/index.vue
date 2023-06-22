@@ -71,7 +71,7 @@
         <ElTableColumn :formatter="statusFormatter" label="状态" prop="status">
           <template #default="{ row }">
             <ElSwitch
-              v-model="row.is_auto"
+              v-model="row.status"
               :active-value="1"
               :inactive-value="0"
               @change="onSwitchChange(row)"
