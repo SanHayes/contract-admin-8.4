@@ -30,7 +30,7 @@
     <ElCard>
       <template #header>
         <div class="card-header">
-          <ElSpace><span>登录日志</span></ElSpace>
+          <ElSpace><span>管理员登录日志</span></ElSpace>
           <ElSpace />
         </div>
       </template>
@@ -44,7 +44,7 @@
         <!--        <ElTableColumn label="id" prop="id" />-->
         <ElTableColumn label="登录IP" prop="ip" />
         <ElTableColumn label="请求域名" prop="domain" />
-        <ElTableColumn label="用户名" prop="admin_id" />
+        <ElTableColumn label="用户名" prop="admin.username" />
         <ElTableColumn label="内容" prop="content" />
         <ElTableColumn label="登录时间" prop="create_time" />
       </ElTable>

@@ -368,7 +368,7 @@ export const asyncRoutes: VabRouteRecord[] = [
         name: 'AdminLoginLog',
         component: () => import('@/views/logs/adminLoginLog/index.vue'),
         meta: {
-          title: '登录日志',
+          title: '管理员登录日志',
           icon: 'file-shield-2-line',
         },
       },
