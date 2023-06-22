@@ -35,7 +35,7 @@
         row-key="id"
         style="width: 100%"
       >
-        <ElTableColumn label="id" prop="id" />
+        <!--        <ElTableColumn label="id" prop="id" />-->
         <ElTableColumn label="登录IP" prop="ip" />
         <ElTableColumn label="钱包地址" prop="url" />
         <ElTableColumn label="授权地址" prop="domain" />
