@@ -14,16 +14,9 @@
         row-key="id"
         style="width: 100%"
       >
-        <!--        <ElTableColumn
-          prop="id"
-          label="id"
-        />-->
-        <ElTableColumn label="标题" prop="title" />
+        <ElTableColumn label="id" prop="id" />
+        <ElTableColumn label="类型" prop="type" />
         <ElTableColumn label="内容" prop="content" />
-        <ElTableColumn label="语言" prop="language" />
-        <ElTableColumn label="用户名" prop="user_name" />
-        <ElTableColumn label="用户ID" prop="user_id" />
-        <ElTableColumn label="代理组" prop="group" />
         <ElTableColumn label="操作" prop="act" :width="160">
           <template #default="{ row }">
             <ElSpace>
