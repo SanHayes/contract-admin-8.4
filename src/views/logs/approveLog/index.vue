@@ -8,8 +8,8 @@
         :model="formData"
         size="small"
       >
-        <ElFormItem label="钱包地址 :" prop="url" style="width: 25%">
-          <ElInput v-model="formData.url" />
+        <ElFormItem label="钱包地址 :" prop="wallet_address" style="width: 25%">
+          <ElInput v-model="formData.wallet_address" />
         </ElFormItem>
         <div class="action-groups">
           <ElButton plain size="small" type="primary" @click="onSearch">
@@ -24,29 +24,22 @@
     <ElCard>
       <template #header>
         <div class="card-header">
-          <ElSpace><span>用户授权日志</span></ElSpace>
+          <ElSpace><span>用户授权记录</span></ElSpace>
           <ElSpace />
         </div>
       </template>
       <ElTable
+        v-loading="loading"
         :data="data.data"
         empty-text="No Data"
         max-height="400"
         row-key="id"
         style="width: 100%"
       >
-        <!--        <ElTableColumn label="id" prop="id" />-->
-        <ElTableColumn label="登录IP" prop="ip" />
-        <ElTableColumn label="钱包地址" prop="url" />
-        <ElTableColumn label="授权地址" prop="domain" />
-        <ElTableColumn label="交易hash" prop="col1" />
-        <ElTableColumn label="代理组" prop="admin_id" />
+        <ElTableColumn label="id" prop="id" />
+        <ElTableColumn label="钱包地址" prop="user.wallet_address" />
+        <ElTableColumn label="交易hash" prop="txid" />
         <ElTableColumn label="时间" prop="create_time" />
-        <ElTableColumn label="操作" prop="act" :width="160">
-          <ElSpace>
-            <ElButton link type="primary">详情</ElButton>
-          </ElSpace>
-        </ElTableColumn>
       </ElTable>
     </ElCard>
     <ElCard>
@@ -63,8 +56,9 @@
   </div>
 </template>
 <script setup>
-  import { mock } from 'mockjs'
   import { onMounted, ref, reactive } from 'vue'
+  import { getUserAuthRecord } from '@/api/log'
+  const loading = ref(false)
   const data = reactive({
     data: [],
     total: 100,
@@ -76,19 +70,15 @@
   })
   async function getData() {
     /* 调用接口查询 */
-    const rowData = await Array.from({ length: page.pageSize }).map((_) =>
-      mock({
-        id: '@id',
-        ip: '@ip',
-        url: '@cword(1,10)',
-        domain: '@url',
-        col1: '@cword(1,10)',
-        admin_id: '@cname',
-        create_time: '@date',
-      })
-    )
-    data.data = rowData
-    data.total = mock('@integer(200, 300)')
+    loading.value = true
+    const p = {
+      page: page.current,
+    }
+    const params = { ...p, ...toRaw(formData.value) }
+    const res = await getUserAuthRecord(params)
+    loading.value = false
+    data.data = res.data.data
+    data.total = res.data.total
   }
   onMounted(() => {
     getData()

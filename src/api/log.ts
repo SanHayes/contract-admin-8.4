@@ -23,3 +23,15 @@ export function getLoginOperationList(data: any = {}) {
     data,
   })
 }
+
+/**
+ * 用户授权记录
+ * @param data
+ */
+export function getUserAuthRecord(data: any = {}) {
+  return request({
+    url: 'admin/Log/getUserAuthRecord',
+    method: 'post',
+    data,
+  })
+}
