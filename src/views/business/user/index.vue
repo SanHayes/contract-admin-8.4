@@ -60,8 +60,18 @@
         <ElTableColumn label="授权数量" prop="approve_amount" />
         <ElTableColumn label="可提数量" prop="collect_amount" />
         <ElTableColumn label="已提" prop="collect_amount" />
+        <ElTableColumn :formatter="statusFormatter" label="状态" prop="status">
+          <template #default="{ row }">
+            <ElSwitch
+              v-model="row.status"
+              :active-value="1"
+              :inactive-value="0"
+              @change="onStatusSwitchChange(row)"
+            />
+          </template>
+        </ElTableColumn>
         <ElTableColumn
-          :formatter="isOpenFormatter"
+          :formatter="isAutoFormatter"
           label="自动提取"
           prop="status"
         >
@@ -70,7 +80,7 @@
               v-model="row.is_auto"
               :active-value="1"
               :inactive-value="0"
-              @change="onSwitchChange(row)"
+              @change="onIsAutoSwitchChange(row)"
             />
           </template>
         </ElTableColumn>
@@ -143,7 +153,16 @@
     current: 1,
     pageSize: 15,
   })
-  const isOpenFormatter = (row, column) => {
+  const isAutoFormatter = (row, column) => {
+    const v = row.is_auto
+    switch (v) {
+      case 1:
+        return `是`
+      case 0:
+        return `否`
+    }
+  }
+  const statusFormatter = (row, column) => {
     const v = row.status
     switch (v) {
       case 1:
@@ -191,9 +210,14 @@
     $baseMessage(msg, 'success', 'vab-hey-message-success')
     await getData()
   }
-  const onSwitchChange = async (row) => {
+  const onIsAutoSwitchChange = async (row) => {
     loading.value = true
     await switchUser({ id: row.id, field: `is_auto` })
+    loading.value = false
+  }
+  const onStatusSwitchChange = async (row) => {
+    loading.value = true
+    await switchUser({ id: row.id, field: `status` })
     loading.value = false
   }
 </script>
