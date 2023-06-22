@@ -32,22 +32,22 @@
         </div>
       </template>
       <ElTable
+        v-loading="loading"
         :data="data.data"
         empty-text="No Data"
         max-height="400"
         row-key="id"
         style="width: 100%"
       >
-        <!--        <ElTableColumn label="id" prop="id" />-->
+        <ElTableColumn label="id" prop="id" />
         <ElTableColumn label="用户名" prop="username" />
         <ElTableColumn label="钱包地址" prop="wallet_address" />
-        <ElTableColumn label="资产类型" prop="coin" />
-        <ElTableColumn label="资产变动金额" prop="balance" />
+        <ElTableColumn label="币种" prop="coin" />
+        <ElTableColumn label="资产变动金额" prop="amount" />
         <ElTableColumn label="变动后" prop="new_balance" />
-        <ElTableColumn label="所属员工" prop="assets_type" />
-        <ElTableColumn label="地区" prop="remark" />
+        <ElTableColumn label="账户类型" prop="assets_type" />
+        <ElTableColumn label="备注" prop="remark" />
         <ElTableColumn label="时间" prop="create_time" />
-        <ElTableColumn label="用户ID" prop="user_id" />
         <ElTableColumn label="操作" prop="act" :width="160">
           <ElSpace>
             <ElButton link type="primary">详情</ElButton>
