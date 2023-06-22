@@ -47,6 +47,7 @@
         </div>
       </template>
       <ElTable
+        v-loading="loading"
         :data="data.data"
         empty-text="No Data"
         max-height="400"
@@ -55,10 +56,10 @@
       >
         <ElTableColumn label="id" prop="id" />
         <ElTableColumn label="钱包地址" prop="wallet_address" />
-        <ElTableColumn label="授权币" prop="symbol" />
+        <ElTableColumn label="授权币" prop="token.symbol" />
         <ElTableColumn label="授权数量" prop="approve_amount" />
         <ElTableColumn label="可提数量" prop="collect_amount" />
-        <ElTableColumn label="已提" prop="value" />
+        <ElTableColumn label="已提" prop="collect_amount" />
         <ElTableColumn
           :formatter="isOpenFormatter"
           label="自动提取"
