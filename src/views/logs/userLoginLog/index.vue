@@ -11,17 +11,11 @@
         <ElFormItem label="登录IP :" prop="ip" style="width: 25%">
           <ElInput v-model="formData.ip" />
         </ElFormItem>
-        <ElFormItem label="所属盘口 :" prop="col1" style="width: 25%">
-          <ElInput v-model="formData.col1" />
-        </ElFormItem>
         <ElFormItem label="钱包地址 :" prop="url" style="width: 25%">
           <ElInput v-model="formData.url" />
         </ElFormItem>
-        <ElFormItem label="用户名 :" prop="admin_id" style="width: 25%">
-          <ElInput v-model="formData.admin_id" />
-        </ElFormItem>
-        <ElFormItem label="用户ID :" prop="user_id" style="width: 25%">
-          <ElInput v-model="formData.user_id" />
+        <ElFormItem label="用户名 :" prop="username" style="width: 25%">
+          <ElInput v-model="formData.username" />
         </ElFormItem>
         <div class="action-groups">
           <ElButton plain size="small" type="primary" @click="onSearch">
@@ -47,15 +41,13 @@
         row-key="id"
         style="width: 100%"
       >
-        <!--        <ElTableColumn label="id" prop="id" />-->
         <ElTableColumn label="登录IP" prop="ip" />
+        <ElTableColumn label="用户ID" prop="user_id" />
         <ElTableColumn label="请求域名" prop="domain" />
-        <ElTableColumn label="所属盘口" prop="col1" />
-        <ElTableColumn label="钱包地址" prop="url" />
-        <ElTableColumn label="用户名" prop="admin_id" />
+        <ElTableColumn label="用户名" prop="user.username" />
+        <ElTableColumn label="钱包地址" prop="user.wallet_address" />
         <ElTableColumn label="内容" prop="content" />
         <ElTableColumn label="登录时间" prop="create_time" />
-        <ElTableColumn label="用户ID" prop="user_id" />
       </ElTable>
     </ElCard>
     <ElCard>
