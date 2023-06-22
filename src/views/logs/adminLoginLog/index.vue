@@ -42,7 +42,7 @@
         row-key="id"
         style="width: 100%"
       >
-        <!--        <ElTableColumn label="id" prop="id" />-->
+        <ElTableColumn label="id" prop="id" />
         <ElTableColumn label="登录IP" prop="ip" />
         <ElTableColumn label="请求域名" prop="domain" />
         <ElTableColumn label="用户名" prop="admin.username" />
