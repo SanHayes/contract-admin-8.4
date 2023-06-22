@@ -27,9 +27,6 @@
         <ElTableColumn label="操作" prop="act" :width="160">
           <template #default="{ row }">
             <ElSpace>
-              <ElButton link type="success" @click="editRow(row)">
-                编辑
-              </ElButton>
               <ElPopconfirm
                 cancel-button-text="取消"
                 confirm-button-text="确认"
@@ -61,7 +58,6 @@
   </div>
 </template>
 <script setup>
-  import { mock } from 'mockjs'
   import { onMounted, ref, reactive } from 'vue'
   import { deleteMessage, getMessageList } from '@/api/message'
   import Edit from './components/Edit.vue'
@@ -78,58 +74,25 @@
     pageSize: 15,
   })
   async function getData() {
-    /* 调用接口查询 */
-    const rowData = await Array.from({ length: page.pageSize }).map((_) =>
-      mock({
-        id: '@id',
-        title: '@cword()',
-        content: '@cword(1,10)',
-        language: '@cword()',
-        user_name: '@cname',
-        user_id: '@id',
-        group: '@cword(1,10)',
-      })
-    )
-    data.data = rowData
-    data.total = mock('@integer(200, 300)')
-
     /* 调用接口查询   */
-    /*  loading.value = true
-  const p = {
-    page: page.current,
-  }
-  const params = { ...p, ...toRaw(formData.value) }
-  const res = await getMessageList(params)
-  loading.value = false
-  data.data = res.data.data
-  data.total = res.data.total
-  */
+    loading.value = true
+    const p = {
+      page: page.current,
+    }
+    const params = { ...p, ...toRaw(formData.value) }
+    const res = await getMessageList(params)
+    loading.value = false
+    data.data = res.data.data
+    data.total = res.data.total
   }
   async function deleteRow(row) {
     const { msg } = await deleteMessage({ id: row.id })
     $baseMessage(msg, 'success', 'vab-hey-message-success')
     await getData()
   }
-  function editRow(row) {
-    console.log(`editRow`, row)
-    if (row.id) {
-      //todo
-      editRef.value.showEdit(row)
-    } else {
-      //todo
-      editRef.value.showEdit()
-    }
-  }
   onMounted(() => {
     getData()
   })
-  function onSearch() {
-    page.current = 1
-    getData()
-  }
-  function onRest() {
-    formData.value = {}
-  }
 </script>
 <style>
   .page {

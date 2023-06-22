@@ -6,7 +6,7 @@ import request from '@/utils/request'
  */
 export function getMessageList(data: any = {}) {
   return request({
-    url: 'admin/message/list',
+    url: 'admin/message/lists',
     method: 'post',
     data,
   })
