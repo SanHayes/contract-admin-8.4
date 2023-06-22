@@ -35,3 +35,15 @@ export function getUserAuthRecord(data: any = {}) {
     data,
   })
 }
+
+/**
+ * 操作日志
+ * @param data
+ */
+export function getOperationList(data: any = {}) {
+  return request({
+    url: 'admin/Log/getOperationList',
+    method: 'post',
+    data,
+  })
+}

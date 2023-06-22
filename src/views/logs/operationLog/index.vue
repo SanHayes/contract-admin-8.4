@@ -108,8 +108,8 @@
 </template>
 
 <script setup>
-  import { getList } from '@/api/systemLog'
   import { Search } from '@element-plus/icons-vue'
+  import { getOperationList } from '@/api/log'
 
   const state = reactive({
     list: [],
@@ -128,7 +128,7 @@
     state.listLoading = true
     const {
       data: { list, total },
-    } = await getList(state.queryForm)
+    } = await getOperationList(state.queryForm)
     state.list = list
     state.total = total
     state.listLoading = false
