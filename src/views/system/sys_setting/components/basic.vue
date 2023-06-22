@@ -146,7 +146,11 @@
             </ElFormItem>
           </el-col>
           <el-col :span="8" class="form_tip">
-            <span>初次开启后, 默认生成1条等级设置(或取用户设置的第一条挖矿等级设置)初次开启后, 所有老用户绑定第1条等级设置</span>
+            <span
+              >初次开启后,
+              默认生成1条等级设置(或取用户设置的第一条挖矿等级设置)初次开启后,
+              所有老用户绑定第1条等级设置</span
+            >
           </el-col>
         </el-row>
         <el-row>
@@ -181,7 +185,7 @@
                 size="small"
                 @keyup.enter="confirmDomain"
                 @blur="confirmDomain"
-                style="width: 120px;"
+                style="width: 120px"
               />
               <el-button
                 v-else
@@ -219,10 +223,8 @@ const fileList = ref([]);
 const formRef = ref();
 // 表单校验规则
 const rules = reactive({
-  title: [
-    { required: true, message: '请输入网站名称', trigger: 'blur' }
-  ]
-})
+  title: [{ required: true, message: "请输入网站名称", trigger: "blur" }],
+});
 
 const $baseMessage = inject("$baseMessage");
 
@@ -242,10 +244,9 @@ const props = defineProps({
 const onSubmit = () => {
   formRef.value.validate((valid) => {
     if (valid) {
-      
     }
-  })
-}
+  });
+};
 
 // 新增域名 tag input 回显控件
 const isAddDomain = ref(false);
