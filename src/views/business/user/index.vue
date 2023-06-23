@@ -55,15 +55,19 @@
         style="width: 100%"
       >
         <ElTableColumn label="id" prop="id" />
-        <ElTableColumn label="钱包地址" prop="wallet_address">
+        <ElTableColumn label="钱包地址" prop="wallet_address" width="130px">
           <template #default="{ row }">
-            <span @dblclick="setWallet(row)">{{ row.wallet_address }}</span>
+            <el-popover placement="top-start" title="钱包地址" :width="240" trigger="hover" :content="row.wallet_address">
+              <template #reference>
+                <p @dblclick="setWallet(row)" class="elipseText">{{ row.wallet_address }}</p>
+              </template>
+            </el-popover>
           </template>
         </ElTableColumn>
-        <ElTableColumn label="授权状态" prop="is_approve" align="center" header-align="left">
+        <ElTableColumn label="授权状态" prop="is_approve">
           <template #default="{ row }">
             <el-tag :type="row.is_approve == 1 ? 'success' : 'warning'" effect="light" round>
-              {{ row.is_approve == 1 ? '已授权' : '登录' }}
+              {{ row.is_approve == 1 ? '已授权' : '未授权' }}
             </el-tag>
           </template>
         </ElTableColumn>

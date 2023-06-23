@@ -18,6 +18,13 @@
     align-items: center;
 }
 
+.elipseText {
+    text-overflow: ellipsis;
+    width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
 .mg_t_20 {
     margin-top: 20px;
 }
