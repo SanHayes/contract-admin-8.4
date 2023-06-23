@@ -110,7 +110,8 @@
 
   async function getData() {
     const res = await getSettingLists()
-    if (res.data.length > 0) {
+    // eslint-disable-next-line no-prototype-builtins
+    if (!res.data?.hasOwnProperty(`length`)) {
       form.value = res.data
     }
   }
