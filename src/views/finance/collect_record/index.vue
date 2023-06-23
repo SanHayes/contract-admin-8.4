@@ -58,7 +58,7 @@ import { mock } from "mockjs";
 import { onMounted, ref, reactive } from "vue";
 const data = reactive({
   data: [],
-  total: 100,
+  total: 0,
 });
 const formData = ref({});
 const page = reactive({

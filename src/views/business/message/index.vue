@@ -57,7 +57,7 @@
   const loading = ref(false)
   const data = reactive({
     data: [],
-    total: 100,
+    total: 0,
   })
   const formData = ref({})
   const page = reactive({

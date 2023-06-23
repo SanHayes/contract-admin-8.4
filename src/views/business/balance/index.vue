@@ -74,7 +74,7 @@
   import { getBalanceList } from '@/api/balance'
   const data = reactive({
     data: [],
-    total: 100,
+    total: 0,
   })
   const loading = ref(false)
   const formData = ref({})

@@ -43,7 +43,7 @@ import { mock } from "mockjs";
 import { onMounted, reactive } from "vue";
 const data = reactive({
   data: [],
-  total: 100,
+  total: 0,
 });
 const page = reactive({
   current: 1,
