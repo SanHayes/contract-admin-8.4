@@ -1,6 +1,7 @@
 <template>
   <ElForm
     ref="formRef"
+    v-loading="loading"
     class="form"
     label-position="top"
     label-width="155px"
@@ -61,11 +62,15 @@
   const userStore = useUserStore()
   const { token } = userStore
   const formRef = ref()
+
+  const loading = ref(true)
+
   const state = reactive({
     uploadUrl: `${process.env.VUE_APP_BASE_URL}/admin/Upload/index`,
     uploadHeaders: {
       Authorization: `Bearer ${token}`,
     },
+    loadingInstance: null,
   })
 
   const form = ref({
@@ -99,8 +104,10 @@
     if (!formEl) return
     await formEl.validate(async (valid, fields) => {
       if (valid) {
+        loading.value = true
         const { msg } = await editSetting(form.value)
         $baseMessage(msg, 'success', 'vab-hey-message-success')
+        loading.value = false
         await getData()
       } else {
         console.log('error submit!', fields)
@@ -110,6 +117,7 @@
 
   async function getData() {
     const res = await getSettingLists()
+    loading.value = false
     // eslint-disable-next-line no-prototype-builtins
     if (!res.data?.hasOwnProperty(`length`)) {
       form.value = res.data
