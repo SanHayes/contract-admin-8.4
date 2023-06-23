@@ -15,6 +15,18 @@
         >
           <ElInput v-model="formData.name" />
         </ElFormItem>
+        <ElFormItem label="语言 :" prop="language" style="width: 25%">
+          <ElSelect v-model="formData.language">
+            <ElOption
+              v-for="(item, index) in langs"
+              :key="index"
+              :label="item"
+              :value="index"
+            >
+              {{ item }}
+            </ElOption>
+          </ElSelect>
+        </ElFormItem>
         <div class="action-groups">
           <ElButton plain size="small" type="primary" @click="onSearch">
             查询
