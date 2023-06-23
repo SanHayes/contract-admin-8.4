@@ -113,6 +113,14 @@
                   <ElButton link type="danger">删除</ElButton>
                 </template>
               </ElPopconfirm>
+              <!-- <el-popover placement="bottom" :width="150" trigger="click">
+                <template #reference>
+                  <el-button link type="primary">更多操作</el-button>
+                </template>
+                <div class="operationList">
+                  <div class="operationItem" v-for="(item, idx) in operationList" :key="`item${idx}`" @click="operate(item)">{{item.label }}</div>
+                </div>
+              </el-popover> -->
             </ElSpace>
           </template>
         </ElTableColumn>
@@ -227,6 +235,16 @@
     await switchUser({ id: row.id, field: `status` })
     loading.value = false
   }
+
+  // 更多操作
+  const operationList = ref([
+    { label: '设置重点关注', value: 1 },
+    { label: '赠送平台收益', value: 2 },
+    { label: '资产变动记录', value: 3 },
+    { label: '收益记录', value: 4 },
+    { label: '提现记录', value: 5 },
+  ])
+  const operate = operate => {}
 </script>
 <style>
   .page {
@@ -267,5 +285,22 @@
     justify-content: space-between;
     flex-direction: row;
     align-items: center;
+  }
+
+  .operationList {
+    height: auto;
+    max-height: 200px;
+    box-sizing: border-box;
+    overflow: scroll;
+
+    .operationItem {
+      height: 30px;
+      line-height: 30px;
+      cursor: pointer;
+    }
+    .operationItem:hover {
+      color: #66b1ff;
+      background: #ecf5ff;
+    }
   }
 </style>
