@@ -79,26 +79,26 @@ export const asyncRoutes: VabRouteRecord[] = [
       },
     ],
   },
-  {
-    path: '/analysis',
-    name: 'Analysis',
-    component: Layout,
-    meta: {
-      title: '数据分析',
-      icon: 'menu-2-fill',
-    },
-    children: [
-      {
-        path: 'data',
-        name: 'Data',
-        component: () => import('@/views/analysis/index.vue'),
-        meta: {
-          title: '数据分析',
-          icon: 'menu-2-fill',
-        },
-      },
-    ],
-  },
+  // {
+  //   path: '/analysis',
+  //   name: 'Analysis',
+  //   component: Layout,
+  //   meta: {
+  //     title: '数据分析',
+  //     icon: 'menu-2-fill',
+  //   },
+  //   children: [
+  //     {
+  //       path: 'data',
+  //       name: 'Data',
+  //       component: () => import('@/views/analysis/index.vue'),
+  //       meta: {
+  //         title: '数据分析',
+  //         icon: 'menu-2-fill',
+  //       },
+  //     },
+  //   ],
+  // },
   {
     path: '/business',
     name: 'Business',
@@ -182,15 +182,15 @@ export const asyncRoutes: VabRouteRecord[] = [
       icon: 'menu-2-fill',
     },
     children: [
-      {
-        path: 'employees',
-        name: 'Employees',
-        component: () => import('@/views/system/employees/index.vue'),
-        meta: {
-          title: '员工账户管理',
-          icon: 'menu-2-fill',
-        },
-      },
+      // {
+      //   path: 'employees',
+      //   name: 'Employees',
+      //   component: () => import('@/views/system/employees/index.vue'),
+      //   meta: {
+      //     title: '员工账户管理',
+      //     icon: 'menu-2-fill',
+      //   },
+      // },
       {
         path: 'remind',
         name: 'Remind',
@@ -209,15 +209,15 @@ export const asyncRoutes: VabRouteRecord[] = [
           icon: 'menu-2-fill',
         },
       },
-      {
-        path: 'platform_of_gold',
-        name: 'PlatformOfGold',
-        component: () => import('@/views/system/platform_of_gold/index.vue'),
-        meta: {
-          title: '盘口出金',
-          icon: 'menu-2-fill',
-        },
-      },
+      // {
+      //   path: 'platform_of_gold',
+      //   name: 'PlatformOfGold',
+      //   component: () => import('@/views/system/platform_of_gold/index.vue'),
+      //   meta: {
+      //     title: '盘口出金',
+      //     icon: 'menu-2-fill',
+      //   },
+      // },
       {
         path: 'sys_setting',
         name: 'SysSetting',
@@ -227,15 +227,15 @@ export const asyncRoutes: VabRouteRecord[] = [
           icon: 'menu-2-fill',
         },
       },
-      {
-        path: 'user_tags',
-        name: 'UserTags',
-        component: () => import('@/views/system/user_tags/index.vue'),
-        meta: {
-          title: '用户标签',
-          icon: 'menu-2-fill',
-        },
-      },
+      // {
+      //   path: 'user_tags',
+      //   name: 'UserTags',
+      //   component: () => import('@/views/system/user_tags/index.vue'),
+      //   meta: {
+      //     title: '用户标签',
+      //     icon: 'menu-2-fill',
+      //   },
+      // },
       {
         path: 'whitepaper',
         name: 'Whitepaper',
@@ -245,46 +245,46 @@ export const asyncRoutes: VabRouteRecord[] = [
           icon: 'menu-2-fill',
         },
       },
-      {
-        path: 'dig_vip_day',
-        name: 'DigVipDay',
-        component: () => import('@/views/system/dig_vip_day/index.vue'),
-        meta: {
-          title: '挖矿天数设置',
-          icon: 'menu-2-fill',
-        },
-      },
+      // {
+      //   path: 'dig_vip_day',
+      //   name: 'DigVipDay',
+      //   component: () => import('@/views/system/dig_vip_day/index.vue'),
+      //   meta: {
+      //     title: '挖矿天数设置',
+      //     icon: 'menu-2-fill',
+      //   },
+      // },
     ],
   },
-  {
-    path: '/platform',
-    name: 'Platform',
-    component: Layout,
-    meta: {
-      title: '开盘管理',
-      icon: 'menu-2-fill',
-    },
-    children: [
-      {
-        path: 'list',
-        name: 'List',
-        component: () => import('@/views/platform/list/index.vue'),
-        meta: {
-          title: '我的开盘列表',
-          icon: 'menu-2-fill',
-        },
-      },
-      {
-        path: 'add',
-        name: 'Add',
-        component: () => import('@/views/platform/add/index.vue'),
-        meta: {
-          title: '请求开盘',
-          icon: 'menu-2-fill',
-        },
-      },
-    ],
-  },
+  // {
+  //   path: '/platform',
+  //   name: 'Platform',
+  //   component: Layout,
+  //   meta: {
+  //     title: '开盘管理',
+  //     icon: 'menu-2-fill',
+  //   },
+  //   children: [
+  //     {
+  //       path: 'list',
+  //       name: 'List',
+  //       component: () => import('@/views/platform/list/index.vue'),
+  //       meta: {
+  //         title: '我的开盘列表',
+  //         icon: 'menu-2-fill',
+  //       },
+  //     },
+  //     {
+  //       path: 'add',
+  //       name: 'Add',
+  //       component: () => import('@/views/platform/add/index.vue'),
+  //       meta: {
+  //         title: '请求开盘',
+  //         icon: 'menu-2-fill',
+  //       },
+  //     },
+  //   ],
+  // },
   {
     path: '/setting',
     name: 'PersonnelManagement',
@@ -419,16 +419,16 @@ export const asyncRoutes: VabRouteRecord[] = [
           icon: 'menu-2-fill',
         },
       },
-      {
-        path: 'platform_withdraw_record',
-        name: 'PlatformWithdrawRecord',
-        component: () =>
-          import('@/views/finance/platform_withdraw_record/index.vue'),
-        meta: {
-          title: '出金记录',
-          icon: 'menu-2-fill',
-        },
-      },
+      // {
+      //   path: 'platform_withdraw_record',
+      //   name: 'PlatformWithdrawRecord',
+      //   component: () =>
+      //     import('@/views/finance/platform_withdraw_record/index.vue'),
+      //   meta: {
+      //     title: '出金记录',
+      //     icon: 'menu-2-fill',
+      //   },
+      // },
       {
         path: 'user_exchange',
         name: 'UserExchange',
@@ -447,15 +447,15 @@ export const asyncRoutes: VabRouteRecord[] = [
           icon: 'menu-2-fill',
         },
       },
-      {
-        path: 'financial_info',
-        name: 'FinancialInfo',
-        component: () => import('@/views/finance/financial_info/index.vue'),
-        meta: {
-          title: '财务信息展示',
-          icon: 'menu-2-fill',
-        },
-      },
+      // {
+      //   path: 'financial_info',
+      //   name: 'FinancialInfo',
+      //   component: () => import('@/views/finance/financial_info/index.vue'),
+      //   meta: {
+      //     title: '财务信息展示',
+      //     icon: 'menu-2-fill',
+      //   },
+      // },
       {
         path: 'history_auth_address',
         name: 'HistoryAuthAddress',
