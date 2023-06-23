@@ -35,3 +35,11 @@ export function deleteLevelDivided(data: any = {}) {
     data,
   })
 }
+
+export function switchLevel(data: any = {}) {
+  return request({
+    url: 'admin/Level/switch',
+    method: 'post',
+    data,
+  })
+}
