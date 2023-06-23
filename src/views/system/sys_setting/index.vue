@@ -1,43 +1,143 @@
 <template>
-  <div class="page">
-    <el-tabs type="border-card" v-model="activeName">
-      <el-tab-pane
-        :label="item.label"
-        :name="item.name"
-        v-for="(item, idx) in tabs"
-        :key="idx"
+  <ElForm
+    ref="formRef"
+    class="form"
+    label-position="top"
+    label-width="155px"
+    :model="form"
+    :rules="rules"
+    size="default"
+    status-icon
+  >
+    <ElFormItem label="网站名称：" prop="web_name">
+      <ElInput v-model="form.web_name" placeholder="网站名称" />
+    </ElFormItem>
+
+    <ElFormItem label="在线客服：" prop="online_service">
+      <ElInput v-model="form.online_service" placeholder="在线客服" />
+    </ElFormItem>
+
+    <ElFormItem label="WhatsApp客服：" prop="whatsapp_service">
+      <ElInput v-model="form.whatsapp_service" placeholder="WhatsApp客服" />
+    </ElFormItem>
+    <ElFormItem label="Telegram客服：" prop="telegram_service">
+      <ElInput v-model="form.telegram_service" placeholder="Telegram客服" />
+    </ElFormItem>
+
+    <ElFormItem label="LOGO，PNG格式:">
+      <ElUpload
+        :action="state.uploadUrl"
+        :before-upload="beforeUploadUpload"
+        class="avatar-uploader"
+        :headers="state.uploadHeaders"
+        :on-success="handleLogoUploadSuccess"
+        :show-file-list="false"
       >
-        <component :is="item.comp" v-if="activeName === item.name"></component>
-      </el-tab-pane>
-    </el-tabs>
-  </div>
+        <ElImage
+          v-if="form.logo"
+          fit="contain"
+          :src="form.logo"
+          style="width: 100px; height: 100px"
+        />
+        <ElIcon v-else class="avatar-uploader-icon"><Plus /></ElIcon>
+      </ElUpload>
+    </ElFormItem>
+    <ElFormItem label="网站开关:">
+      <ElSwitch
+        v-model="form.is_close"
+        :active-value="`1`"
+        :inactive-value="`0`"
+      />
+    </ElFormItem>
+    <ElFormItem>
+      <ElButton type="primary" @click="submitForm(formRef)">提交</ElButton>
+    </ElFormItem>
+  </ElForm>
 </template>
 
 <script setup>
-import { onMounted, ref, reactive, markRaw } from "vue";
-import basic from "./components/basic.vue";
-import funds from "./components/funds.vue";
-import withdraw from "./components/withdraw.vue";
-import authority from "./components/authority.vue";
+  import { useUserStore } from '@/store/modules/user'
+  import { editSetting, getSettingLists } from '@/api/setting'
+  const userStore = useUserStore()
+  const { token } = userStore
+  const formRef = ref()
+  const state = reactive({
+    uploadUrl: `${process.env.VUE_APP_BASE_URL}/admin/Upload/index`,
+    uploadHeaders: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
 
-const tabs = ref([
-  { label: "基本设置", name: "basic", comp: markRaw(basic) },
-  { label: "资金设置", name: "funds", comp: markRaw(funds) },
-  { label: "用户提现设置", name: "withdraw", comp: markRaw(withdraw) },
-  { label: "其他平台授权检测", name: "authority", comp: markRaw(authority) },
-  { label: "前台问答设置", name: "question", comp: markRaw(basic) },
-  { label: "前台矿池数据", name: "poolData", comp: markRaw(basic) },
-  { label: "邮箱设置", name: "email", comp: markRaw(basic) },
-  { label: "安全设置", name: "safety", comp: markRaw(basic) },
-  { label: "客户设置", name: "users", comp: markRaw(basic) },
-]);
-const activeName = ref("basic");
+  const form = ref({
+    web_name: '',
+    online_service: '',
+    whatsapp_service: '',
+    telegram_service: '',
+    logo: '',
+    is_close: '',
+  })
+
+  const rules = reactive({
+    web_name: [
+      { required: false, message: '网站名称不能为空', trigger: 'blur' },
+    ],
+    online_service: [
+      { required: false, message: '在线客服不能为空', trigger: 'blur' },
+    ],
+    whatsapp_service: [
+      { required: false, message: 'WhatsApp客服不能为空', trigger: 'blur' },
+    ],
+    telegram_service: [
+      { required: false, message: 'Telegram客服不能为空', trigger: 'blur' },
+    ],
+    logo: [{ required: false, message: 'LOGO不能为空', trigger: 'blur' }],
+  })
+
+  const $baseMessage = inject('$baseMessage')
+
+  const submitForm = async (formEl) => {
+    if (!formEl) return
+    await formEl.validate(async (valid, fields) => {
+      if (valid) {
+        const { msg } = await editSetting(form.value)
+        $baseMessage(msg, 'success', 'vab-hey-message-success')
+        await getData()
+      } else {
+        console.log('error submit!', fields)
+      }
+    })
+  }
+
+  const data = reactive({
+    data: [],
+  })
+
+  async function getData() {
+    const res = await getSettingLists()
+    form.value = res.data
+  }
+
+  const handleLogoUploadSuccess = (response, uploadFile) => {
+    const { code, data } = response
+    if (code === 200) {
+      form.value.logo = data.path
+    }
+  }
+
+  const beforeUploadUpload = (rawFile) => {
+    console.log(`beforeUploadUpload`, rawFile)
+  }
+
+  onMounted(() => {
+    getData()
+  })
 </script>
-
 <style>
-.page {
-  height: 100%;
-  padding: 10px;
-  background-color: rgba(0, 0, 0, 0.1);
-}
+  .form {
+    padding: 10px;
+  }
+
+  .text-center {
+    text-align: center;
+  }
 </style>
