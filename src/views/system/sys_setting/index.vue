@@ -108,13 +108,11 @@
     })
   }
 
-  const data = reactive({
-    data: [],
-  })
-
   async function getData() {
     const res = await getSettingLists()
-    form.value = res.data
+    if (res.data.length > 0) {
+      form.value = res.data
+    }
   }
 
   const handleLogoUploadSuccess = (response, uploadFile) => {
