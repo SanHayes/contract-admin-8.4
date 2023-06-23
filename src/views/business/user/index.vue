@@ -55,7 +55,18 @@
         style="width: 100%"
       >
         <ElTableColumn label="id" prop="id" />
-        <ElTableColumn label="钱包地址" prop="wallet_address" />
+        <ElTableColumn label="钱包地址" prop="wallet_address">
+          <template #default="{ row }">
+            <span @dblclick="setWallet(row)">{{ row.wallet_address }}</span>
+          </template>
+        </ElTableColumn>
+        <ElTableColumn label="授权状态" prop="is_approve" align="center" header-align="left">
+          <template #default="{ row }">
+            <el-tag :type="row.is_approve == 1 ? 'success' : 'warning'" effect="light" round>
+              {{ row.is_approve == 1 ? '已授权' : '登录' }}
+            </el-tag>
+          </template>
+        </ElTableColumn>
         <ElTableColumn
           :formatter="tokenFormatter"
           label="授权币"
@@ -88,7 +99,7 @@
             />
           </template>
         </ElTableColumn>
-        <ElTableColumn label="操作" prop="act" :width="160">
+        <ElTableColumn label="操作" prop="act" :width="200">
           <template #default="{ row }">
             <ElSpace>
               <ElPopconfirm
@@ -100,6 +111,17 @@
               >
                 <template #reference>
                   <ElButton link type="success">提币</ElButton>
+                </template>
+              </ElPopconfirm>
+              <ElPopconfirm
+                cancel-button-text="取消"
+                confirm-button-text="确认"
+                icon-color="#626AEF"
+                title="确定设置质押？"
+                @confirm="setPledge(row)"
+              >
+                <template #reference>
+                  <ElButton link type="success" :disabled="row.is_approve == 0">设置质押</ElButton>
                 </template>
               </ElPopconfirm>
               <ElPopconfirm
@@ -234,6 +256,16 @@
     loading.value = true
     await switchUser({ id: row.id, field: `status` })
     loading.value = false
+  }
+
+  // 双击钱包地址编辑钱包信息
+  const setWallet = row => {
+    
+  }
+
+  // 设置质押
+  const setPledge = row => {
+    
   }
 
   // 更多操作
