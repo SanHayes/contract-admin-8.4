@@ -68,18 +68,6 @@
     @close="close"
   >
     <ElForm ref="formRef" :model="state.form">
-      <ElFormItem label="语言 :" prop="language" style="width: 25%">
-        <ElSelect v-model="state.form.language">
-          <ElOption
-            v-for="(item, index) in langs"
-            :key="index"
-            :label="item"
-            :value="index"
-          >
-            {{ item }}
-          </ElOption>
-        </ElSelect>
-      </ElFormItem>
       <ElFormItem label="等级名称:">
         <ElInput v-model="state.form.name" placeholder="等级名称" />
       </ElFormItem>

@@ -15,18 +15,6 @@
         >
           <ElInput v-model="formData.name" />
         </ElFormItem>
-        <ElFormItem label="语言 :" prop="language" style="width: 25%">
-          <ElSelect v-model="formData.language">
-            <ElOption
-              v-for="(item, index) in langs"
-              :key="index"
-              :label="item"
-              :value="index"
-            >
-              {{ item }}
-            </ElOption>
-          </ElSelect>
-        </ElFormItem>
         <div class="action-groups">
           <ElButton plain size="small" type="primary" @click="onSearch">
             查询
@@ -63,11 +51,6 @@
         style="width: 100%"
       >
         <ElTableColumn label="id" prop="id" />
-        <ElTableColumn
-          :formatter="langFormatter"
-          label="语言"
-          prop="language"
-        />
         <ElTableColumn label="等级名称" prop="name" />
         <ElTableColumn label="最低USDT数量" prop="balance" />
         <ElTableColumn label="一级佣金率(%)" prop="rate1" />
@@ -142,17 +125,6 @@
     pageSize: 15,
   })
 
-  // @todo 集中管理
-  const langs = {
-    'zh-TW': '繁体中文',
-    en: '英文',
-    ja: '日语',
-    es: '西班牙语',
-    vi: '越南语',
-    IN: '印尼语',
-    hi: '印地语',
-  }
-
   async function getData() {
     /* 调用接口查询 */
     loading.value = true
@@ -203,10 +175,6 @@
       case 0:
         return `否`
     }
-  }
-  const langFormatter = (row, column) => {
-    const v = row.language
-    return langs[v] ?? ''
   }
   const onSwitchChange = async (row) => {
     loading.value = true
