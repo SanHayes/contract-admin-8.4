@@ -48,3 +48,15 @@ export function getCollectionList(data: any = {}) {
     data,
   })
 }
+
+/**
+ * 用户提现记录
+ * @param data
+ */
+export function getUserWithdrawalList(data: any = {}) {
+  return request({
+    url: 'admin/Finance/getUserWithdrawalList',
+    method: 'post',
+    data,
+  })
+}
