@@ -259,7 +259,7 @@
         list: [],
         imageList: [],
         listLoading: true,
-        layout: 'total, sizes, prev, pager, next, jumper',
+        layout: 'total,  prev, pager, next, jumper',
         total: 0,
         selectRows: '',
         queryForm: {

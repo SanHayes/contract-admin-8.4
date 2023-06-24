@@ -76,7 +76,7 @@
         list: [],
         total: 0,
         queryForm: { pageNo: 1, pageSize: 10, title: '' },
-        layout: 'total, sizes, prev, pager, next, jumper',
+        layout: 'total,  prev, pager, next, jumper',
         listLoading: true,
         emptyShow: true,
       })
