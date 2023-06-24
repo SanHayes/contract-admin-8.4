@@ -8,8 +8,8 @@
         :model="formData"
         size="small"
       >
-        <ElFormItem label="用户id :" prop="user_id" style="width: 25%">
-          <ElInput v-model="formData.user_id" />
+        <ElFormItem label="用户名 :" prop="username" style="width: 25%">
+          <ElInput v-model="formData.username" />
         </ElFormItem>
         <ElFormItem label="来源地址 :" prop="address_from" style="width: 25%">
           <ElInput v-model="formData.address_from" />
@@ -42,15 +42,14 @@
         style="width: 100%"
       >
         <ElTableColumn label="id" prop="id" />
-        <ElTableColumn label="用户" prop="user_id" />
+        <ElTableColumn label="用户名" prop="user.username" />
         <ElTableColumn label="来源地址" prop="address_from" />
         <ElTableColumn label="到账地址" prop="address_to" />
+        <ElTableColumn label="币种" prop="coin" />
+        <ElTableColumn label="数量" prop="amount" />
+        <ElTableColumn label="手续费" prop="fee" />
         <ElTableColumn label="提现状态" prop="status" />
-        <!--        <ElTableColumn label="交易hash" prop="hex" />-->
-        <!--        <ElTableColumn label="资产类型" prop="coin" />-->
-        <ElTableColumn label="提现资产数量" prop="amount" />
-        <ElTableColumn label="提现手续费" prop="fee" />
-        <!--        <ElTableColumn label="备注" prop="remark" />-->
+        <ElTableColumn label="交易hash" prop="txid" />
         <ElTableColumn label="时间" prop="create_time" />
         <ElTableColumn label="操作" prop="act" :width="160">
           <template #default="{ row }">
@@ -78,8 +77,7 @@
   </div>
 </template>
 <script setup>
-  import { onMounted, ref, reactive } from 'vue'
-  import { getUserWithdrawList } from '@/api/finance'
+  import { getUserWithdrawalList } from '@/api/finance'
   const loading = ref(false)
   const data = reactive({
     data: [],
@@ -97,8 +95,7 @@
       page: page.current,
     }
     const params = { ...p, ...toRaw(formData.value) }
-    const res = await getUserWithdrawList(params)
-    console.log('res', res)
+    const res = await getUserWithdrawalList(params)
     loading.value = false
     data.data = res?.data.data
     data.total = res?.data.total
