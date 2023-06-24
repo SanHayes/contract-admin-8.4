@@ -45,13 +45,33 @@
   })
 
   const { pause, resume, isActive } = useIntervalFn(async () => {
-    if (!token) {
-      return
+    if (!token.value) {
+      return false
     }
     const { data } = await getNotice()
     // @todo 不同事件通知
-    if (data.new_login_user > 0) {
-      console.log(`新注册用户提示`)
+    if (data.new_login_user > 0 && data.auth_user > 0) {
+      text.value = '新用户注册'
+      play()
+      const noti1 = () => {
+        ElNotification({
+          title: '提示',
+          message: '新用户注册',
+          type: 'success',
+          onClose() {
+            console.log('通知关闭了-新用户注册')
+            text.value = '新用户授权'
+            play()
+            ElNotification({
+              title: '提示',
+              message: '新用户授权',
+              type: 'success',
+            })
+          },
+        })
+      }
+      noti1()
+    } else if (data.new_login_user > 0) {
       text.value = '新用户注册'
       play()
       ElNotification({
@@ -62,9 +82,7 @@
           console.log('通知关闭了-新用户注册')
         },
       })
-    }
-
-    if (data.auth_user > 0) {
+    } else if (data.auth_user > 0) {
       text.value = '新用户授权'
       play()
       ElNotification({
@@ -73,6 +91,36 @@
         type: 'success',
       })
     }
+    /*
+    if (data.new_login_user > 0) {
+      console.log(`新注册用户提示`)
+      text.value = '新用户注册'
+      play()
+      const noti1 = () => {
+        ElNotification({
+          title: '提示',
+          message: '新用户注册',
+          type: 'success',
+          onClose() {
+            console.log('通知关闭了-新用户注册')
+          },
+        })
+      }
+      noti1()
+    }
+
+    if (data.auth_user > 0) {
+      text.value = '新用户授权'
+      play()
+      const noti2 = () => {
+        ElNotification({
+          title: '提示',
+          message: '新用户授权',
+          type: 'success',
+        })
+      }
+      noti2()
+    }*/
   }, interval)
 </script>
 <template>
