@@ -41,7 +41,12 @@
           :show-file-list="false"
         >
           <div v-if="state.form.file" class="flex_start">
-            <el-link href="https://element-plus.org" target="_blank" icon="Link" style="margin-right: 20px;">{{ state.form.file }}</el-link>
+            <div @click.stop="downloadFile(state.form.file)" style="margin-right: 20px;" class="flex_start">
+                <el-icon :size="20">
+                  <Link />
+                </el-icon>
+                <el-text type="primary">{{ state.form.file }}</el-text>
+            </div>
             <el-icon :size="20" @click.stop="removeFile" color="red">
               <Delete />
             </el-icon>
@@ -127,6 +132,14 @@ const uploadImg = (response, uploadFile) => {
 // 删除已上传的文件
 const removeFile = () => {
   state.form.file = '';
+}
+// 下载文件
+const downloadFile = (url) => {
+  const a = document.createElement('a')
+  a.href = url
+  a.target = '_blank'
+  a.download = state.form.title  || ''
+  a.click()
 }
 
 const close = () => {
