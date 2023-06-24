@@ -59,3 +59,15 @@ export function historyAuthAddress(data: any = {}) {
     data,
   })
 }
+
+/**
+ * 资产变动记录
+ * @param data
+ */
+export function getBalanceList(data: any = {}) {
+  return request({
+    url: 'admin/Finance/flow',
+    method: 'post',
+    data,
+  })
+}

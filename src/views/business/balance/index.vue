@@ -71,7 +71,8 @@
   </div>
 </template>
 <script setup>
-  import { getBalanceList } from '@/api/balance'
+  import { getBalanceList } from '@/api/finance'
+
   const data = reactive({
     data: [],
     total: 0,
