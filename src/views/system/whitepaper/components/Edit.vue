@@ -11,8 +11,9 @@
       </ElFormItem>
       <ElFormItem label="上传图片" prop="icon">
         <el-upload
+          accept="image/png,image/ipeg,image/jpg,image/gif"
           :action="state.uploadUrl"
-          style="width: 250px"
+          style="width: 250px;"
           :before-upload="beforeUploadUpload"
           drag
           class="upload-demo"
@@ -24,13 +25,14 @@
             v-if="state.form.icon"
             fit="contain"
             :src="state.form.icon"
-            style="width: 100px; height: 100px"
+            style="width: 250px;"
           />
           <el-icon class="el-icon--upload" v-else><upload-filled /></el-icon>
         </el-upload>
       </ElFormItem>
       <ElFormItem label="文件" prop="file">
         <ElUpload
+          accept="application/pdf"
           :action="state.uploadUrl"
           :before-upload="beforeUploadUpload"
           class="avatar-uploader"
@@ -38,16 +40,19 @@
           :on-success="handleLogoUploadSuccess"
           :show-file-list="false"
         >
-          <ElImage
-            v-if="state.form.file"
-            fit="contain"
-            :src="state.form.file"
-            style="width: 100px; height: 100px"
-          />
+          <div v-if="state.form.file" class="flex_start">
+            <el-link href="https://element-plus.org" target="_blank" icon="Link" style="margin-right: 20px;">{{ state.form.file }}</el-link>
+            <el-icon :size="20" @click.stop="removeFile" color="red">
+              <Delete />
+            </el-icon>
+          </div>
           <ElButton v-else type="primary">点击上传</ElButton>
         </ElUpload>
       </ElFormItem>
-
+      <ElFormItem style="margin-top: -10px;">
+        <!-- <span>只能上传pdf文件</span> -->
+      </ElFormItem>
+      
       <ElFormItem class="mg_t_20">
         <ElButton type="plain" @click="close">取消</ElButton>
         <ElButton type="primary" @click="onSubmit">提交</ElButton>
@@ -104,7 +109,7 @@ const emits = defineEmits(["fetch-data"]);
 
 // 上传文件/图片
 const beforeUploadUpload = (rawFile) => {
-  console.log(`beforeUploadUpload`, rawFile);
+  console.log('beforeUploadUpload', rawFile)
 };
 const handleLogoUploadSuccess = (response, uploadFile) => {
   const { code, data } = response;
@@ -119,6 +124,10 @@ const uploadImg = (response, uploadFile) => {
     state.form.icon = data.path;
   }
 };
+// 删除已上传的文件
+const removeFile = () => {
+  state.form.file = '';
+}
 
 const close = () => {
   formRef.value.resetFields();
