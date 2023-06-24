@@ -4,9 +4,9 @@ import request from '@/utils/request'
  * 用户兑换记录
  * @param data
  */
-export function getUserExchangeList(data: any = {}) {
+export function getUserConversionList(data: any = {}) {
   return request({
-    url: 'admin/finance/userExchange',
+    url: 'admin/Finance/getUserConversionList',
     method: 'post',
     data,
   })
@@ -43,7 +43,7 @@ export function statusUserExchange(data: any = {}) {
  */
 export function getCollectionList(data: any = {}) {
   return request({
-    url: 'admin/User/getCollectionList',
+    url: 'admin/Finance/getCollectionList',
     method: 'post',
     data,
   })
