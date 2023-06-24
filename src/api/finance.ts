@@ -13,25 +13,12 @@ export function getUserConversionList(data: any = {}) {
 }
 
 /**
- * 用户提现记录
+ * 审核提现
  * @param data
  */
-export function getUserWithdrawList(data: any = {}) {
+export function auditWithdraw(data: any = {}) {
   return request({
-    url: 'admin/finance/userWithdraw',
-    method: 'post',
-    data,
-  })
-}
-
-
-/**
- * 审核
- * @param data
- */
-export function statusUserExchange(data: any = {}) {
-  return request({
-    url: 'admin/finance/userStatus',
+    url: 'admin/Finance/audit',
     method: 'post',
     data,
   })
