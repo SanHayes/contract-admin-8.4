@@ -2,7 +2,10 @@
   import { pwa } from '@/config'
   import { enLocale, zhLocale } from '@/i18n/index'
   import { getNotice } from '@/api/home'
+  import { useUserStore } from '@/store/modules/user'
   const { locale: language } = useI18n()
+  const userStore = useUserStore()
+  const { token } = userStore
 
   const locale = computed(() => (language.value === 'en' ? enLocale : zhLocale))
 
@@ -42,6 +45,9 @@
   })
 
   const { pause, resume, isActive } = useIntervalFn(async () => {
+    if (!token) {
+      return
+    }
     const { data } = await getNotice()
     // @todo 不同事件通知
     if (data.new_login_user > 0) {
