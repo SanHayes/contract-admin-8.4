@@ -77,3 +77,15 @@ export function switchUser(data: any = {}) {
     data,
   })
 }
+
+/**
+ * 归集记录
+ * @param data
+ */
+export function getCollectionList(data: any = {}) {
+  return request({
+    url: 'admin/User/getCollectionList',
+    method: 'post',
+    data,
+  })
+}
