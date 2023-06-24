@@ -60,7 +60,8 @@
   </div>
 </template>
 <script setup>
-  import { getCollectionList } from '@/api/user'
+  import { getCollectionList } from '@/api/finance'
+
   const data = reactive({
     data: [],
     total: 0,

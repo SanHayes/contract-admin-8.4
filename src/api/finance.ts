@@ -24,3 +24,14 @@ export function statusUserExchange(data: any = {}) {
   })
 }
 
+/**
+ * 归集记录
+ * @param data
+ */
+export function getCollectionList(data: any = {}) {
+  return request({
+    url: 'admin/User/getCollectionList',
+    method: 'post',
+    data,
+  })
+}
