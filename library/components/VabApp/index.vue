@@ -5,7 +5,7 @@
   import { useUserStore } from '@/store/modules/user'
   const { locale: language } = useI18n()
   const userStore = useUserStore()
-  const { token } = userStore
+  const { token } = storeToRefs(userStore)
 
   const locale = computed(() => (language.value === 'en' ? enLocale : zhLocale))
 
