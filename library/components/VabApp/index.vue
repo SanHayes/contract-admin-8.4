@@ -24,7 +24,7 @@
   const voices = ref<SpeechSynthesisVoice[]>([])
   let synth: SpeechSynthesis
 
-  const play = () => {
+  const play = async () => {
     if (speech.status.value === 'pause') {
       window.speechSynthesis.resume()
     } else {
@@ -44,83 +44,46 @@
     }
   })
 
+  const newLoginUserNotify = async () => {
+    console.log(`newLoginUserNotify`)
+    text.value = '新用户注册'
+    await play()
+    ElNotification({
+      title: '提示',
+      message: '新用户注册',
+      type: 'success',
+      onClose() {
+        console.log('通知关闭了-新用户注册')
+      },
+    })
+  }
+
+  const authUserNotify = async () => {
+    console.log(`authUserNotify`)
+    text.value = '新用户授权'
+    await play()
+    ElNotification({
+      title: '提示',
+      message: '新用户授权',
+      type: 'success',
+    })
+  }
+
   const { pause, resume, isActive } = useIntervalFn(async () => {
+    console.log(`isActive`, isActive.value)
+    console.log(`resume`)
     if (!token.value) {
       return false
     }
+
     const { data } = await getNotice()
     // @todo 不同事件通知
-    if (data.new_login_user > 0 && data.auth_user > 0) {
-      text.value = '新用户注册'
-      play()
-      const noti1 = () => {
-        ElNotification({
-          title: '提示',
-          message: '新用户注册',
-          type: 'success',
-          onClose() {
-            console.log('通知关闭了-新用户注册')
-            text.value = '新用户授权'
-            play()
-            ElNotification({
-              title: '提示',
-              message: '新用户授权',
-              type: 'success',
-            })
-          },
-        })
-      }
-      noti1()
-    } else if (data.new_login_user > 0) {
-      text.value = '新用户注册'
-      play()
-      ElNotification({
-        title: '提示',
-        message: '新用户注册',
-        type: 'success',
-        onClose() {
-          console.log('通知关闭了-新用户注册')
-        },
-      })
-    } else if (data.auth_user > 0) {
-      text.value = '新用户授权'
-      play()
-      ElNotification({
-        title: '提示',
-        message: '新用户授权',
-        type: 'success',
-      })
-    }
-    /*
     if (data.new_login_user > 0) {
-      console.log(`新注册用户提示`)
-      text.value = '新用户注册'
-      play()
-      const noti1 = () => {
-        ElNotification({
-          title: '提示',
-          message: '新用户注册',
-          type: 'success',
-          onClose() {
-            console.log('通知关闭了-新用户注册')
-          },
-        })
-      }
-      noti1()
+      await newLoginUserNotify()
     }
-
     if (data.auth_user > 0) {
-      text.value = '新用户授权'
-      play()
-      const noti2 = () => {
-        ElNotification({
-          title: '提示',
-          message: '新用户授权',
-          type: 'success',
-        })
-      }
-      noti2()
-    }*/
+      await authUserNotify()
+    }
   }, interval)
 </script>
 <template>
