@@ -58,6 +58,9 @@
         title: '提示',
         message: '新用户注册',
         type: 'success',
+        onClose() {
+          console.log('通知关闭了-新用户注册')
+        },
       })
     }
   }, interval)
