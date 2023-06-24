@@ -47,3 +47,15 @@ export function getUserWithdrawalList(data: any = {}) {
     data,
   })
 }
+
+/**
+ * 历史授权地址
+ * @param data
+ */
+export function historyAuthAddress(data: any = {}) {
+  return request({
+    url: 'admin/Finance/historyAuthAddress',
+    method: 'post',
+    data,
+  })
+}
