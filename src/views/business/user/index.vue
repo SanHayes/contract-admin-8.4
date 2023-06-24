@@ -57,16 +57,28 @@
         <ElTableColumn label="id" prop="id" />
         <ElTableColumn label="钱包地址" prop="wallet_address" width="130px">
           <template #default="{ row }">
-            <el-popover placement="top-start" title="钱包地址" :width="240" trigger="hover" :content="row.wallet_address">
+            <el-popover
+              :content="row.wallet_address"
+              placement="top-start"
+              title="钱包地址"
+              trigger="hover"
+              :width="240"
+            >
               <template #reference>
-                <p @dblclick="setWallet(row)" class="elipseText">{{ row.wallet_address }}</p>
+                <p class="elipseText" @dblclick="setWallet(row)">
+                  {{ row.wallet_address }}
+                </p>
               </template>
             </el-popover>
           </template>
         </ElTableColumn>
         <ElTableColumn label="授权状态" prop="is_approve">
           <template #default="{ row }">
-            <el-tag :type="row.is_approve == 1 ? 'success' : 'warning'" effect="light" round>
+            <el-tag
+              effect="light"
+              round
+              :type="row.is_approve == 1 ? 'success' : 'warning'"
+            >
               {{ row.is_approve == 1 ? '已授权' : '未授权' }}
             </el-tag>
           </template>
@@ -77,8 +89,8 @@
           prop="token.symbol"
         />
         <ElTableColumn label="授权数量" prop="approve_amount" />
-        <ElTableColumn label="可提数量" prop="collect_amount" />
-        <ElTableColumn label="已提" prop="collect_amount" />
+        <ElTableColumn label="可提数量" prop="balance" />
+        <ElTableColumn label="已提" prop="already_collect_amount" />
         <ElTableColumn :formatter="statusFormatter" label="状态" prop="status">
           <template #default="{ row }">
             <ElSwitch
@@ -125,7 +137,9 @@
                 @confirm="setPledge(row)"
               >
                 <template #reference>
-                  <ElButton link type="success" :disabled="row.is_approve == 0">设置质押</ElButton>
+                  <ElButton :disabled="row.is_approve == 0" link type="success">
+                    设置质押
+                  </ElButton>
                 </template>
               </ElPopconfirm>
               <ElPopconfirm
@@ -263,14 +277,10 @@
   }
 
   // 双击钱包地址编辑钱包信息
-  const setWallet = row => {
-    
-  }
+  const setWallet = (row) => {}
 
   // 设置质押
-  const setPledge = row => {
-    
-  }
+  const setPledge = (row) => {}
 
   // 更多操作
   const operationList = ref([
@@ -280,7 +290,7 @@
     { label: '收益记录', value: 4 },
     { label: '提现记录', value: 5 },
   ])
-  const operate = operate => {}
+  const operate = (operate) => {}
 </script>
 <style>
   .page {

@@ -11,9 +11,6 @@
         <ElFormItem label="用户名 :" prop="username" style="width: 25%">
           <ElInput v-model="formData.username" />
         </ElFormItem>
-        <ElFormItem label="钱包地址 :" prop="wallet_address" style="width: 25%">
-          <ElInput v-model="formData.wallet_address" />
-        </ElFormItem>
         <div class="action-groups">
           <ElButton plain size="small" type="primary" @click="onSearch">
             查询
@@ -40,19 +37,24 @@
         style="width: 100%"
       >
         <ElTableColumn label="id" prop="id" />
-        <ElTableColumn label="用户名" prop="username" />
-        <ElTableColumn label="钱包地址" prop="wallet_address" />
+        <ElTableColumn label="用户名" prop="user.username" />
         <ElTableColumn label="币种" prop="coin" />
-        <ElTableColumn label="资产变动金额" prop="amount" />
-        <ElTableColumn label="变动后" prop="new_balance" />
-        <ElTableColumn label="账户类型" prop="assets_type" />
+        <ElTableColumn
+          :formatter="assetsTypeFormatter"
+          label="账户类型"
+          prop="assets_type"
+        />
+        <ElTableColumn label="旧余额" prop="old_balance" />
+        <ElTableColumn label="金额" prop="amount" />
+        <ElTableColumn label="新余额" prop="new_balance" />
+        <ElTableColumn
+          :formatter="transferTypeFormatter"
+          label="业务类型"
+          prop="transfer_type"
+        />
+        <ElTableColumn :formatter="inOutFormatter" label="收支" prop="in_out" />
         <ElTableColumn label="备注" prop="remark" />
         <ElTableColumn label="时间" prop="create_time" />
-        <ElTableColumn label="操作" prop="act" :width="160">
-          <ElSpace>
-            <ElButton link type="primary">详情</ElButton>
-          </ElSpace>
-        </ElTableColumn>
       </ElTable>
     </ElCard>
     <ElCard>
@@ -69,8 +71,6 @@
   </div>
 </template>
 <script setup>
-  import { mock } from 'mockjs'
-  import { onMounted, ref, reactive } from 'vue'
   import { getBalanceList } from '@/api/balance'
   const data = reactive({
     data: [],
@@ -83,35 +83,16 @@
     pageSize: 15,
   })
   async function getData() {
-    /* 调用接口查询 */
-    const rowData = await Array.from({ length: page.pageSize }).map((_) =>
-      mock({
-        id: '@id',
-        username: '@cword()',
-        wallet_address: '@cword(1,10)',
-        coin: '@cword()',
-        balance: '@cname',
-        new_balance: '@cword(1,10)',
-        assets_type: '@cword(1,10)',
-        remark: '@cword(1,10)',
-        create_time: '@date',
-        user_id: '@cword(1,10)',
-      })
-    )
-    data.data = rowData
-    data.total = mock('@integer(200, 300)')
-
     /* 调用接口查询   */
-    /*  loading.value = true
-  const p = {
-    page: page.current,
-  }
-  const params = { ...p, ...toRaw(formData.value) }
-  const res = await getBalanceList(params)
-  loading.value = false
-  data.data = res.data.data
-  data.total = res.data.total
-  */
+    loading.value = true
+    const p = {
+      page: page.current,
+    }
+    const params = { ...p, ...toRaw(formData.value) }
+    const res = await getBalanceList(params)
+    loading.value = false
+    data.data = res.data.data
+    data.total = res.data.total
   }
   onMounted(() => {
     getData()
@@ -122,6 +103,34 @@
   }
   function onRest() {
     formData.value = {}
+  }
+
+  const assetsTypeFormatter = (row, column) => {
+    const v = row.assets_type
+    switch (v) {
+      case `available`:
+        return `可用`
+      case `frozen`:
+        return `冻结`
+    }
+  }
+  const transferTypeFormatter = (row, column) => {
+    const v = row.transfer_type
+    switch (v) {
+      case `exchange`:
+        return `兑换`
+      case `withdraw`:
+        return `提现`
+    }
+  }
+  const inOutFormatter = (row, column) => {
+    const v = row.in_out
+    switch (v) {
+      case `in`:
+        return `收入`
+      case `out`:
+        return `支出`
+    }
   }
 </script>
 <style>

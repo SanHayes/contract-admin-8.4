@@ -6,7 +6,7 @@ import request from '@/utils/request'
  */
 export function getBalanceList(data: any = {}) {
   return request({
-    url: 'admin/balance/list',
+    url: 'admin/TransactionFlow/lists',
     method: 'post',
     data,
   })
