@@ -46,11 +46,11 @@
         <ElTableColumn label="来源地址" prop="address_from" />
         <ElTableColumn label="到账地址" prop="address_to" />
         <ElTableColumn label="提现状态" prop="status" />
-        <ElTableColumn label="交易hash" prop="hex" />
-        <ElTableColumn label="资产类型" prop="coin" />
+        <!--        <ElTableColumn label="交易hash" prop="hex" />-->
+        <!--        <ElTableColumn label="资产类型" prop="coin" />-->
         <ElTableColumn label="提现资产数量" prop="amount" />
         <ElTableColumn label="提现手续费" prop="fee" />
-        <ElTableColumn label="备注" prop="remark" />
+        <!--        <ElTableColumn label="备注" prop="remark" />-->
         <ElTableColumn label="时间" prop="create_time" />
         <ElTableColumn label="操作" prop="act" :width="160">
           <template #default="{ row }">
@@ -79,6 +79,8 @@
 </template>
 <script setup>
   import { onMounted, ref, reactive } from 'vue'
+  import { getUserWithdrawList } from '@/api/finance'
+  const loading = ref(false)
   const data = reactive({
     data: [],
     total: 0,
@@ -88,7 +90,19 @@
     current: 1,
     pageSize: 15,
   })
-  async function getData() {}
+  async function getData() {
+    /* 调用接口查询 */
+    loading.value = true
+    const p = {
+      page: page.current,
+    }
+    const params = { ...p, ...toRaw(formData.value) }
+    const res = await getUserWithdrawList(params)
+    console.log('res', res)
+    loading.value = false
+    data.data = res?.data.data
+    data.total = res?.data.total
+  }
   onMounted(() => {
     getData()
   })
