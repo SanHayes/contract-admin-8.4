@@ -94,7 +94,7 @@
           colorful: false,
           num: 28,
         },
-        layout: 'total, sizes, prev, pager, next, jumper',
+        layout: 'total,  prev, pager, next, jumper',
         emptyShow: true,
       })
 
