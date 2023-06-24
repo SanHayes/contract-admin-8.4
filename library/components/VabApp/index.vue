@@ -63,6 +63,16 @@
         },
       })
     }
+
+    if (data.auth_user > 0) {
+      text.value = '新用户授权'
+      play()
+      ElNotification({
+        title: '提示',
+        message: '新用户授权',
+        type: 'success',
+      })
+    }
   }, interval)
 </script>
 <template>
