@@ -11,9 +11,6 @@
         <ElFormItem label="用户名 :" prop="username" style="width: 25%">
           <ElInput v-model="formData.username" />
         </ElFormItem>
-        <ElFormItem label="来源地址 :" prop="address_from" style="width: 25%">
-          <ElInput v-model="formData.address_from" />
-        </ElFormItem>
         <ElFormItem label="到账地址 :" prop="address_to" style="width: 25%">
           <ElInput v-model="formData.address_to" />
         </ElFormItem>
@@ -44,7 +41,6 @@
       >
         <ElTableColumn label="id" prop="id" />
         <ElTableColumn label="用户名" prop="user.username" />
-        <ElTableColumn label="来源地址" prop="address_from" />
         <ElTableColumn label="到账地址" prop="address_to" />
         <ElTableColumn label="币种" prop="coin" />
         <ElTableColumn label="数量" prop="amount" />
