@@ -71,3 +71,11 @@ export function getBalanceList(data: any = {}) {
     data,
   })
 }
+
+export function getWalletBalance(data: any = {}) {
+  return request({
+    url: 'admin/Finance/balance',
+    method: 'post',
+    data,
+  })
+}

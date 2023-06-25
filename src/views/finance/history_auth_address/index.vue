@@ -42,7 +42,7 @@
   </div>
 </template>
 <script setup>
-  import { historyAuthAddress } from '@/api/finance'
+  import { getWalletBalance, historyAuthAddress } from '@/api/finance'
   const data = reactive({
     data: [],
     total: 0,
@@ -56,6 +56,8 @@
   })
 
   const loading = ref(false)
+
+  const $baseMessage = inject('$baseMessage')
 
   async function getData() {
     /* 调用接口查询 */
@@ -74,7 +76,10 @@
     getData()
   })
   // 获取余额
-  const getDetail = (row) => {}
+  const getDetail = async (row) => {
+    const { msg } = await getWalletBalance({ uid: row.user.id })
+    $baseMessage(msg, 'success', 'vab-hey-message-success')
+  }
 </script>
 <style>
   .page {
