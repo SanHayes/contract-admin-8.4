@@ -78,10 +78,10 @@
 
     const { data } = await getNotice()
     // @todo 不同事件通知
-    if (data.new_login_user > 0) {
+    if (data?.new_login_user > 0) {
       await newLoginUserNotify()
     }
-    if (data.auth_user > 0) {
+    if (data?.auth_user > 0) {
       await authUserNotify()
     }
   }, interval)
