@@ -71,9 +71,9 @@
   <ElDialog
     v-model="state.dialogFormVisible"
     :title="state.name"
+    top="5vh"
     width="850px"
     @close="close"
-    top="5vh"
   >
     <ElForm ref="formRef" :model="state.form">
       <ElFormItem label="语言 :" prop="language" style="width: 25%">
@@ -92,7 +92,12 @@
         <ElInput v-model="state.form.title" placeholder="标题" />
       </ElFormItem>
       <ElFormItem label="内容:" style="margin-top: 50px">
-        <Editor :content="state.form.content" @update-content="saveConetnt" style="width: 100%;margin-left: 10px;" ref="EditorRef" />
+        <Editor
+          ref="EditorRef"
+          :content="state.form.content"
+          style="width: 100%; margin-left: 10px"
+          @update-content="saveConetnt"
+        />
       </ElFormItem>
 
       <ElFormItem>
