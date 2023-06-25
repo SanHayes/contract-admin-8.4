@@ -27,7 +27,7 @@ module.exports = {
   // 是否开启刷新组件
   showRefresh: true,
   // 是否开启搜索组件
-  showSearch: true,
+  showSearch: false,
   // 是否开启主题组件
   showTheme: true,
   // 是否开启通知组件
