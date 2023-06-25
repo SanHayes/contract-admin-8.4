@@ -42,7 +42,7 @@
         <ElTableColumn label="id" prop="id" />
         <ElTableColumn label="用户名" prop="user.username" />
         <ElTableColumn label="到账地址" prop="address_to" />
-        <ElTableColumn label="币种" prop="coin" />
+        <ElTableColumn label="币种" prop="token.symbol" />
         <ElTableColumn label="数量" prop="amount" />
         <ElTableColumn label="手续费" prop="fee" />
         <ElTableColumn label="提现状态" prop="status" />
