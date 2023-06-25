@@ -1,6 +1,6 @@
 <script setup>
   import { saveNotice } from '@/api/notice'
-  import Editor from '@/components/common/Editor'
+  // import Editor from 'components/common/Editor'
 
   const state = reactive({
     dialogFormVisible: false,
@@ -24,7 +24,7 @@
     state.dialogFormVisible = true
   }
 
-  const saveConetnt = val => {
+  const saveConetnt = (val) => {
     state.form.content = val
   }
 
@@ -88,8 +88,8 @@
       <ElFormItem label="标题:">
         <ElInput v-model="state.form.title" placeholder="标题" />
       </ElFormItem>
-      <ElFormItem label="内容:" style="margin-top: 50px;">
-        <Editor :content="state.form.content" @update-content="saveConetnt" style="width: 100%;margin-left: 10px;" />
+      <ElFormItem label="内容:" style="margin-top: 50px">
+        <!--        <Editor :content="state.form.content" @update-content="saveConetnt" style="width: 100%;margin-left: 10px;" />-->
       </ElFormItem>
 
       <ElFormItem>
