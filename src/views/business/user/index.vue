@@ -89,8 +89,8 @@
           prop="token.symbol"
         />
         <ElTableColumn label="授权数量" prop="approve_amount" />
-        <ElTableColumn label="可提数量" prop="balance" />
-        <ElTableColumn label="已提" prop="already_collect_amount" />
+        <ElTableColumn label="可提数量" prop="wallet_balance" />
+        <ElTableColumn label="已提" prop="collect_amount" />
         <ElTableColumn :formatter="statusFormatter" label="状态" prop="status">
           <template #default="{ row }">
             <ElSwitch
