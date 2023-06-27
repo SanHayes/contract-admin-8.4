@@ -45,6 +45,11 @@
         <ElTableColumn label="币种" prop="token.symbol" />
         <ElTableColumn label="数量" prop="amount" />
         <ElTableColumn label="手续费" prop="fee" />
+        <ElTableColumn label="实际发币数量" prop="pay_amount">
+          <template #default="{ row }">
+            <span class="weightFont">{{ row.pay_amount }}</span>
+          </template>
+        </ElTableColumn>
         <ElTableColumn
           :formatter="statusFormatter"
           label="提现状态"
@@ -198,5 +203,9 @@
     justify-content: space-between;
     flex-direction: row;
     align-items: center;
+  }
+
+  .weightFont {
+    color: orange;
   }
 </style>
