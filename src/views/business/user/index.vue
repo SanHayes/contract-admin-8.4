@@ -178,6 +178,8 @@
         @size-change="getData"
       />
     </ElCard>
+
+    <WalletDetail ref="walletDetailRef" @fetch-data="getData" />
   </div>
 </template>
 <script setup>
@@ -189,6 +191,7 @@
     userWithdraw,
   } from '@/api/user'
   import { getSymbols } from '@/api/contract'
+  import WalletDetail from './components/walletDetail.vue'
 
   const loading = ref(false)
   const editRef = ref()
@@ -277,7 +280,10 @@
   }
 
   // 双击钱包地址编辑钱包信息
-  const setWallet = (row) => {}
+  const walletDetailRef = ref()
+  const setWallet = (row) => {
+    walletDetailRef.value.showEdit(row)
+  }
 
   // 设置质押
   const setPledge = (row) => {}
