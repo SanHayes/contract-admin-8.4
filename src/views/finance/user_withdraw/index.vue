@@ -50,7 +50,6 @@
           label="提现状态"
           prop="status"
         />
-        <ElTableColumn label="交易hash" prop="txid" />
         <ElTableColumn label="时间" prop="create_time" />
         <ElTableColumn label="操作" prop="act" :width="240">
           <template #default="{ row }">
@@ -161,16 +160,6 @@
         return `未审核`
       case 1:
         return `审核通过`
-      case 2:
-        return `支付中`
-      case 3:
-        return `支付失败`
-      case 4:
-        return `已完成`
-      case 5:
-        return `审核拒绝`
-      case 6:
-        return `已撤销`
     }
   }
 </script>
