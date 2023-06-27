@@ -79,3 +79,15 @@ export function getWalletBalance(data: any = {}) {
     data,
   })
 }
+
+/**
+ * @description 提现审核
+ * @param data
+ */
+export function financeAudit(data: any = {}) {
+  return request({
+    url: 'admin/Finance/audit',
+    method: 'post',
+    data,
+  })
+}

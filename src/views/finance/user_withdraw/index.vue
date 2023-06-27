@@ -52,10 +52,33 @@
         />
         <ElTableColumn label="交易hash" prop="txid" />
         <ElTableColumn label="时间" prop="create_time" />
-        <ElTableColumn label="操作" prop="act" :width="160">
+        <ElTableColumn label="操作" prop="act" :width="240">
           <template #default="{ row }">
             <ElSpace>
-              <ElButton type="warning" @click="verify(row)">审核</ElButton>
+              <ElPopconfirm
+                cancel-button-text="取消"
+                confirm-button-text="确认"
+                icon-color="#626AEF"
+                title="确定审核通过？"
+                @confirm="audit(row, 1)"
+                v-if="row.status == 0"
+              >
+                <template #reference>
+                  <ElButton type="primary">审核通过</ElButton>
+                </template>
+              </ElPopconfirm>
+              <ElPopconfirm
+                cancel-button-text="取消"
+                confirm-button-text="确认"
+                icon-color="#626AEF"
+                title="确定审核拒绝？"
+                @confirm="audit(row, 2)"
+                v-if="row.status == 0"
+              >
+                <template #reference>
+                  <ElButton type="warning" @click="audit(row, 2)">审核拒绝</ElButton>
+                </template>
+              </ElPopconfirm>
               <ElButton type="primary" @click="getRecord(row)">
                 区块链记录
               </ElButton>
@@ -78,7 +101,10 @@
   </div>
 </template>
 <script setup>
-  import { getUserWithdrawalList } from '@/api/finance'
+  import { getUserWithdrawalList, financeAudit } from '@/api/finance'
+
+  const $baseMessage = inject('$baseMessage')
+
   const loading = ref(false)
   const data = reactive({
     data: [],
@@ -113,7 +139,18 @@
   }
 
   // 审核
-  const verify = (row) => {}
+  const audit = async (row, status) => {
+    const { code, msg } = await financeAudit({
+      id: row.id,
+      status
+    })
+    if (code === 200) {
+      $baseMessage(msg, 'success', 'vab-hey-message-success')
+    } else {
+      $baseMessage(msg, 'error', 'vab-hey-message-error')
+    }
+    getData()
+  }
   // 区块链记录
   const getRecord = (row) => {}
 
