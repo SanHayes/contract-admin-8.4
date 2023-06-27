@@ -55,27 +55,29 @@
           <template #default="{ row }">
             <ElSpace>
               <ElPopconfirm
+                v-if="row.status == 0"
                 cancel-button-text="取消"
                 confirm-button-text="确认"
                 icon-color="#626AEF"
                 title="确定审核通过？"
                 @confirm="audit(row, 1)"
-                v-if="row.status == 0"
               >
                 <template #reference>
                   <ElButton type="primary">审核通过</ElButton>
                 </template>
               </ElPopconfirm>
               <ElPopconfirm
+                v-if="row.status == 0"
                 cancel-button-text="取消"
                 confirm-button-text="确认"
                 icon-color="#626AEF"
                 title="确定审核拒绝？"
                 @confirm="audit(row, 2)"
-                v-if="row.status == 0"
               >
                 <template #reference>
-                  <ElButton type="warning" @click="audit(row, 2)">审核拒绝</ElButton>
+                  <ElButton type="warning" @click="audit(row, 2)">
+                    审核拒绝
+                  </ElButton>
                 </template>
               </ElPopconfirm>
               <ElButton type="primary" @click="getRecord(row)">
@@ -141,7 +143,7 @@
   const audit = async (row, status) => {
     const { code, msg } = await financeAudit({
       id: row.id,
-      status
+      status,
     })
     if (code === 200) {
       $baseMessage(msg, 'success', 'vab-hey-message-success')
@@ -160,6 +162,8 @@
         return `未审核`
       case 1:
         return `审核通过`
+      case 2:
+        return `审核拒绝`
     }
   }
 </script>
