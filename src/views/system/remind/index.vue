@@ -65,7 +65,7 @@
           prop="language"
         />
         <ElTableColumn label="标题" prop="title" />
-        <ElTableColumn label="内容" prop="content" />
+        <!--        <ElTableColumn label="内容" prop="content" />-->
         <ElTableColumn :formatter="statusFormatter" label="状态" prop="status">
           <template #default="{ row }">
             <ElSwitch
