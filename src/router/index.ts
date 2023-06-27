@@ -466,6 +466,15 @@ export const asyncRoutes: VabRouteRecord[] = [
           icon: 'menu-2-fill',
         },
       },
+      {
+        path: 'stake_earnings',
+        name: 'HistoryAuthAddress',
+        component: () => import('@/views/finance/stake_earnings/index.vue'),
+        meta: {
+          title: '质押收益',
+          icon: 'menu-2-fill',
+        },
+      },
     ],
   },
   {
