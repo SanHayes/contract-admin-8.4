@@ -75,9 +75,7 @@
                 @confirm="audit(row, 2)"
               >
                 <template #reference>
-                  <ElButton type="warning" @click="audit(row, 2)">
-                    审核拒绝
-                  </ElButton>
+                  <ElButton type="warning">审核拒绝</ElButton>
                 </template>
               </ElPopconfirm>
               <ElButton type="primary" @click="getRecord(row)">
