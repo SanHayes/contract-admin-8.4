@@ -8,7 +8,6 @@
   })
 
   const formRef = ref()
-
   const $baseMessage = inject('$baseMessage')
 
   const emits = defineEmits(['fetch-data'])
@@ -27,6 +26,10 @@
   }
 
   const onSubmit = () => {
+    if (state.form.contract_address !== '' && state.form.token_id !== '') {
+      $baseMessage('不能提交空数据', 'error', 'vab-hey-message-error')
+      return
+    }
     formRef.value.validate(async (valid) => {
       if (valid) {
         const { code, msg } = await editContract(state.form)
