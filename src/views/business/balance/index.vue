@@ -38,7 +38,7 @@
       >
         <ElTableColumn label="id" prop="id" />
         <ElTableColumn label="用户名" prop="user.username" />
-        <ElTableColumn label="币种" prop="coin" />
+        <ElTableColumn label="币种" prop="token.symbol" />
         <ElTableColumn
           :formatter="assetsTypeFormatter"
           label="账户类型"
