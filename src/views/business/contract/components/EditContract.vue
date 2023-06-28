@@ -10,7 +10,7 @@
         { required: true, trigger: 'blur', message: '请输入合约地址' },
       ],
       token_id: [
-        { required: true, trigger: 'blur', message: '请输选择授权代币' },
+        { required: true, trigger: 'blur', message: '请选择授权代币' },
       ],
     },
   })

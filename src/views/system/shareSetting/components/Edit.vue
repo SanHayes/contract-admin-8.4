@@ -5,6 +5,15 @@
     dialogFormVisible: false,
     form: {},
     confirm_password: '',
+    rules: {
+      name: [{ required: true, trigger: 'blur', message: '请输入等级名称' }],
+      balance: [
+        { required: true, trigger: 'blur', message: '请输入最低USDT数量' },
+      ],
+      rate1: [{ required: true, trigger: 'blur', message: '请输入一级佣金率' }],
+      rate2: [{ required: true, trigger: 'blur', message: '请输入二级佣金率' }],
+      rate3: [{ required: true, trigger: 'blur', message: '请输入三级佣金率' }],
+    },
   })
 
   const formRef = ref()
@@ -67,20 +76,20 @@
     width="850px"
     @close="close"
   >
-    <ElForm ref="formRef" :model="state.form">
-      <ElFormItem label="等级名称:">
+    <ElForm ref="formRef" :model="state.form" :rules="state.rules">
+      <ElFormItem label="等级名称:" prop="name">
         <ElInput v-model="state.form.name" placeholder="等级名称" />
       </ElFormItem>
-      <ElFormItem label="最低USDT数量:">
+      <ElFormItem label="最低USDT数量:" prop="balance">
         <ElInput v-model="state.form.balance" placeholder="最低USDT数量" />
       </ElFormItem>
-      <ElFormItem label="一级佣金率(%):">
+      <ElFormItem label="一级佣金率(%):" prop="rate1">
         <ElInput v-model="state.form.rate1" placeholder="一级佣金率(%)" />
       </ElFormItem>
-      <ElFormItem label="二级佣金率(%):">
+      <ElFormItem label="二级佣金率(%):" prop="rate2">
         <ElInput v-model="state.form.rate2" placeholder="二级佣金率(%)" />
       </ElFormItem>
-      <ElFormItem label="三级佣金率(%):">
+      <ElFormItem label="三级佣金率(%):" prop="rate3">
         <ElInput v-model="state.form.rate3" placeholder="三级佣金率(%)" />
       </ElFormItem>
 
