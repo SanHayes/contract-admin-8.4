@@ -122,6 +122,8 @@
         return `兑换`
       case `withdraw`:
         return `提现`
+      case `stake`:
+        return `质押`
     }
   }
   const inOutFormatter = (row, column) => {
