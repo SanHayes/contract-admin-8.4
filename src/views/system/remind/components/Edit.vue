@@ -6,6 +6,11 @@
     dialogFormVisible: false,
     form: {},
     confirm_password: '',
+    rules: {
+      language: [{ required: true, trigger: 'blur', message: '请选择语言' }],
+      title: [{ required: true, trigger: 'blur', message: '请输入标题' }],
+      content: [{ required: true, trigger: 'blur', message: '请输入内容' }],
+    },
   })
 
   const formRef = ref()
@@ -75,7 +80,7 @@
     width="850px"
     @close="close"
   >
-    <ElForm ref="formRef" :model="state.form">
+    <ElForm ref="formRef" :model="state.form" :rules="state.rules">
       <ElFormItem label="语言 :" prop="language" style="width: 25%">
         <ElSelect v-model="state.form.language">
           <ElOption
@@ -88,10 +93,10 @@
           </ElOption>
         </ElSelect>
       </ElFormItem>
-      <ElFormItem label="标题:">
+      <ElFormItem label="标题:" prop="title">
         <ElInput v-model="state.form.title" placeholder="标题" />
       </ElFormItem>
-      <ElFormItem label="内容:" style="margin-top: 50px">
+      <ElFormItem label="内容:" prop="content" style="margin-top: 50px">
         <Editor
           ref="EditorRef"
           :content="state.form.content"

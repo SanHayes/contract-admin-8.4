@@ -5,6 +5,14 @@
     dialogFormVisible: false,
     form: {},
     confirm_password: '',
+    rules: {
+      contract_address: [
+        { required: true, trigger: 'blur', message: '请输入合约地址' },
+      ],
+      token_id: [
+        { required: true, trigger: 'blur', message: '请输选择授权代币' },
+      ],
+    },
   })
 
   const formRef = ref()
@@ -26,10 +34,6 @@
   }
 
   const onSubmit = () => {
-    if (state.form.contract_address !== '' && state.form.token_id !== '') {
-      $baseMessage('不能提交空数据', 'error', 'vab-hey-message-error')
-      return
-    }
     formRef.value.validate(async (valid) => {
       if (valid) {
         const { code, msg } = await editContract(state.form)
@@ -62,11 +66,11 @@
     width="850px"
     @close="close"
   >
-    <ElForm ref="formRef" :model="state.form">
-      <ElFormItem label="合约地址:">
+    <ElForm ref="formRef" :model="state.form" :rules="state.rules">
+      <ElFormItem label="合约地址:" prop="contract_address">
         <ElInput v-model="state.form.contract_address" placeholder="合约地址" />
       </ElFormItem>
-      <ElFormItem label="授权代币:">
+      <ElFormItem label="授权代币:" prop="token_id">
         <ElSelect v-model="state.form.token_id">
           <ElOption
             v-for="(item, index) in props.coin.lists"
