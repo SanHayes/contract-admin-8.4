@@ -129,7 +129,7 @@
                   <ElButton link type="success">提币</ElButton>
                 </template>
               </ElPopconfirm>
-              <ElPopconfirm
+              <!--              <ElPopconfirm
                 cancel-button-text="取消"
                 confirm-button-text="确认"
                 icon-color="#626AEF"
@@ -141,7 +141,7 @@
                     设置质押
                   </ElButton>
                 </template>
-              </ElPopconfirm>
+              </ElPopconfirm>-->
               <ElPopconfirm
                 cancel-button-text="取消"
                 confirm-button-text="确认"
