@@ -49,7 +49,7 @@
           prop="status"
         />
         <!--        <ElTableColumn label="结果" prop="result" />-->
-        <ElTableColumn label="归集时间" prop="create_time" />
+        <ElTableColumn label="归集时间" prop="update_time" />
       </ElTable>
     </ElCard>
     <ElCard>
