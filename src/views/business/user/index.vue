@@ -172,7 +172,6 @@
         v-model:page-size="page.pageSize"
         :background="true"
         layout="jumper,next,pager,prev,total"
-        :page-sizes="[15, 30, 50, 80, 100]"
         :total="data.total"
         @current-change="getData"
         @size-change="getData"

@@ -44,7 +44,7 @@
         <ElTableColumn label="到账地址" prop="address_to" />
         <ElTableColumn label="币种" prop="token.symbol" />
         <ElTableColumn label="数量" prop="amount" />
-<!--        <ElTableColumn label="手续费" prop="fee" />-->
+        <!--        <ElTableColumn label="手续费" prop="fee" />-->
         <ElTableColumn label="实际发币数量" prop="pay_amount">
           <template #default="{ row }">
             <span class="weightFont">{{ row.pay_amount }}</span>
@@ -96,7 +96,6 @@
         v-model:current-page="page.current"
         v-model:page-size="page.pageSize"
         layout="jumper,next,pager,prev,total"
-        :page-sizes="[15, 30, 50, 80, 100]"
         :total="data.total"
         @current-change="getData"
         @size-change="getData"
