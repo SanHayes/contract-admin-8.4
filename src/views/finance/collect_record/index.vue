@@ -39,10 +39,16 @@
         <ElTableColumn label="id" prop="id" />
         <ElTableColumn label="用户名" prop="user.username" />
         <ElTableColumn label="付款地址" prop="user.wallet_address" />
-        <ElTableColumn label="归集金额" prop="amount" />
+        <ElTableColumn label="币种" prop="token.symbol" />
+        <ElTableColumn label="链" prop="token.chain" />
+        <ElTableColumn label="数量" prop="amount" />
         <ElTableColumn label="交易hash" prop="txid" />
-        <ElTableColumn label="状态" prop="status" />
-        <ElTableColumn label="结果" prop="result" />
+        <ElTableColumn
+          :formatter="statusFormatter"
+          label="状态"
+          prop="status"
+        />
+        <!--        <ElTableColumn label="结果" prop="result" />-->
         <ElTableColumn label="归集时间" prop="create_time" />
       </ElTable>
     </ElCard>
@@ -93,6 +99,15 @@
   }
   function onRest() {
     formData.value = {}
+  }
+  const statusFormatter = (row, column) => {
+    const v = row.status
+    switch (v) {
+      case 1:
+        return `已归集`
+      case 0:
+        return `未归集`
+    }
   }
 </script>
 <style>
