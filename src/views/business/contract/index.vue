@@ -67,7 +67,7 @@
         <ElTableColumn label="合约" prop="contract_address" />
         <ElTableColumn label="授权代币" prop="coin.symbol" />
         <ElTableColumn label="代币地址" prop="coin.contract_address" />
-        <ElTableColumn label="小数位数" prop="coin.contract_decimals" />
+        <!--        <ElTableColumn label="小数位数" prop="coin.contract_decimals" />-->
         <ElTableColumn :formatter="statusFormatter" label="状态" prop="status">
           <template #default="{ row }">
             <ElSwitch
@@ -178,9 +178,7 @@
   }
 
   function editRow(row) {
-    console.log(`editRow`, row)
     if (row.id) {
-      //todo
       editRef.value.showEdit(row)
     } else {
       //todo
