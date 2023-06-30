@@ -29,7 +29,7 @@ module.exports = {
   // 是否开启搜索组件
   showSearch: false,
   // 是否开启主题组件
-  showTheme: true,
+  showTheme: false,
   // 是否开启通知组件
   showNotice: true,
   // 是否开启全屏组件
