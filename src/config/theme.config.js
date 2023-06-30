@@ -23,7 +23,7 @@ module.exports = {
   // 是否标签页图标
   showTabsIcon: true,
   // 是否开启语言选择组件
-  showLanguage: true,
+  showLanguage: false,
   // 是否开启刷新组件
   showRefresh: true,
   // 是否开启搜索组件
