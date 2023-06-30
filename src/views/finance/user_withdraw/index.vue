@@ -45,11 +45,11 @@
         <ElTableColumn label="币种" prop="token.symbol" />
         <ElTableColumn label="数量" prop="amount" />
         <!--        <ElTableColumn label="手续费" prop="fee" />-->
-        <ElTableColumn label="实际发币数量" prop="pay_amount">
+        <!--        <ElTableColumn label="实际发币数量" prop="pay_amount">
           <template #default="{ row }">
             <span class="weightFont">{{ row.pay_amount }}</span>
           </template>
-        </ElTableColumn>
+        </ElTableColumn>-->
         <ElTableColumn
           :formatter="statusFormatter"
           label="提现状态"
@@ -68,7 +68,7 @@
                 @confirm="audit(row, 1)"
               >
                 <template #reference>
-                  <ElButton type="primary">审核通过</ElButton>
+                  <ElButton size="small" type="success">通过</ElButton>
                 </template>
               </ElPopconfirm>
               <ElPopconfirm
@@ -80,12 +80,12 @@
                 @confirm="audit(row, 2)"
               >
                 <template #reference>
-                  <ElButton type="warning">审核拒绝</ElButton>
+                  <ElButton size="small" type="danger">拒绝</ElButton>
                 </template>
               </ElPopconfirm>
-              <ElButton type="primary" @click="getRecord(row)">
+              <!--              <ElButton size="small" type="primary" @click="getRecord(row)">
                 区块链记录
-              </ElButton>
+              </ElButton>-->
             </ElSpace>
           </template>
         </ElTableColumn>
