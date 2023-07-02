@@ -55,6 +55,7 @@
         style="width: 100%"
       >
         <ElTableColumn label="id" prop="id" />
+        <ElTableColumn label="username" prop="username" />
         <ElTableColumn label="钱包地址" prop="wallet_address" width="130px">
           <template #default="{ row }">
             <el-popover
