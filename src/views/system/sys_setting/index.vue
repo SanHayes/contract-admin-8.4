@@ -43,6 +43,24 @@
         <ElIcon v-else class="avatar-uploader-icon"><Plus /></ElIcon>
       </ElUpload>
     </ElFormItem>
+    <ElFormItem label="首页Banner图:">
+      <ElUpload
+        :action="state.uploadUrl"
+        :before-upload="beforeUploadUpload"
+        class="avatar-uploader"
+        :headers="state.uploadHeaders"
+        :on-success="handleHomeBannerUploadSuccess"
+        :show-file-list="false"
+      >
+        <ElImage
+          v-if="form.home_banner"
+          fit="contain"
+          :src="form.home_banner"
+          style="width: 100px; height: 100px"
+        />
+        <ElIcon v-else class="avatar-uploader-icon"><Plus /></ElIcon>
+      </ElUpload>
+    </ElFormItem>
     <ElFormItem label="网站开关:">
       <ElSwitch
         v-model="form.is_close"
@@ -128,6 +146,13 @@
     const { code, data } = response
     if (code === 200) {
       form.value.logo = data.path
+    }
+  }
+
+  const handleHomeBannerUploadSuccess = (response, uploadFile) => {
+    const { code, data } = response
+    if (code === 200) {
+      form.value.home_banner = data.path
     }
   }
 
