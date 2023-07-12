@@ -77,3 +77,17 @@ export function switchUser(data: any = {}) {
     data,
   })
 }
+export function editUserAssets(data: any = {}) {
+  return request({
+    url: 'admin/User/assets',
+    method: 'post',
+    data,
+  })
+}
+export function getUserAssets(params: any = {}) {
+  return request({
+    url: 'admin/User/assets',
+    method: 'get',
+    params,
+  })
+}

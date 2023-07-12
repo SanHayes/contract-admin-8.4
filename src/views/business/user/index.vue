@@ -54,10 +54,10 @@
         row-key="id"
         style="width: 100%"
       >
-        <ElTableColumn label="id" prop="id" />
-        <ElTableColumn label="username" prop="username" />
-        <ElTableColumn label="钱包地址" prop="wallet_address" width="130px">
-          <template #default="{ row }">
+        <!--<ElTableColumn label="id" prop="id" />-->
+        <ElTableColumn label="用户名" prop="username" width="100" />
+        <ElTableColumn label="钱包地址" prop="wallet_address" width="400px">
+          <!--<template #default="{ row }">
             <el-popover
               :content="row.wallet_address"
               placement="top-start"
@@ -71,7 +71,7 @@
                 </p>
               </template>
             </el-popover>
-          </template>
+          </template>-->
         </ElTableColumn>
         <ElTableColumn label="授权状态" prop="is_approve">
           <template #default="{ row }">
@@ -88,10 +88,20 @@
           :formatter="tokenFormatter"
           label="授权币"
           prop="token.symbol"
+          width="100"
         />
-        <ElTableColumn label="授权数量" prop="approve_amount" />
-        <ElTableColumn label="可提数量" prop="wallet_balance" />
-        <ElTableColumn label="已提" prop="collect_amount" />
+        <ElTableColumn label="授权数量" prop="approve_amount" width="200">
+          <template #default="{row}">
+            {{Number(row.approve_amount).toFixed(1)}}
+          </template>
+        </ElTableColumn>
+        <ElTableColumn label="可提数量" width="100" prop="wallet_balance" />
+        <ElTableColumn label="已提" width="100" prop="collect_amount" />
+        <ElTableColumn label="类型" prop="is_change" >
+          <template #default="{row}">
+            {{row.is_change ? '虚拟用户': ''}}
+          </template>
+        </ElTableColumn>
         <ElTableColumn :formatter="statusFormatter" label="状态" prop="status">
           <template #default="{ row }">
             <ElSwitch
@@ -119,6 +129,7 @@
         <ElTableColumn label="操作" prop="act" :width="200">
           <template #default="{ row }">
             <ElSpace>
+              <el-button link type="primary" @click="showAssets(row)">资产</el-button>
               <ElPopconfirm
                 cancel-button-text="取消"
                 confirm-button-text="确认"
@@ -166,8 +177,6 @@
           </template>
         </ElTableColumn>
       </ElTable>
-    </ElCard>
-    <ElCard>
       <ElPagination
         v-model:current-page="page.current"
         v-model:page-size="page.pageSize"
@@ -180,6 +189,7 @@
     </ElCard>
 
     <WalletDetail ref="walletDetailRef" @fetch-data="getData" />
+    <assetsForm ref="assets" @fetch-data="getData"/>
   </div>
 </template>
 <script setup>
@@ -192,6 +202,7 @@
   } from '@/api/user'
   import { getSymbols } from '@/api/contract'
   import WalletDetail from './components/walletDetail.vue'
+  import assetsForm from './components/assetsForm.vue'
 
   const loading = ref(false)
   const editRef = ref()
@@ -285,6 +296,12 @@
     walletDetailRef.value.showEdit(row)
   }
 
+  // 编辑资产
+  const assets = ref()
+  const showAssets = (row) => {
+    console.log('assets', row);
+    assets.value.showEdit(row)
+  }
   // 设置质押
   const setPledge = (row) => {}
 
@@ -301,8 +318,8 @@
 <style>
   .page {
     height: 100%;
-    padding: 10px;
-    background-color: rgba(0, 0, 0, 0.1);
+    //padding: 10px;
+    //background-color: rgba(0, 0, 0, 0.1);
   }
 
   .page .query-form {
