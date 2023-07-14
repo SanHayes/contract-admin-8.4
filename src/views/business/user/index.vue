@@ -56,8 +56,8 @@
       >
         <!--<ElTableColumn label="id" prop="id" />-->
         <ElTableColumn label="用户名" prop="username" width="100" />
-        <ElTableColumn label="钱包地址" prop="wallet_address" width="400px">
-          <!--<template #default="{ row }">
+        <ElTableColumn label="钱包地址" prop="wallet_address" width="130">
+          <template #default="{ row }">
             <el-popover
               :content="row.wallet_address"
               placement="top-start"
@@ -71,7 +71,7 @@
                 </p>
               </template>
             </el-popover>
-          </template>-->
+          </template>
         </ElTableColumn>
         <ElTableColumn label="授权状态" prop="is_approve">
           <template #default="{ row }">
@@ -126,11 +126,11 @@
             />
           </template>
         </ElTableColumn>
-        <ElTableColumn label="操作" prop="act" :width="200">
+        <ElTableColumn label="操作" prop="act" fixed="right" :width="200">
           <template #default="{ row }">
             <ElSpace>
-              <el-button link type="primary" @click="showAssets(row)">资产</el-button>
-              <ElPopconfirm
+              <el-button type="success" plain round size="small" :icon="View" @click="showAssets(row)">设置质押</el-button>
+             <!-- <ElPopconfirm
                 cancel-button-text="取消"
                 confirm-button-text="确认"
                 icon-color="#626AEF"
@@ -140,7 +140,7 @@
                 <template #reference>
                   <ElButton link type="success">提币</ElButton>
                 </template>
-              </ElPopconfirm>
+              </ElPopconfirm>-->
               <!--              <ElPopconfirm
                 cancel-button-text="取消"
                 confirm-button-text="确认"
@@ -154,7 +154,7 @@
                   </ElButton>
                 </template>
               </ElPopconfirm>-->
-              <ElPopconfirm
+              <!--<ElPopconfirm
                 cancel-button-text="取消"
                 confirm-button-text="确认"
                 icon-color="#626AEF"
@@ -162,17 +162,19 @@
                 @confirm="deleteRow(row)"
               >
                 <template #reference>
-                  <ElButton link type="danger">删除</ElButton>
+                  <ElButton icon="delete" type="danger" round size="mini">删除</ElButton>
                 </template>
-              </ElPopconfirm>
-              <!-- <el-popover placement="bottom" :width="150" trigger="click">
+              </ElPopconfirm>-->
+               <el-popover placement="bottom" :width="150" trigger="click">
                 <template #reference>
-                  <el-button link type="primary">更多操作</el-button>
+                  <el-button plain round size="small" type="primary">更多操作
+                    <el-icon class="el-icon--right"><More/></el-icon>
+                  </el-button>
                 </template>
                 <div class="operationList">
-                  <div class="operationItem" v-for="(item, idx) in operationList" :key="`item${idx}`" @click="operate(item)">{{item.label }}</div>
+                  <div class="operationItem" v-for="(item, idx) in operationList" :key="`item${idx}`" @click="operate(item, row)">{{item.label }}</div>
                 </div>
-              </el-popover> -->
+              </el-popover>
             </ElSpace>
           </template>
         </ElTableColumn>
@@ -203,6 +205,8 @@
   import { getSymbols } from '@/api/contract'
   import WalletDetail from './components/walletDetail.vue'
   import assetsForm from './components/assetsForm.vue'
+  import { View, More } from '@element-plus/icons-vue'
+  import {ElMessageBox} from 'element-plus'
 
   const loading = ref(false)
   const editRef = ref()
@@ -307,13 +311,30 @@
 
   // 更多操作
   const operationList = ref([
-    { label: '设置重点关注', value: 1 },
-    { label: '赠送平台收益', value: 2 },
-    { label: '资产变动记录', value: 3 },
-    { label: '收益记录', value: 4 },
-    { label: '提现记录', value: 5 },
+    // { label: '设置重点关注', value: 1 },
+    // { label: '赠送平台收益', value: 2 },
+    // { label: '资产变动记录', value: 3 },
+    // { label: '收益记录', value: 4 },
+    // { label: '提现记录', value: 5 },
+    {label: '提现', value: 6},
+    {label: '删除', value: 7},
   ])
-  const operate = (operate) => {}
+  const operate = (operate, row) => {
+    const {value} = operate
+    if (value === 6){
+      ElMessageBox.confirm('确定要用此地址提币？').then(()=>{
+        withdraw(row)
+      }).catch(()=>{
+
+      })
+    } else if (value === 7){
+      ElMessageBox.confirm('确认删除？').then(()=>{
+        deleteRow(row)
+      }).catch(()=>{
+
+      })
+    }
+  }
 </script>
 <style>
   .page {
@@ -366,6 +387,7 @@
       height: 30px;
       line-height: 30px;
       cursor: pointer;
+      text-align: center;
     }
     .operationItem:hover {
       color: #66b1ff;
