@@ -44,7 +44,7 @@
     }
   })
 
-  const newLoginUserNotify = async () => {
+  const newLoginUserNotify = async (pause) => {
     console.log(`newLoginUserNotify`)
     text.value = '新用户注册'
     await play()
@@ -54,11 +54,12 @@
       type: 'success',
       onClose() {
         console.log('通知关闭了-新用户注册')
+        pause()
       },
     })
   }
 
-  const authUserNotify = async () => {
+  const authUserNotify = async (pause) => {
     console.log(`authUserNotify`)
     text.value = '新用户授权'
     await play()
@@ -66,6 +67,10 @@
       title: '提示',
       message: '新用户授权',
       type: 'success',
+      onClose() {
+        console.log('通知关闭了-新用户注册')
+        pause()
+      },
     })
   }
 
@@ -79,10 +84,10 @@
     const { data } = await getNotice()
     // @todo 不同事件通知
     if (data?.new_login_user > 0) {
-      await newLoginUserNotify()
+      await newLoginUserNotify(pause)
     }
     if (data?.auth_user > 0) {
-      await authUserNotify()
+      await authUserNotify(pause)
     }
   }, interval)
 </script>
