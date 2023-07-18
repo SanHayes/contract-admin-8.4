@@ -104,8 +104,8 @@ export const asyncRoutes: VabRouteRecord[] = [
     name: 'Business',
     component: Layout,
     meta: {
-      title: '业务管理',
-      icon: 'menu-2-fill',
+      title: '业务',
+      icon: 'briefcase-4-line',
     },
     children: [
       {
@@ -114,7 +114,7 @@ export const asyncRoutes: VabRouteRecord[] = [
         component: () => import('@/views/business/user/index.vue'),
         meta: {
           title: '用户信息',
-          icon: 'menu-2-fill',
+          icon: 'user-3-line',
         },
       },
       {
@@ -123,7 +123,7 @@ export const asyncRoutes: VabRouteRecord[] = [
         component: () => import('@/views/business/contract/index.vue'),
         meta: {
           title: '合约列表',
-          icon: 'menu-2-fill',
+          icon: 'list-unordered',
         },
       },
       {
@@ -132,7 +132,7 @@ export const asyncRoutes: VabRouteRecord[] = [
         component: () => import('@/views/business/balance/index.vue'),
         meta: {
           title: '资产变动记录',
-          icon: 'menu-2-fill',
+          icon: 'file-list-2-line',
         },
       },
       // {
@@ -168,7 +168,7 @@ export const asyncRoutes: VabRouteRecord[] = [
         component: () => import('@/views/business/message/index.vue'),
         meta: {
           title: '站内信',
-          icon: 'menu-2-fill',
+          icon: 'message-line',
         },
       },
     ],
@@ -178,8 +178,8 @@ export const asyncRoutes: VabRouteRecord[] = [
     name: 'System',
     component: Layout,
     meta: {
-      title: '系统管理',
-      icon: 'menu-2-fill',
+      title: '系统',
+      icon: 'windows-line',
     },
     children: [
       // {
@@ -197,7 +197,7 @@ export const asyncRoutes: VabRouteRecord[] = [
         component: () => import('@/views/system/remind/index.vue'),
         meta: {
           title: '前台公告设置',
-          icon: 'menu-2-fill',
+          icon: 'chat-settings-line',
         },
       },
       {
@@ -206,7 +206,7 @@ export const asyncRoutes: VabRouteRecord[] = [
         component: () => import('@/views/system/shareSetting/index.vue'),
         meta: {
           title: '推荐奖励设置',
-          icon: 'menu-2-fill',
+          icon: 'award-line',
         },
       },
       // {
@@ -224,7 +224,7 @@ export const asyncRoutes: VabRouteRecord[] = [
         component: () => import('@/views/system/sys_setting/index.vue'),
         meta: {
           title: '系统设置',
-          icon: 'menu-2-fill',
+          icon: 'settings-2-line',
         },
       },
       // {
@@ -242,7 +242,7 @@ export const asyncRoutes: VabRouteRecord[] = [
         component: () => import('@/views/system/whitepaper/index.vue'),
         meta: {
           title: '白皮书设置',
-          icon: 'menu-2-fill',
+          icon: 'file-settings-line',
         },
       },
       // {
@@ -359,8 +359,8 @@ export const asyncRoutes: VabRouteRecord[] = [
     component: Layout,
     name: 'Logs',
     meta: {
-      title: '日志管理',
-      icon: 'user-settings-line',
+      title: '日志',
+      icon: 'list-check-2',
     },
     children: [
       {
@@ -369,7 +369,7 @@ export const asyncRoutes: VabRouteRecord[] = [
         component: () => import('@/views/logs/adminLoginLog/index.vue'),
         meta: {
           title: '管理员登录日志',
-          icon: 'file-shield-2-line',
+          icon: 'admin-line',
         },
       },
       {
@@ -378,7 +378,7 @@ export const asyncRoutes: VabRouteRecord[] = [
         component: () => import('@/views/logs/operationLog/index.vue'),
         meta: {
           title: '管理员操作日志',
-          icon: 'file-shield-2-line',
+          icon: 'hammer-line',
         },
       },
       {
@@ -387,7 +387,7 @@ export const asyncRoutes: VabRouteRecord[] = [
         component: () => import('@/views/logs/userLoginLog/index.vue'),
         meta: {
           title: '前台登录日志',
-          icon: 'file-shield-2-line',
+          icon: 'login-circle-line',
         },
       },
       {
@@ -396,7 +396,7 @@ export const asyncRoutes: VabRouteRecord[] = [
         component: () => import('@/views/logs/approveLog/index.vue'),
         meta: {
           title: '用户授权记录',
-          icon: 'file-shield-2-line',
+          icon: 'shield-check-line',
         },
       },
     ],
@@ -406,8 +406,8 @@ export const asyncRoutes: VabRouteRecord[] = [
     name: 'Finance',
     component: Layout,
     meta: {
-      title: '财务管理',
-      icon: 'menu-2-fill',
+      title: '财务',
+      icon: 'wallet-3-line',
     },
     children: [
       {
@@ -416,7 +416,7 @@ export const asyncRoutes: VabRouteRecord[] = [
         component: () => import('@/views/finance/collect_record/index.vue'),
         meta: {
           title: '归集记录',
-          icon: 'menu-2-fill',
+          icon: 'install-line',
         },
       },
       // {
@@ -435,7 +435,7 @@ export const asyncRoutes: VabRouteRecord[] = [
         component: () => import('@/views/finance/user_exchange/index.vue'),
         meta: {
           title: '用户兑换记录',
-          icon: 'menu-2-fill',
+          icon: 'exchange-line',
         },
       },
       {
@@ -444,7 +444,7 @@ export const asyncRoutes: VabRouteRecord[] = [
         component: () => import('@/views/finance/user_withdraw/index.vue'),
         meta: {
           title: '用户提现记录',
-          icon: 'menu-2-fill',
+          icon: 'wallet-line',
         },
       },
       // {
@@ -463,7 +463,7 @@ export const asyncRoutes: VabRouteRecord[] = [
           import('@/views/finance/history_auth_address/index.vue'),
         meta: {
           title: '历史授权地址',
-          icon: 'menu-2-fill',
+          icon: 'history-fill',
         },
       },
       {
@@ -472,7 +472,7 @@ export const asyncRoutes: VabRouteRecord[] = [
         component: () => import('@/views/finance/stake_earnings/index.vue'),
         meta: {
           title: '质押收益',
-          icon: 'menu-2-fill',
+          icon: 'money-dollar-circle-line',
         },
       },
     ],
