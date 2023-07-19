@@ -17,7 +17,7 @@
       <ElFormItem
         label="合约地址 :"
         prop="contract_address"
-        style="width: 20%; margin: 0 20px"
+        style="width: 20%; margin-right: 20px;"
       >
         <ElInput v-model="formData.contract_address" />
       </ElFormItem>
