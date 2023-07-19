@@ -1,50 +1,41 @@
 <template>
   <div class="page">
-    <ElCard>
-      <template #header>
-        <div class="card-header">
-          <ElSpace><span>历史授权地址</span></ElSpace>
-          <ElSpace />
-        </div>
-      </template>
-      <ElTable
-        v-loading="loading"
-        :data="data.data"
-        empty-text="No Data"
-        max-height="400"
-        row-key="id"
-        style="width: 100%"
-      >
-        <ElTableColumn label="id" prop="id" />
-        <ElTableColumn label="钱包地址" prop="user.wallet_address" />
-        <ElTableColumn label="钱包余额" prop="act" :width="160">
-          <template #default="{ row }">
-            <ElSpace>
-              <ElButton type="warning" @click="getDetail(row)">
-                获取余额
-              </ElButton>
-            </ElSpace>
-          </template>
-        </ElTableColumn>
-      </ElTable>
-    </ElCard>
-    <ElCard>
-      <ElPagination
-        v-model:current-page="page.current"
-        v-model:page-size="page.pageSize"
-        layout="jumper,next,pager,prev,total"
-        :total="data.total"
-        @current-change="getData"
-        @size-change="getData"
-      />
-    </ElCard>
+    <ElTable
+      v-loading="loading"
+      :data="data.data"
+      :height="data.height"
+      empty-text="No Data"
+      row-key="id"
+      style="width: 100%"
+    >
+      <!--<ElTableColumn label="id" prop="id" />-->
+      <ElTableColumn label="钱包地址" prop="user.wallet_address" />
+      <ElTableColumn label="钱包余额" prop="act">
+        <template #default="{ row }">
+          <ElSpace>
+            <ElButton type="warning" @click="getDetail(row)">获取余额</ElButton>
+          </ElSpace>
+        </template>
+      </ElTableColumn>
+    </ElTable>
+    <ElPagination
+      v-model:current-page="page.current"
+      v-model:page-size="page.pageSize"
+      layout="jumper,next,pager,prev,total"
+      hide-on-single-page
+      :total="data.total"
+      @current-change="getData"
+      @size-change="getData"
+    />
   </div>
 </template>
 <script setup>
   import { getWalletBalance, historyAuthAddress } from '@/api/finance'
+  const $baseTableHeight = inject('$baseTableHeight')
   const data = reactive({
     data: [],
     total: 0,
+    height: $baseTableHeight()
   })
 
   const formData = ref({})
@@ -84,7 +75,6 @@
   .page {
     height: 100%;
     padding: 10px;
-    background-color: rgba(0, 0, 0, 0.1);
   }
   .page .query-form {
     width: 100%;

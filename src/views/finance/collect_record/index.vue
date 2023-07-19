@@ -1,75 +1,55 @@
 <template>
   <div class="page">
-    <ElCard>
-      <ElForm
-        class="query-form"
-        inline
-        :label-width="80"
-        :model="formData"
-        size="small"
-      >
-        <ElFormItem label="用户名:" prop="username" style="width: 25%">
-          <ElInput v-model="formData.username" />
-        </ElFormItem>
-        <div class="action-groups">
-          <ElButton plain size="small" type="primary" @click="onSearch">
-            查询
-          </ElButton>
-          <ElButton plain size="small" type="primary" @click="onRest">
-            重置
-          </ElButton>
-        </div>
-      </ElForm>
-    </ElCard>
-    <ElCard>
-      <template #header>
-        <div class="card-header">
-          <ElSpace><span>归集记录</span></ElSpace>
-          <ElSpace />
-        </div>
-      </template>
-      <ElTable
-        v-loading="loading"
-        :data="data.data"
-        empty-text="No Data"
-        max-height="400"
-        row-key="id"
-        style="width: 100%"
-      >
-        <ElTableColumn label="id" prop="id" />
-        <ElTableColumn label="用户名" prop="user.username" />
-        <ElTableColumn label="付款地址" prop="user.wallet_address" />
-        <ElTableColumn label="币种" prop="token.symbol" />
-        <ElTableColumn label="链" prop="token.chain" />
-        <ElTableColumn label="数量" prop="amount" />
-        <ElTableColumn label="交易hash" prop="txid" />
-        <ElTableColumn
-          :formatter="statusFormatter"
-          label="状态"
-          prop="status"
-        />
-        <!--        <ElTableColumn label="结果" prop="result" />-->
-        <ElTableColumn label="归集时间" prop="update_time" />
-      </ElTable>
-    </ElCard>
-    <ElCard>
-      <ElPagination
-        v-model:current-page="page.current"
-        v-model:page-size="page.pageSize"
-        layout="jumper,next,pager,prev,total"
-        :total="data.total"
-        @current-change="getData"
-        @size-change="getData"
-      />
-    </ElCard>
+    <ElForm class="query-form" inline :label-width="80" :model="formData">
+      <ElFormItem label="用户名:" prop="username" style="width: 25%">
+        <ElInput v-model="formData.username" />
+      </ElFormItem>
+      <div class="action-groups">
+        <ElButton icon="search" plain type="success" @click="onSearch">
+          查询
+        </ElButton>
+        <ElButton icon="RefreshLeft" plain type="warning" @click="onRest">
+          重置
+        </ElButton>
+      </div>
+    </ElForm>
+    <ElTable
+      v-loading="loading"
+      :data="data.data"
+      empty-text="No Data"
+      :height="data.height"
+      row-key="id"
+      style="width: 100%"
+    >
+      <!--<ElTableColumn label="id" prop="id" />-->
+      <ElTableColumn label="用户名" prop="user.username" />
+      <ElTableColumn label="付款地址" prop="user.wallet_address" />
+      <ElTableColumn label="币种" prop="token.symbol" />
+      <ElTableColumn label="链" prop="token.chain" />
+      <ElTableColumn label="数量" prop="amount" />
+      <ElTableColumn label="交易hash" prop="txid" />
+      <ElTableColumn :formatter="statusFormatter" label="状态" prop="status" />
+      <!--        <ElTableColumn label="结果" prop="result" />-->
+      <ElTableColumn label="归集时间" prop="update_time" />
+    </ElTable>
+    <ElPagination
+      v-model:current-page="page.current"
+      v-model:page-size="page.pageSize"
+      layout="jumper,next,pager,prev,total"
+      hide-on-single-page
+      :total="data.total"
+      @current-change="getData"
+      @size-change="getData"
+    />
   </div>
 </template>
 <script setup>
   import { getCollectionList } from '@/api/finance'
-
+  const $baseTableHeight = inject('$baseTableHeight')
   const data = reactive({
     data: [],
     total: 0,
+    height: $baseTableHeight(1),
   })
   const loading = ref(false)
   const formData = ref({})
@@ -113,7 +93,6 @@
   .page {
     height: 100%;
     padding: 10px;
-    background-color: rgba(0, 0, 0, 0.1);
   }
   .page .query-form {
     width: 100%;
@@ -122,6 +101,7 @@
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: center;
+    padding: 12px 0;
   }
   .page .query-form .action-groups {
     margin-left: auto;

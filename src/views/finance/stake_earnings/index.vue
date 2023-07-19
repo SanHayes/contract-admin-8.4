@@ -1,45 +1,38 @@
 <template>
   <div class="page">
-    <ElCard>
-      <template #header>
-        <div class="card-header">
-          <ElSpace><span>质押收益</span></ElSpace>
-          <ElSpace />
-        </div>
-      </template>
-      <ElTable
-        v-loading="loading"
-        :data="data.data"
-        empty-text="No Data"
-        max-height="400"
-        row-key="id"
-        style="width: 100%"
-      >
-        <ElTableColumn label="id" prop="id" />
-        <ElTableColumn label="用户" prop="user.username" />
-        <ElTableColumn label="代币" prop="token.symbol" />
-        <ElTableColumn label="数量" prop="amount" />
-        <ElTableColumn :formatter="rateFormatter" label="收益率" prop="rate" />
-        <ElTableColumn label="时间" prop="create_time" />
-      </ElTable>
-    </ElCard>
-    <ElCard>
-      <ElPagination
-        v-model:current-page="page.current"
-        v-model:page-size="page.pageSize"
-        layout="jumper,next,pager,prev,total"
-        :total="data.total"
-        @current-change="getData"
-        @size-change="getData"
-      />
-    </ElCard>
+    <ElTable
+      v-loading="loading"
+      :data="data.data"
+      empty-text="No Data"
+      :height="data.height"
+      row-key="id"
+      style="width: 100%"
+    >
+      <!--<ElTableColumn label="id" prop="id" />-->
+      <ElTableColumn label="用户" prop="user.username" />
+      <ElTableColumn label="代币" prop="token.symbol" />
+      <ElTableColumn label="数量" prop="amount" />
+      <ElTableColumn :formatter="rateFormatter" label="收益率" prop="rate" />
+      <ElTableColumn label="时间" prop="create_time" />
+    </ElTable>
+    <ElPagination
+      v-model:current-page="page.current"
+      v-model:page-size="page.pageSize"
+      layout="jumper,next,pager,prev,total"
+      hide-on-single-page
+      :total="data.total"
+      @current-change="getData"
+      @size-change="getData"
+    />
   </div>
 </template>
 <script setup>
   import { getStakeList } from '@/api/stake'
+  const $baseTableHeight = inject('$baseTableHeight')
   const data = reactive({
     data: [],
     total: 0,
+    height: $baseTableHeight(),
   })
 
   const formData = ref({})
@@ -78,7 +71,6 @@
   .page {
     height: 100%;
     padding: 10px;
-    background-color: rgba(0, 0, 0, 0.1);
   }
   .page .query-form {
     width: 100%;
@@ -87,6 +79,7 @@
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: center;
+    padding: 12px 0;
   }
   .page .query-form .action-groups {
     margin-left: auto;

@@ -1,52 +1,43 @@
 <template>
   <div class="page">
-    <ElCard>
-      <template #header>
-        <div class="card-header">
-          <ElSpace><span>站内信</span></ElSpace>
-          <ElSpace />
-        </div>
-      </template>
-      <ElTable
-        v-loading="loading"
-        :data="data.data"
-        empty-text="No Data"
-        max-height="400"
-        row-key="id"
-        style="width: 100%"
-      >
-        <ElTableColumn label="id" prop="id" />
-        <ElTableColumn label="类型" prop="type" />
-        <ElTableColumn label="内容" prop="content" />
-        <ElTableColumn label="操作" prop="act" :width="160">
-          <template #default="{ row }">
-            <ElSpace>
-              <ElPopconfirm
-                cancel-button-text="取消"
-                confirm-button-text="确认"
-                icon-color="#626AEF"
-                title="确定删除？"
-                @confirm="deleteRow(row)"
-              >
-                <template #reference>
-                  <ElButton link type="danger">删除</ElButton>
-                </template>
-              </ElPopconfirm>
-            </ElSpace>
-          </template>
-        </ElTableColumn>
-      </ElTable>
-    </ElCard>
-    <ElCard>
-      <ElPagination
-        v-model:current-page="page.current"
-        v-model:page-size="page.pageSize"
-        layout="jumper,next,pager,prev,total"
-        :total="data.total"
-        @current-change="getData"
-        @size-change="getData"
-      />
-    </ElCard>
+    <ElTable
+      v-loading="loading"
+      :data="data.data"
+      empty-text="No Data"
+      row-key="id"
+      style="width: 100%"
+      :height="data.height"
+    >
+      <!--<ElTableColumn label="id" prop="id" />-->
+      <ElTableColumn label="类型" prop="type" />
+      <ElTableColumn label="内容" prop="content" />
+      <ElTableColumn label="操作" prop="act" :width="160">
+        <template #default="{ row }">
+          <ElSpace>
+            <ElPopconfirm
+              cancel-button-text="取消"
+              confirm-button-text="确认"
+              icon-color="#626AEF"
+              title="确定删除？"
+              @confirm="deleteRow(row)"
+            >
+              <template #reference>
+                <ElButton link type="danger">删除</ElButton>
+              </template>
+            </ElPopconfirm>
+          </ElSpace>
+        </template>
+      </ElTableColumn>
+    </ElTable>
+    <ElPagination
+      v-model:current-page="page.current"
+      v-model:page-size="page.pageSize"
+      layout="jumper,next,pager,prev,total"
+      hide-on-single-page
+      :total="data.total"
+      @current-change="getData"
+      @size-change="getData"
+    />
   </div>
 </template>
 <script setup>
@@ -54,9 +45,11 @@
   import { deleteMessage, getMessageList } from '@/api/message'
   const $baseMessage = inject('$baseMessage')
   const loading = ref(false)
+  const $baseTableHeight = inject('$baseTableHeight')
   const data = reactive({
     data: [],
     total: 0,
+    height: $baseTableHeight()
   })
   const formData = ref({})
   const page = reactive({
@@ -88,7 +81,6 @@
   .page {
     height: 100%;
     padding: 10px;
-    background-color: rgba(0, 0, 0, 0.1);
   }
   .page .query-form {
     width: 100%;

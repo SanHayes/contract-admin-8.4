@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <ElCard>
+    <ElCard shadow="never">
       <template #header>
         <div class="card-header">
           <ElSpace><span>白皮书设置</span></ElSpace>
@@ -10,6 +10,7 @@
               class="button"
               plain
               type="primary"
+              icon="plus"
               @click="editRow($event)"
             >
               新增
@@ -20,8 +21,8 @@
       <ElTable
         :data="data.data"
         empty-text="No Data"
-        max-height="400"
         row-key="id"
+        :height="data.height"
         style="width: 100%"
       >
         <ElTableColumn label="图片" prop="icon">
@@ -56,12 +57,11 @@
           </template>
         </ElTableColumn>
       </ElTable>
-    </ElCard>
-    <ElCard>
       <ElPagination
         v-model:current-page="page.current"
         v-model:page-size="page.pageSize"
         layout="jumper,next,pager,prev,total"
+        hide-on-single-page
         :total="data.total"
         @current-change="getData"
         @size-change="getData"
@@ -78,10 +78,12 @@
   const loading = ref(false)
   const editRef = ref()
   const $baseMessage = inject('$baseMessage')
+  const $baseTableHeight = inject('$baseTableHeight')
 
   const data = reactive({
     data: [],
     total: 0,
+    height: $baseTableHeight(2)
   })
 
   // 新增 / 编辑
@@ -123,7 +125,6 @@
   .page {
     height: 100%;
     padding: 10px;
-    background-color: rgba(0, 0, 0, 0.1);
   }
   .page .query-form {
     width: 100%;
