@@ -11,3 +11,15 @@ export function getNotice(data: any = {}) {
     data,
   })
 }
+
+/**
+ * 业务通知
+ * @param data
+ */
+export function getIndexData(data: any = {}) {
+  return request({
+    url: 'admin/index/index',
+    method: 'get',
+    data,
+  })
+}
