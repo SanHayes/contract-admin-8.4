@@ -3,15 +3,24 @@
   import { toLoginRoute } from '@/utils/routes'
   import { translate } from '@/i18n'
   import { VabRoute } from '/#/router'
+  import {ref, reactive} from 'vue'
+  import { updatePassword } from "@/api/user";
+
 
   const route: VabRoute = useRoute()
   const router = useRouter()
+  const $baseMessage = inject('$baseMessage')
 
   const userStore = useUserStore()
   const { avatar, username } = storeToRefs(userStore)
-  const { logout } = userStore
+  const { logout, resetAll } = userStore
 
   const active = ref(false)
+  const visible = ref(false)
+  const form = reactive({
+    newpwd: '',
+    goode_code: ''
+  })
 
   const handleVisibleChange = (val: boolean) => {
     active.value = val
@@ -25,7 +34,30 @@
       case 'personalCenter':
         await router.push('/setting/personalCenter')
         break
+      case 'updatePassword':
+        visible.value = true
+        break
     }
+  }
+  const confirm = () => {
+    if (!form.newpwd){
+      $baseMessage('请填写新密码。','info')
+      return
+    }
+    if (!form.goode_code){
+      $baseMessage('请填写Google验证码。','info')
+      return
+    }
+    updatePassword(form).then(res=>{
+      console.log('updatePassword', res);
+      $baseMessage('修改成功', 'success')
+      if (res.code === 200){
+        setTimeout(()=>{
+          resetAll()
+          router.push(toLoginRoute(route.fullPath))
+        },500)
+      }
+    })
   }
 </script>
 
@@ -44,9 +76,13 @@
     </span>
     <template #dropdown>
       <el-dropdown-menu>
-        <el-dropdown-item command="personalCenter">
+        <!--<el-dropdown-item command="personalCenter">
           <vab-icon icon="user-line" />
           <span>{{ translate('个人中心') }}</span>
+        </el-dropdown-item>-->
+        <el-dropdown-item command="updatePassword">
+          <vab-icon icon="lock-password-line" />
+          <span>{{ translate('修改密码') }}</span>
         </el-dropdown-item>
         <el-dropdown-item command="logout">
           <vab-icon icon="logout-circle-r-line" />
@@ -55,6 +91,24 @@
       </el-dropdown-menu>
     </template>
   </el-dropdown>
+  <el-dialog v-model="visible" title="修改密码" width="30%" align-center center>
+    <el-form :model="form" label-width="100px">
+      <el-form-item label="新密码">
+        <el-input v-model="form.newpwd" type="password" autocomplete="off" show-password />
+      </el-form-item>
+      <el-form-item label="Google验证码">
+        <el-input v-model="form.goode_code" autocomplete="off" />
+      </el-form-item>
+    </el-form>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="visible = false">取消</el-button>
+        <el-button type="primary" @click="confirm">
+          确认
+        </el-button>
+      </span>
+    </template>
+  </el-dialog>
 </template>
 
 <style lang="scss" scoped>
@@ -94,5 +148,8 @@
         margin-left: 3px !important;
       }
     }
+  }
+  .el-input{
+    width: 240px;
   }
 </style>

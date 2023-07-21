@@ -38,6 +38,14 @@ export function logout() {
   })
 }
 
+export function updatePassword(data: any) {
+  return request({
+    url: '/admin/auth/updatepwd ',
+    method: 'post',
+    data
+  })
+}
+
 export function register(data: any) {
   return request({
     url: '/register',

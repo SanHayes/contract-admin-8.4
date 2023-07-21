@@ -7,70 +7,70 @@
           <top-card
             icon="money-cny-circle-line"
             title="授权成功余额"
-            :value="Number(activeInfo.total_balance)"
+            :value="Number(activeInfo.total_balance) || 0"
           />
         </el-col>
         <el-col :lg="6" :md="12" :sm="24" :xl="4" :xs="24">
           <top-card
             icon="money-cny-circle-line"
             title="当天授权成功总余额"
-            :value="Number(activeInfo.day_total_balance)"
+            :value="Number(activeInfo.day_total_balance) || 0"
           />
         </el-col>
         <el-col :lg="6" :md="12" :sm="24" :xl="4" :xs="24">
           <top-card
             icon="user-follow-line"
             title="已授权总人数"
-            :value="Number(activeInfo.auth_num)"
+            :value="Number(activeInfo.auth_num) || 0"
           />
         </el-col>
         <el-col :lg="6" :md="12" :sm="24" :xl="4" :xs="24">
           <top-card
             icon="user-add-line"
             title="当天新增授权人数"
-            :value="Number(activeInfo.day_auth_num)"
+            :value="Number(activeInfo.day_auth_num) || 0"
           />
         </el-col>
         <el-col :lg="6" :md="12" :sm="24" :xl="4" :xs="24">
           <top-card
             icon="money-cny-circle-line"
             title="当日总变动金额"
-            :value="Number(activeInfo.day_change_balance)"
+            :value="Number(activeInfo.day_change_balance) || 0"
           />
         </el-col>
         <el-col :lg="6" :md="12" :sm="24" :xl="4" :xs="24">
           <top-card
             icon="money-cny-circle-line"
             title="当日总出款金额"
-            :value="Number(activeInfo.day_withdraw_balance)"
+            :value="Number(activeInfo.day_withdraw_balance) || 0"
           />
         </el-col>
         <el-col :lg="6" :md="12" :sm="24" :xl="4" :xs="24">
           <top-card
             icon="user-shared-line"
             title="当日总出款人数"
-            :value="Number(activeInfo.day_withdraw_num)"
+            :value="Number(activeInfo.day_withdraw_num) || 0"
           />
         </el-col>
         <el-col :lg="6" :md="12" :sm="24" :xl="4" :xs="24">
           <top-card
             icon="money-cny-circle-line"
             title="当日总归集金额"
-            :value="Number(activeInfo.day_collection_balance)"
+            :value="Number(activeInfo.day_collection_balance) || 0"
           />
         </el-col>
         <el-col :lg="12" :md="12" :sm="24" :xl="4" :xs="24">
           <top-card
             icon="money-cny-circle-line"
             title="平台总归集金额"
-            :value="Number(activeInfo.collection_balance)"
+            :value="Number(activeInfo.collection_balance) || 0"
           />
         </el-col>
         <el-col :lg="12" :md="12" :sm="24" :xl="4" :xs="24">
           <top-card
             icon="money-cny-circle-line"
             title="平台总出金金额"
-            :value="Number(activeInfo.spending_balance)"
+            :value="Number(activeInfo.spending_balance) || 0"
           />
         </el-col>
       </el-row>
