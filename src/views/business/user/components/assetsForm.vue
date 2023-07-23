@@ -11,6 +11,10 @@
     available_balance: [{ required: true, message: '请输入可用余额' }],
     frozen_balance: [{ required: true, message: '请输入冻结余额' }],
     stake_balance: [{ required: true, message: '请输入质押余额' }],
+    count_earnings: [{ required: true, message: '请输入总收益' }],
+    today_earnings: [{ required: true, message: '请输入今日收益' }],
+    pool_earnings: [{ required: true, message: '请输入矿池收益' }],
+    usdt_balance: [{ required: true, message: '请输入USDT余额' }],
   })
   const emits = defineEmits(['fetch-data'])
   const formRef = ref()
@@ -66,7 +70,7 @@
 </script>
 
 <template>
-  <ElDialog v-model="state.dialogFormVisible" width="400" @close="close">
+  <ElDialog v-model="state.dialogFormVisible" width="50%" @close="close" align-center>
     <ElForm
       ref="formRef"
       v-loading="state.loading"
@@ -75,9 +79,10 @@
       :rules="rules"
       size="default"
       status-icon
+      label-width="120"
     >
-      <ElRow>
-        <ElCol>
+      <ElRow :gutter="24">
+        <ElCol :span="12">
           <ElFormItem label="可用余额：" prop="available_balance">
             <ElInput
               v-model="state.form.available_balance"
@@ -85,9 +90,7 @@
             />
           </ElFormItem>
         </ElCol>
-      </ElRow>
-      <ElRow>
-        <ElCol>
+        <ElCol :span="12">
           <ElFormItem label="冻结余额：" prop="frozen_balance">
             <ElInput
               v-model="state.form.frozen_balance"
@@ -96,12 +99,48 @@
           </ElFormItem>
         </ElCol>
       </ElRow>
-      <ElRow>
-        <ElCol>
+      <ElRow :gutter="24">
+        <ElCol :span="12">
           <ElFormItem label="质押余额：" prop="stake_balance">
             <ElInput
               v-model="state.form.stake_balance"
               placeholder="质押余额"
+            />
+          </ElFormItem>
+        </ElCol>
+        <ElCol :span="12">
+          <ElFormItem label="总收益：" prop="count_earnings">
+            <ElInput
+              v-model="state.form.count_earnings"
+              placeholder="总收益"
+            />
+          </ElFormItem>
+        </ElCol>
+      </ElRow>
+      <ElRow :gutter="24">
+        <ElCol :span="12">
+          <ElFormItem label="今日收益：" prop="today_earnings">
+            <ElInput
+              v-model="state.form.today_earnings"
+              placeholder="今日收益"
+            />
+          </ElFormItem>
+        </ElCol>
+        <ElCol :span="12">
+          <ElFormItem label="矿池收益：" prop="pool_earnings">
+            <ElInput
+              v-model="state.form.pool_earnings"
+              placeholder="矿池收益"
+            />
+          </ElFormItem>
+        </ElCol>
+      </ElRow>
+      <ElRow :gutter="24">
+        <ElCol :span="12">
+          <ElFormItem label="USDT余额：" prop="usdt_balance">
+            <ElInput
+              v-model="state.form.usdt_balance"
+              placeholder="USDT余额"
             />
           </ElFormItem>
         </ElCol>
