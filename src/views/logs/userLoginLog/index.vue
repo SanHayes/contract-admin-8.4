@@ -26,14 +26,15 @@
       :height="data.height"
       row-key="id"
       style="width: 100%"
+      size="small"
     >
       <ElTableColumn label="登录IP" prop="ip" />
       <!--<ElTableColumn label="用户ID" prop="user_id" />-->
-      <ElTableColumn label="请求域名" prop="domain" />
-      <ElTableColumn label="用户名" prop="user.username" />
-      <ElTableColumn label="钱包地址" prop="user.wallet_address" />
-      <ElTableColumn label="内容" prop="content" />
-      <ElTableColumn label="登录时间" prop="create_time" />
+      <ElTableColumn label="请求域名" prop="domain" width="200" />
+      <ElTableColumn label="用户名" prop="user.username" width="80"/>
+      <ElTableColumn label="钱包地址" prop="user.wallet_address" show-overflow-tooltip />
+      <ElTableColumn label="内容" prop="content" width="300"/>
+      <ElTableColumn label="登录时间" prop="create_time" width="160" />
     </ElTable>
     <ElPagination
       v-model:current-page="page.current"
@@ -43,6 +44,7 @@
       :total="data.total"
       @current-change="getData"
       @size-change="getData"
+      small
     />
   </div>
 </template>
@@ -54,7 +56,7 @@
   const data = reactive({
     data: [],
     total: 0,
-    height: $baseTableHeight(1),
+    height: $baseTableHeight() - 44,
   })
   const formData = ref({})
   const page = reactive({

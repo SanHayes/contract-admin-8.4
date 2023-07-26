@@ -29,12 +29,13 @@
       :height="data.height"
       row-key="id"
       style="width: 100%"
+      size="small"
     >
       <!--<ElTableColumn label="id" prop="id" />-->
       <ElTableColumn label="用户名" prop="admin.username" />
       <ElTableColumn label="ip" prop="ip" />
       <ElTableColumn label="请求域名" prop="domain" />
-      <ElTableColumn label="url" prop="url" />
+      <ElTableColumn label="url" prop="url" width="240" />
       <ElTableColumn
         :formatter="paramFormatter"
         label="请求参数"
@@ -50,6 +51,7 @@
       :total="data.total"
       @current-change="getData"
       @size-change="getData"
+      small
     />
   </div>
 </template>
@@ -61,7 +63,7 @@
   const data = reactive({
     data: [],
     total: 0,
-    height: $baseTableHeight(2),
+    height: $baseTableHeight(1) - 24,
   })
   const formData = ref({})
   const page = reactive({

@@ -7,6 +7,7 @@
       :height="data.height"
       row-key="id"
       style="width: 100%"
+      size="small"
     >
       <!--<ElTableColumn label="id" prop="id" />-->
       <ElTableColumn label="用户" prop="user.username" />
@@ -23,6 +24,7 @@
       :total="data.total"
       @current-change="getData"
       @size-change="getData"
+      small
     />
   </div>
 </template>

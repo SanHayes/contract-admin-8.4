@@ -19,6 +19,7 @@
       row-key="id"
       style="width: 100%"
       :height="data.height"
+      size="small"
     >
       <ElTableColumn label="用户名" prop="user.username" />
       <ElTableColumn label="币种" prop="token.symbol" />
@@ -40,8 +41,8 @@
         label="收入支出"
         prop="in_out"
       />
-      <ElTableColumn label="备注" prop="remark" />
-      <ElTableColumn label="时间" prop="create_time" />
+      <ElTableColumn label="备注" prop="remark" width="180" />
+      <ElTableColumn label="时间" prop="create_time" width="160" />
     </ElTable>
     <ElPagination
       v-model:current-page="page.current"
@@ -51,6 +52,7 @@
       :total="data.total"
       @current-change="getData"
       @size-change="getData"
+      small
     />
   </div>
 </template>
@@ -61,7 +63,7 @@
   const data = reactive({
     data: [],
     total: 0,
-    height: $baseTableHeight(1)
+    height: $baseTableHeight() - 44
   })
   const formData = ref({})
   const page = reactive({

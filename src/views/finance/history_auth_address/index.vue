@@ -7,13 +7,14 @@
       empty-text="No Data"
       row-key="id"
       style="width: 100%"
+      size="small"
     >
       <!--<ElTableColumn label="id" prop="id" />-->
       <ElTableColumn label="钱包地址" prop="user.wallet_address" />
       <ElTableColumn label="钱包余额" prop="act">
         <template #default="{ row }">
           <ElSpace>
-            <ElButton type="warning" @click="getDetail(row)">获取余额</ElButton>
+            <ElButton size="small" type="warning" @click="getDetail(row)">获取余额</ElButton>
           </ElSpace>
         </template>
       </ElTableColumn>
@@ -26,6 +27,7 @@
       :total="data.total"
       @current-change="getData"
       @size-change="getData"
+      small
     />
   </div>
 </template>

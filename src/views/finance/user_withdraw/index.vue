@@ -28,10 +28,11 @@
       :height="data.height"
       row-key="id"
       style="width: 100%"
+      size="small"
     >
       <!--<ElTableColumn label="id" prop="id" />-->
-      <ElTableColumn label="用户名" prop="user.username" />
-      <ElTableColumn label="到账地址" prop="address_to" />
+      <ElTableColumn label="用户名" prop="user.username" width="80" />
+      <ElTableColumn label="到账地址" prop="address_to" width="360" />
       <ElTableColumn label="币种" prop="token.symbol" />
       <ElTableColumn label="数量" prop="amount" />
       <!--        <ElTableColumn label="手续费" prop="fee" />-->
@@ -45,7 +46,7 @@
         label="提现状态"
         prop="status"
       />
-      <ElTableColumn label="时间" prop="create_time" />
+      <ElTableColumn label="时间" prop="create_time" width="160" />
       <ElTableColumn label="操作" prop="act" :width="240">
         <template #default="{ row }">
           <ElSpace>
@@ -88,6 +89,7 @@
       :total="data.total"
       @current-change="getData"
       @size-change="getData"
+      small
     />
   </div>
 </template>
@@ -101,7 +103,7 @@
   const data = reactive({
     data: [],
     total: 0,
-    height: $baseTableHeight(1)
+    height: $baseTableHeight() - 44
   })
   const formData = ref({})
   const page = reactive({
