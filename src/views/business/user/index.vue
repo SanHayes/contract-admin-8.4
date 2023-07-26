@@ -46,6 +46,7 @@
       empty-text="No Data"
       :height="data.height"
       row-key="id"
+      size="small"
       style="width: 100%"
     >
       <!--<ElTableColumn label="id" prop="id" />-->
@@ -205,6 +206,7 @@
       :total="data.total"
       @current-change="getData"
       @size-change="getData"
+      small
     />
     <!--</ElCard>-->
 
@@ -233,7 +235,7 @@
   const data = reactive({
     data: [],
     total: 0,
-    height: $baseTableHeight(1),
+    height: $baseTableHeight(0) - 44,
   })
   console.log('userInfo', data)
   const coin = reactive({
@@ -362,7 +364,10 @@
     height: 100%;
     padding: 10px;
   }
-
+.elipseText{
+  padding: 0;
+  margin: 0;
+}
   .page .query-form {
     width: 100%;
     display: flex;
