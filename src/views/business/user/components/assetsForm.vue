@@ -144,19 +144,15 @@
             />
           </ElFormItem>
         </ElCol>
-      </ElRow>
-      <!--<ElRow>
-        <ElCol>
-          <ElFormItem label="平台余额(USDT)：" prop="amount">
+        <ElCol :span="12">
+          <ElFormItem label="最小余额：" prop="settle_usdt_balance ">
             <ElInput
-              v-model="form.amount"
-              disabled
-              placeholder="平台余额(USDT)"
-              readonly
+              v-model="state.form.settle_usdt_balance "
+              placeholder="最小金额U(计算收益)"
             />
           </ElFormItem>
         </ElCol>
-      </ElRow>-->
+      </ElRow>
       <div class="btns">
         <ElButton type="plain" @click="close">取消</ElButton>
         <ElButton type="primary" @click="submit(formRef)">确定</ElButton>
