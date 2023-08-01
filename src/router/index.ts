@@ -245,6 +245,15 @@ export const asyncRoutes: VabRouteRecord[] = [
           icon: 'file-settings-line',
         },
       },
+      {
+        path: 'help',
+        name: 'help',
+        component: () => import('@/views/system/help/index.vue'),
+        meta: {
+          title: '帮助中心设置',
+          icon: 'questionnaire-line',
+        },
+      },
       // {
       //   path: 'dig_vip_day',
       //   name: 'DigVipDay',

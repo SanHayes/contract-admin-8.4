@@ -161,15 +161,15 @@
               />
             </ElFormItem>
           </ElCol>
-          <ElCol :span="12">
-            <!--结算USDT余额-->
+         <!-- <ElCol :span="12">
+            &lt;!&ndash;结算USDT余额&ndash;&gt;
             <ElFormItem label="最小余额U：" prop="settle_usdt_balance ">
               <ElInput
                 v-model="state.form.settle_usdt_balance"
                 placeholder="最小余额U(计算收益)"
               />
             </ElFormItem>
-          </ElCol>
+          </ElCol>-->
         </ElRow>
       </div>
       <div class="btns">
