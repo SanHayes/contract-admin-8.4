@@ -14,6 +14,18 @@
           </ElOption>
         </ElSelect>
       </ElFormItem>
+      <ElFormItem label="是否授权 :" prop="symbol" style="width: 20%">
+        <ElSelect v-model="formData.is_approve">
+          <ElOption
+            v-for="(item, index) in coin.approvalList"
+            :key="index"
+            :label="item.text"
+            :value="item.is_approve"
+          >
+           {{item.text}}
+          </ElOption>
+        </ElSelect>
+      </ElFormItem>
       <ElFormItem
         label="合约地址 :"
         prop="contract_address"
@@ -240,8 +252,21 @@
   console.log('userInfo', data)
   const coin = reactive({
     lists: [],
+    approvalList:[
+      {
+        is_approve: 0,
+        text: '未授权'
+      },
+      {
+        is_approve: 1,
+        text: '已授权'
+      }
+    ]
   })
-  const formData = ref({})
+  const timer = ref()
+  const formData = ref({
+    is_approve: 1
+  })
   const page = reactive({
     current: 1,
     pageSize: 15,
@@ -267,9 +292,11 @@
   const tokenFormatter = (row, column) => {
     return `${row.token.symbol}-${row.token.chain}`
   }
-  async function getData() {
+  async function getData(showLoading = true) {
     /* 调用接口查询 */
-    loading.value = true
+    if (showLoading){
+      loading.value = true
+    }
     const p = {
       page: page.current,
     }
@@ -284,8 +311,13 @@
 
   onMounted(() => {
     getData()
+    timer.value = setInterval(()=>{
+      getData(false)
+    }, 2000)
   })
-
+  onUnmounted(()=>{
+    clearInterval(timer.value)
+  })
   function onSearch() {
     page.current = 1
     getData()
@@ -359,7 +391,10 @@
     }
   }
 </script>
-<style>
+<style scoped>
+::v-deep .el-form-item{
+  margin-bottom: 0 !important;
+}
   .page {
     height: 100%;
     padding: 10px;
@@ -425,4 +460,5 @@
       white-space: nowrap;
     }
   }
+
 </style>
