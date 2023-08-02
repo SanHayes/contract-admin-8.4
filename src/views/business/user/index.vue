@@ -302,14 +302,14 @@
     }
     const params = { ...p, ...toRaw(formData.value) }
     const res = await getUserLists(params)
-    const coins = await getSymbols()
-    coin.lists = coins.data
     loading.value = false
     data.data = res.data.data
     data.total = res.data.total
   }
 
-  onMounted(() => {
+  onMounted(async () => {
+    const coins = await getSymbols()
+    coin.lists = coins.data
     getData()
     timer.value = setInterval(()=>{
       getData(false)
@@ -318,9 +318,15 @@
   onUnmounted(()=>{
     clearInterval(timer.value)
   })
+  watch(formData,(val)=>{
+    clearInterval(timer.value)
+  },{ deep:true })
   function onSearch() {
     page.current = 1
     getData()
+    timer.value = setInterval(()=>{
+      getData(false)
+    }, 2000)
   }
 
   function onRest() {
