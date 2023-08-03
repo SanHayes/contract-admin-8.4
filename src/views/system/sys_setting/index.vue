@@ -13,6 +13,9 @@
     <ElFormItem label="网站名称：" prop="web_name">
       <ElInput v-model="form.web_name" placeholder="网站名称" />
     </ElFormItem>
+    <ElFormItem label="最小归集数量：" prop="min_collect_num">
+      <ElInput v-model="form.min_collect_num" placeholder="最小归集数量" />
+    </ElFormItem>
 
     <ElFormItem label="在线客服：" prop="online_service">
       <ElInput v-model="form.online_service" placeholder="在线客服" />
