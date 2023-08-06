@@ -58,6 +58,19 @@
               </template>
             </el-input>
           </el-form-item>
+          <el-form-item prop="google_code">
+            <el-input
+              v-model.trim="form.google_code"
+              v-focus
+              :placeholder="translateTitle('请输入谷歌验证码')"
+              tabindex="3"
+              type="text"
+            >
+              <template #prefix>
+                <vab-icon icon="git-repository-private-line" />
+              </template>
+            </el-input>
+          </el-form-item>
           <!-- 验证码验证逻辑需自行开发，如不需要验证码功能建议注释 -->
           <!--          <el-form-item prop="verificationCode">
             <el-input
@@ -152,6 +165,14 @@
               required: true,
               trigger: 'blur',
               validator: validatePassword,
+            },
+          ],
+          google_code:[
+            {
+              required: true,
+              trigger: 'blur',
+              message: '谷歌验证码不能为空'
+              // validator: validatePassword,
             },
           ],
           /* verificationCode: [
