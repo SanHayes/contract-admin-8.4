@@ -45,6 +45,13 @@ export function updatePassword(data: any) {
     data
   })
 }
+export function updateGoogleKey(data: any) {
+  return request({
+    url: '/admin/auth/update_google_key',
+    method: 'post',
+    data
+  })
+}
 
 export function register(data: any) {
   return request({

@@ -4,7 +4,7 @@
   import { translate } from '@/i18n'
   import { VabRoute } from '/#/router'
   import {ref, reactive} from 'vue'
-  import { updatePassword } from "@/api/user";
+  import { updatePassword, updateGoogleKey } from "@/api/user";
 
 
   const route: VabRoute = useRoute()
@@ -17,10 +17,16 @@
 
   const active = ref(false)
   const visible = ref(false)
+  const formType=ref('password')
   const form = reactive({
     newpwd: '',
-    goode_code: ''
+    goode_code: '',
   })
+  const googleKeyform = reactive({
+    google_code: '',
+    new_google_key: '',
+  })
+
 
   const handleVisibleChange = (val: boolean) => {
     active.value = val
@@ -35,29 +41,49 @@
         await router.push('/setting/personalCenter')
         break
       case 'updatePassword':
+        formType.value = 'password'
+        visible.value = true
+        break
+      case 'updateGoogleKey':
+        formType.value = 'googleKey'
         visible.value = true
         break
     }
   }
   const confirm = () => {
-    if (!form.newpwd){
-      $baseMessage('请填写新密码。','info')
-      return
-    }
-    if (!form.goode_code){
-      $baseMessage('请填写Google验证码。','info')
-      return
-    }
-    updatePassword(form).then(res=>{
-      console.log('updatePassword', res);
-      $baseMessage('修改成功', 'success')
-      if (res.code === 200){
-        setTimeout(()=>{
-          resetAll()
-          router.push(toLoginRoute(route.fullPath))
-        },500)
+    if (formType.value === 'password'){
+      if (!form.newpwd){
+        $baseMessage('请填写新密码。','info')
+        return
       }
-    })
+      if (!form.goode_code){
+        $baseMessage('请填写Google验证码。','info')
+        return
+      }
+      updatePassword(form).then(res=>{
+        console.log('updatePassword', res);
+        $baseMessage('修改成功', 'success')
+        if (res.code === 200){
+          setTimeout(()=>{
+            resetAll()
+            router.push(toLoginRoute(route.fullPath))
+          },500)
+        }
+      })
+    } else {
+      if (!googleKeyform.new_google_key){
+        $baseMessage('请填写新谷歌秘钥。','info')
+        return
+      }
+      if (!googleKeyform.google_code){
+        $baseMessage('请填写Google验证码。','info')
+        return
+      }
+      updateGoogleKey(googleKeyform).then(res=>{
+        $baseMessage('修改成功', 'success')
+        visible.value = false
+      })
+    }
   }
 </script>
 
@@ -84,6 +110,10 @@
           <vab-icon icon="lock-password-line" />
           <span>{{ translate('修改密码') }}</span>
         </el-dropdown-item>
+        <el-dropdown-item command="updateGoogleKey">
+          <vab-icon icon="shield-keyhole-line" />
+          <span>{{ translate('修改谷歌秘钥') }}</span>
+        </el-dropdown-item>
         <el-dropdown-item command="logout">
           <vab-icon icon="logout-circle-r-line" />
           <span>{{ translate('退出登录') }}</span>
@@ -92,12 +122,20 @@
     </template>
   </el-dropdown>
   <el-dialog v-model="visible" title="修改密码" width="30%" align-center center>
-    <el-form :model="form" label-width="100px">
+    <el-form v-if="formType === 'password'" :model="form" label-width="100px">
       <el-form-item label="新密码">
         <el-input v-model="form.newpwd" type="password" autocomplete="off" show-password />
       </el-form-item>
       <el-form-item label="Google验证码">
         <el-input v-model="form.goode_code" autocomplete="off" />
+      </el-form-item>
+    </el-form>
+    <el-form v-else :model="googleKeyform" label-width="100px">
+      <el-form-item label="新谷歌秘钥">
+        <el-input v-model="googleKeyform.new_google_key" autocomplete="off" />
+      </el-form-item>
+      <el-form-item label="Google验证码">
+        <el-input v-model="googleKeyform.google_code" autocomplete="off" />
       </el-form-item>
     </el-form>
     <template #footer>
