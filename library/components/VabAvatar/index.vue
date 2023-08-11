@@ -19,6 +19,7 @@
   const visible = ref(false)
   const loading = ref(false)
   const formType=ref('password')
+  const title = ref('修改密码')
   const form = reactive({
     newpwd: '',
     goode_code: '',
@@ -44,11 +45,13 @@
       case 'updatePassword':
         formType.value = 'password'
         visible.value = true
+        title.value = '修改密码'
         break
       case 'updateGoogleKey':
         formType.value = 'googleKey'
         visible.value = true
         loading.value = true
+        title.value = '修改谷歌秘钥';
         getGoogleKey().then(res=>{
           if (res.code === 200){
             const {secret,url} = res.data
@@ -138,7 +141,7 @@
       </el-dropdown-menu>
     </template>
   </el-dropdown>
-  <el-dialog v-model="visible" title="修改密码" width="30%" align-center center>
+  <el-dialog v-model="visible" :title="title" width="30%" align-center center>
     <el-form v-if="formType === 'password'" :model="form" label-width="100px">
       <el-form-item label="新密码">
         <el-input v-model="form.newpwd" type="password" autocomplete="off" show-password />
