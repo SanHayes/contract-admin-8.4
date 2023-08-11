@@ -52,6 +52,13 @@ export function updateGoogleKey(data: any) {
     data
   })
 }
+export function getGoogleKey(data: any) {
+  return request({
+    url: '/admin/auth/get_google_key',
+    method: 'post',
+    data
+  })
+}
 
 export function register(data: any) {
   return request({

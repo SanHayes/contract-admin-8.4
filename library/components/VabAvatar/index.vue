@@ -4,7 +4,7 @@
   import { translate } from '@/i18n'
   import { VabRoute } from '/#/router'
   import {ref, reactive} from 'vue'
-  import { updatePassword, updateGoogleKey } from "@/api/user";
+  import { updatePassword, updateGoogleKey, getGoogleKey } from "@/api/user";
 
 
   const route: VabRoute = useRoute()
@@ -17,6 +17,7 @@
 
   const active = ref(false)
   const visible = ref(false)
+  const loading = ref(false)
   const formType=ref('password')
   const form = reactive({
     newpwd: '',
@@ -26,7 +27,7 @@
     google_code: '',
     new_google_key: '',
   })
-
+  const qrcode = ref('')
 
   const handleVisibleChange = (val: boolean) => {
     active.value = val
@@ -47,9 +48,20 @@
       case 'updateGoogleKey':
         formType.value = 'googleKey'
         visible.value = true
+        loading.value = true
+        getGoogleKey().then(res=>{
+          if (res.code === 200){
+            const {secret,url} = res.data
+            qrcode.value = url
+            googleKeyform.new_google_key = secret
+          }
+        }).finally(()=>{
+          loading.value = false
+        })
         break
     }
   }
+
   const confirm = () => {
     if (formType.value === 'password'){
       if (!form.newpwd){
@@ -79,9 +91,14 @@
         $baseMessage('请填写Google验证码。','info')
         return
       }
-      updateGoogleKey(googleKeyform).then(res=>{
+      updateGoogleKey(googleKeyform).then(async res=>{
         $baseMessage('修改成功', 'success')
         visible.value = false
+        setTimeout(()=>{
+          resetAll()
+          router.push(toLoginRoute(route.fullPath))
+        },500)
+        // await router.push(toLoginRoute(route.fullPath))
       })
     }
   }
@@ -130,10 +147,14 @@
         <el-input v-model="form.goode_code" autocomplete="off" />
       </el-form-item>
     </el-form>
-    <el-form v-else :model="googleKeyform" label-width="100px">
+    <el-form v-else :model="googleKeyform" label-width="100px" v-loading="loading">
       <el-form-item label="新谷歌秘钥">
         <el-input v-model="googleKeyform.new_google_key" autocomplete="off" />
       </el-form-item>
+      <div class="qrcode">
+        <el-image style="width: 120px;height: 120px" :src="qrcode"/>
+        <p class="tips">请用google验证器扫码导入</p>
+      </div>
       <el-form-item label="Google验证码">
         <el-input v-model="googleKeyform.google_code" autocomplete="off" />
       </el-form-item>
@@ -150,6 +171,13 @@
 </template>
 
 <style lang="scss" scoped>
+  .qrcode{
+    text-align: center;
+  }
+  .tips{
+    font-size: 12px;
+    color: #e54d42;
+  }
   .avatar-dropdown {
     display: flex;
     align-content: center;
