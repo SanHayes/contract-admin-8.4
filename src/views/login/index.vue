@@ -167,14 +167,14 @@
               validator: validatePassword,
             },
           ],
-          google_code:[
-            {
-              required: true,
-              trigger: 'blur',
-              message: '谷歌验证码不能为空'
-              // validator: validatePassword,
-            },
-          ],
+          // google_code:[
+          //   {
+          //     required: true,
+          //     trigger: 'blur',
+          //     message: '谷歌验证码不能为空'
+          //     // validator: validatePassword,
+          //   },
+          // ],
           /* verificationCode: [
           {
             required: true,
