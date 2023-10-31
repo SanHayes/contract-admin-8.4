@@ -4,8 +4,8 @@ import { createI18n } from 'vue-i18n'
 import { LanguageType } from '/#/store'
 import en from './locales/en.json'
 import zh from './locales/zh.json'
-import enLocale from 'element-plus/lib/locale/lang/en'
-import zhLocale from 'element-plus/lib/locale/lang/zh-cn'
+import enLocale from 'element-plus/es/locale/lang/en'
+import zhLocale from 'element-plus/es/locale/lang/zh-cn'
 import type { App } from 'vue'
 
 export { enLocale, zhLocale }

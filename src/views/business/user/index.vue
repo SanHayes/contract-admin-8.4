@@ -110,6 +110,7 @@
         show-overflow-tooltip
       />
       <ElTableColumn label="已提" min-width="100" prop="collect_amount" />
+      <ElTableColumn label="注册时间" min-width="160" prop="create_time" />
       <ElTableColumn label="类型" prop="is_change">
         <template #default="{ row }">
           {{ row.is_change ? '虚拟用户' : '' }}
