@@ -5,6 +5,7 @@
   import { VabRoute } from '/#/router'
   import {ref, reactive} from 'vue'
   import { updatePassword } from "@/api/user";
+  import AddAdmin from "@vab/components/VabAvatar/AddAdmin.vue";
 
 
   const route: VabRoute = useRoute()
@@ -15,8 +16,11 @@
   const { avatar, username } = storeToRefs(userStore)
   const { logout, resetAll } = userStore
 
+  const addRef = ref(null)
   const active = ref(false)
   const visible = ref(false)
+  const title = ref('修改密码')
+  const formType=ref('password')
   const form = reactive({
     newpwd: '',
     goode_code: ''
@@ -35,11 +39,23 @@
         await router.push('/setting/personalCenter')
         break
       case 'updatePassword':
+        formType.value = 'password'
+        visible.value = true
+        title.value = '修改密码'
+        break
+      case 'addAdmin':
+        formType.value = 'add'
+        title.value = '新增管理员'
         visible.value = true
         break
     }
   }
   const confirm = () => {
+    if (formType.value === 'add'){
+      // 新增管理员
+      addRef.value.submit()
+      return;
+    }
     if (!form.newpwd){
       $baseMessage('请填写新密码。','info')
       return
@@ -58,6 +74,9 @@
         },500)
       }
     })
+  }
+  const closeDialog = ()=>{
+    visible.value = false
   }
 </script>
 
@@ -80,6 +99,10 @@
           <vab-icon icon="user-line" />
           <span>{{ translate('个人中心') }}</span>
         </el-dropdown-item>-->
+        <el-dropdown-item command="addAdmin">
+          <vab-icon icon="user-add-line" />
+          <span>{{ translate('添加管理员') }}</span>
+        </el-dropdown-item>
         <el-dropdown-item command="updatePassword">
           <vab-icon icon="lock-password-line" />
           <span>{{ translate('修改密码') }}</span>
@@ -91,8 +114,9 @@
       </el-dropdown-menu>
     </template>
   </el-dropdown>
-  <el-dialog v-model="visible" title="修改密码" width="30%" align-center center>
-    <el-form :model="form" label-width="100px">
+  <el-dialog v-model="visible" :title="title" width="30%" align-center center>
+    <add-admin v-if="formType === 'add'" ref="addRef" :close="closeDialog" />
+    <el-form v-else :model="form" label-width="100px">
       <el-form-item label="新密码">
         <el-input v-model="form.newpwd" type="password" autocomplete="off" show-password />
       </el-form-item>
