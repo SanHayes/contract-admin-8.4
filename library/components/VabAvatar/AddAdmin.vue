@@ -16,8 +16,12 @@ const submit = async () => {
     if (valid) {
       loading.value = true
       addAdmin(form).then(res=>{
-        console.log(res);
-        props.close()
+        $baseMessage(res.msg || '添加成功', 'success')
+        setTimeout(()=>{
+          props.close()
+        }, 500)
+      }).catch(err=>{
+        // $baseMessage(err.msg || '添加失败', 'error')
       }).finally(()=>{
         loading.value = false
       })
