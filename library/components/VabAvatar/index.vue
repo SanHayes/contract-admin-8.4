@@ -5,6 +5,7 @@
   import { VabRoute } from '/#/router'
   import {ref, reactive} from 'vue'
   import { updatePassword, updateGoogleKey, getGoogleKey } from "@/api/user";
+  import AddAdmin from "@vab/components/VabAvatar/AddAdmin.vue";
 
 
   const route: VabRoute = useRoute()
@@ -15,6 +16,7 @@
   const { avatar, username } = storeToRefs(userStore)
   const { logout, resetAll } = userStore
 
+  const addRef = ref(null)
   const active = ref(false)
   const visible = ref(false)
   const loading = ref(false)
@@ -42,6 +44,11 @@
       case 'personalCenter':
         await router.push('/setting/personalCenter')
         break
+      case 'addAdmin':
+        formType.value = 'add'
+        visible.value = true
+        title.value = '新增管理员'
+        break
       case 'updatePassword':
         formType.value = 'password'
         visible.value = true
@@ -66,25 +73,28 @@
   }
 
   const confirm = () => {
-    if (formType.value === 'password'){
-      if (!form.newpwd){
-        $baseMessage('请填写新密码。','info')
+    if (formType.value === 'password') {
+      if (!form.newpwd) {
+        $baseMessage('请填写新密码。', 'info')
         return
       }
-      if (!form.goode_code){
-        $baseMessage('请填写Google验证码。','info')
+      if (!form.goode_code) {
+        $baseMessage('请填写Google验证码。', 'info')
         return
       }
-      updatePassword(form).then(res=>{
+      updatePassword(form).then(res => {
         console.log('updatePassword', res);
         $baseMessage('修改成功', 'success')
-        if (res.code === 200){
-          setTimeout(()=>{
+        if (res.code === 200) {
+          setTimeout(() => {
             resetAll()
             router.push(toLoginRoute(route.fullPath))
-          },500)
+          }, 500)
         }
       })
+    }else if (formType.value === 'add'){
+      // 新增管理员
+      addRef.value.submit()
     } else {
       if (!googleKeyform.new_google_key){
         $baseMessage('请填写新谷歌秘钥。','info')
@@ -104,6 +114,9 @@
         // await router.push(toLoginRoute(route.fullPath))
       })
     }
+  }
+  const closeDialog = ()=>{
+    visible.value = false
   }
 </script>
 
@@ -126,6 +139,10 @@
           <vab-icon icon="user-line" />
           <span>{{ translate('个人中心') }}</span>
         </el-dropdown-item>-->
+        <el-dropdown-item command="addAdmin">
+          <vab-icon icon="user-add-line" />
+          <span>{{ translate('添加管理员') }}</span>
+        </el-dropdown-item>
         <el-dropdown-item command="updatePassword">
           <vab-icon icon="lock-password-line" />
           <span>{{ translate('修改密码') }}</span>
@@ -150,6 +167,7 @@
         <el-input v-model="form.goode_code" autocomplete="off" />
       </el-form-item>
     </el-form>
+    <add-admin v-else-if="formType === 'add'" ref="addRef" :close="closeDialog" />
     <el-form v-else :model="googleKeyform" label-width="100px" v-loading="loading">
       <el-form-item label="新谷歌秘钥">
         <el-input v-model="googleKeyform.new_google_key" autocomplete="off" />

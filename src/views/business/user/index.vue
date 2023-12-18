@@ -110,6 +110,12 @@
         show-overflow-tooltip
       />
       <ElTableColumn label="已提" min-width="100" prop="collect_amount" />
+      <ElTableColumn label="注册时间" min-width="160" prop="create_time" >
+        <template #default="{ row }">
+          {{dayjs(row.create_time).tz('America/New_York').format('YYYY-MM-DD HH:mm:ss')}}
+          <!--{{row.create_time}}-->
+        </template>
+      </ElTableColumn>
       <ElTableColumn label="类型" prop="is_change">
         <template #default="{ row }">
           {{ row.is_change ? '虚拟用户' : '' }}
@@ -239,6 +245,12 @@
   import assetsForm from './components/assetsForm.vue'
   import { View, More } from '@element-plus/icons-vue'
   import { ElMessageBox } from 'element-plus'
+  import dayjs from "dayjs";
+  import utc from 'dayjs/plugin/utc'
+  import timezone from 'dayjs/plugin/timezone'
+
+  dayjs.extend(utc)
+  dayjs.extend(timezone)
 
   const loading = ref(false)
   const editRef = ref()

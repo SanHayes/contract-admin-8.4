@@ -38,6 +38,13 @@ export function logout() {
   })
 }
 
+export function addAdmin(data: any) {
+  return request({
+    url: '/admin/auth/add ',
+    method: 'post',
+    data
+  })
+}
 export function updatePassword(data: any) {
   return request({
     url: '/admin/auth/updatepwd ',
