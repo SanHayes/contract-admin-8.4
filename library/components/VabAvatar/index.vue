@@ -101,7 +101,7 @@
         </el-dropdown-item>-->
         <el-dropdown-item command="addAdmin">
           <vab-icon icon="user-add-line" />
-          <span>{{ translate('添加管理员') }}</span>
+          <span>{{ translate('新增管理员') }}</span>
         </el-dropdown-item>
         <el-dropdown-item command="updatePassword">
           <vab-icon icon="lock-password-line" />

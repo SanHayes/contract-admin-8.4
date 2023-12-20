@@ -12,12 +12,18 @@ const form = reactive({
 });
 const $baseMessage = inject('$baseMessage')
 const loading = ref(false)
+const reset = ()=>{
+  form.username = ''
+  form.password = ''
+  form.manage_uid = ''
+}
 const submit = async () => {
   await formEl.value.validate((valid, fields) => {
     if (valid) {
       loading.value = true
       addAdmin(form).then(res=>{
         $baseMessage(res.msg || '添加成功', 'success')
+        reset()
         setTimeout(()=>{
           props.close()
         }, 500)

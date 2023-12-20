@@ -61,7 +61,7 @@
       size="small"
       style="width: 100%"
     >
-      <!--<ElTableColumn label="id" prop="id" />-->
+      <ElTableColumn label="id" prop="id" />
       <ElTableColumn label="用户名" prop="username" width="100" />
       <ElTableColumn label="钱包地址" prop="wallet_address" width="130">
         <template #default="{ row }">
